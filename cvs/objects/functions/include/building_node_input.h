@@ -368,6 +368,9 @@ protected:
         //! Building size by period.
         DEFINE_VARIABLE( ARRAY | STATE, "base-building-size", mBuildingSize, objects::PeriodVector<Value> ),
 
+        //! A flag to indicate the user wants to fix the building size to the
+        DEFINE_VARIABLE( ARRAY | STATE, "base-building-size", mIsFixedBuildingSize, objects::PeriodVector<bool> ),	
+
         //! Price exponent by period.
         DEFINE_VARIABLE( ARRAY, "price-exponent", mPriceExponent, objects::PeriodVector<Value> ),
 
