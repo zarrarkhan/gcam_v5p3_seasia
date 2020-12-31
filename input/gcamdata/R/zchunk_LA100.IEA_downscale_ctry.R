@@ -26,6 +26,7 @@ module_energy_LA100.IEA_downscale_ctry <- function(command, ...) {
     return(c("L100.Pop_thous_ctry_Yh",
              OPTIONAL_FILE = "energy/IEA_EnergyBalances_2019",
              FILE = "energy/mappings/IEA_product_downscaling",
+             FILE = "energy/mappings/IEA_memo_ctry",
              FILE = "energy/mappings/IEA_ctry"))
   } else if(command == driver.DECLARE_OUTPUTS) {
     return(c("L100.IEA_en_bal_ctry_hist"))
@@ -42,6 +43,7 @@ module_energy_LA100.IEA_downscale_ctry <- function(command, ...) {
     L100.Pop_thous_ctry_Yh <- get_data(all_data, "L100.Pop_thous_ctry_Yh")
     IEA_EnergyBalances_2019 <- get_data(all_data, "energy/IEA_EnergyBalances_2019")
     IEA_product_downscaling <- get_data(all_data, "energy/mappings/IEA_product_downscaling")
+    IEA_memo_ctry <- get_data(all_data, "energy/mappings/IEA_memo_ctry")
     IEA_ctry <- get_data(all_data, "energy/mappings/IEA_ctry")
 
     # If the (proprietary) raw IEA datasets are available, go through the full computations below
@@ -200,15 +202,43 @@ module_energy_LA100.IEA_downscale_ctry <- function(command, ...) {
       L100.USSR_Yug_ctry_bal[USSR_YUG_COLUMNS] <- L100.USSR_Yug_ctry_bal[USSR_YUG_COLUMNS] * L100.USSR_Yug_ctry_bal$`1990_share`
       L100.USSR_Yug_ctry_bal$`1990_share` <- NULL
 
+      # Adjust for any composite countries with "memo" countries being deducted
+      L100.IEAmemo <- subset(L100.IEAsingle, COUNTRY %in% IEA_memo_ctry$IEA_memo_ctry) %>%
+        gather_years() %>%
+        left_join_error_no_match(IEA_memo_ctry,
+                                 by = c( COUNTRY = "IEA_memo_ctry", "iso")) %>%
+        select(-COUNTRY)
+
+      # Gather years and join the composite regions with their corresponding "memo" countries whose energy quantities
+      # need to be deducted.
+      # Several failsafes are included at this stage to prevent data for the composite region that has the wrong sign
+      # (e.g., negative values for energy consumption by final energy consumers, positive values for energy inputs of
+      # energy transformation sectors, or negative values for outputs of transformation sectors)
+      L100.IEAcomposite_adj_memo <- subset(L100.IEAcomposite, COUNTRY %in% IEA_memo_ctry$IEA_ctry) %>%
+        gather_years() %>%
+        left_join_error_no_match(L100.IEAmemo,
+                                 by = c(COUNTRY = "IEA_ctry", "FLOW", "PRODUCT", "year"),
+                                 suffix = c(".composite", ".memo")) %>%
+        mutate(value = value.composite - value.memo,
+               value = if_else(value.composite == 0, 0, value),
+               value = if_else(value / value.composite < 0 & value.composite != 0, 0, value)) %>%
+        select(COUNTRY, FLOW, PRODUCT, year, value) %>%
+        spread(key = year, value = value)
+
+      L100.IEAcomposite_adj_memo <- bind_rows(
+        filter(L100.IEAcomposite, !COUNTRY %in% IEA_memo_ctry$IEA_ctry),
+        L100.IEAcomposite_adj_memo
+      )
+
       # Composite regions where population is used to downscale energy to countries over all historical years
       # Subset composite regions and repeat by number of countries in each (139-142)
-      filter(L100.IEAcomposite, COUNTRY == "Other Africa") %>%
+      filter(L100.IEAcomposite_adj_memo, COUNTRY == "Other Africa") %>%
         repeat_add_columns(tibble(iso = IEA_ctry_composite$iso[IEA_ctry_composite$IEA_ctry == "Other Africa"])) ->
         L100.Afr_repCtry
-      filter(L100.IEAcomposite, COUNTRY == "Other non-OECD Americas") %>%
+      filter(L100.IEAcomposite_adj_memo, COUNTRY == "Other non-OECD Americas") %>%
         repeat_add_columns(tibble(iso = IEA_ctry_composite$iso[IEA_ctry_composite$IEA_ctry == "Other non-OECD Americas"])) ->
         L100.LAM_repCtry
-      filter(L100.IEAcomposite, COUNTRY == "Other non-OECD Asia") %>%
+      filter(L100.IEAcomposite_adj_memo, COUNTRY == "Other non-OECD Asia") %>%
         repeat_add_columns(tibble(iso = IEA_ctry_composite$iso[IEA_ctry_composite$IEA_ctry == "Other non-OECD Asia"])) ->
         L100.Asia_repCtry
 
@@ -293,7 +323,7 @@ module_energy_LA100.IEA_downscale_ctry <- function(command, ...) {
       add_units("ktoe and GWh") %>%
       add_legacy_name("L100.IEA_en_bal_ctry_hist") %>%
       add_precursors("L100.Pop_thous_ctry_Yh", "energy/IEA_EnergyBalances_2019",
-                     "energy/mappings/IEA_product_downscaling", "energy/mappings/IEA_ctry") %>%
+                     "energy/mappings/IEA_product_downscaling", "energy/mappings/IEA_ctry", "energy/mappings/IEA_memo_ctry") %>%
       add_flags(FLAG_NO_TEST) ->
       L100.IEA_en_bal_ctry_hist
 
