@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<!--  THIS FILE CONTAINS SOCIO-ECONOMIC ASSUMPTIONS
+      FOR VIETNAM CONSISTENT WITH PDP8 (RATHER THAN GSO-MEDIUM
+      THE POPULATION NUMBERS FROM 2020-2050 ARE FROM THE PDP8 DOCUMENT
+      AND THE VALUES FROM 2050 ALWAYS FOLLOW THE PREVIOUS GROWTH OF THE 
+      "CORE" ASSUMPTIONS (I.E. UN MEDIUM VARIANT GROWTH )
+
+      This file only contains demographic and GDP assumptions for Vietnam only
+
+       this will be called into the configuration file AFTER the main socioeconomics xml file is referenced 
+
+      this XML file was generated from the data system by Siddarth
+      In the vietnam-only breakout model, this was in the "socioeconomics_gPDP8_GDP_med_PDP8_Pop.xml" file
+   -->
+
+<scenario>
+    <world>
+
+        <!-- CHANGED BACK TO THIS REGION NAME CAPITALIZATION "Viet Nam" TO MATCH WITH ISO CODE FILE -->
+
+        <region name="Viet Nam">
+            <demographics>
+                <populationMiniCAM year="1975">
+                    <totalPop>48718</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="1990">
+                    <totalPop>67989</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2005">
+                    <totalPop>83833</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2010">
+                    <totalPop>87968</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2015">
+                    <totalPop>92677</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2020">
+                    <totalPop>96657</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2025">
+                    <totalPop>102135</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2030">
+                    <totalPop>107614</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2035">
+                    <totalPop>113092</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2040">
+                    <totalPop>118570</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2045">
+                    <totalPop>124048</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2050">
+                    <totalPop>129527</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2055">
+                    <totalPop>129737</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2060">
+                    <totalPop>129242</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2065">
+                    <totalPop>128111</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2070">
+                    <totalPop>126522</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2075">
+                    <totalPop>124695</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2080">
+                    <totalPop>122803</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2085">
+                    <totalPop>120904</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2090">
+                    <totalPop>119014</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2095">
+                    <totalPop>117112</totalPop>
+                </populationMiniCAM>
+                <populationMiniCAM year="2100">
+                    <totalPop>115148</totalPop>
+                </populationMiniCAM>
+            </demographics>
+            <GDP>
+                <baseGDP>11932</baseGDP>
+                <laborforce fillout="1" year="1975">0.5</laborforce>
+                <laborproductivity year="1990">0.01035</laborproductivity>
+                <laborproductivity year="2005">0.05861</laborproductivity>
+                <laborproductivity year="2010">0.05297</laborproductivity>
+                <laborproductivity year="2015">0.04814</laborproductivity>
+                <laborproductivity year="2020">0.05727</laborproductivity>
+                <laborproductivity year="2025">0.05099</laborproductivity>
+                <laborproductivity year="2030">0.04627</laborproductivity>
+                <laborproductivity year="2035">0.04346</laborproductivity>
+                <laborproductivity year="2040">0.04047</laborproductivity>
+                <laborproductivity year="2045">0.04027</laborproductivity>
+                <laborproductivity year="2050">0.03112</laborproductivity>
+                <laborproductivity year="2055">0.0333</laborproductivity>
+                <laborproductivity year="2060">0.02969</laborproductivity>
+                <laborproductivity year="2065">0.02806</laborproductivity>
+                <laborproductivity year="2070">0.02493</laborproductivity>
+                <laborproductivity year="2075">0.02126</laborproductivity>
+                <laborproductivity year="2080">0.01845</laborproductivity>
+                <laborproductivity year="2085">0.0161</laborproductivity>
+                <laborproductivity year="2090">0.0143</laborproductivity>
+                <laborproductivity year="2095">0.01284</laborproductivity>
+                <laborproductivity year="2100">0.01088</laborproductivity>
+                <PPPConvert constRatio="1">2.37246</PPPConvert>
+            </GDP>
+        </region>
+    </world>
+</scenario>
