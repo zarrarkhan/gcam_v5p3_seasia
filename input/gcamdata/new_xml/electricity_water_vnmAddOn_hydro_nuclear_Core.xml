@@ -13,7 +13,9 @@
 <scenario>
     <world>
        
+        <!-- CHANGED BACK TO THIS REGION NAME CAPITALIZATION "Viet Nam" TO MATCH WITH ISO CODE FILE -->
         <region name="Viet Nam">
+
             <supplysector name="electricity">
                 <relative-cost-logit>
                     <logit-exponent fillout="1" year="1975">-3</logit-exponent>

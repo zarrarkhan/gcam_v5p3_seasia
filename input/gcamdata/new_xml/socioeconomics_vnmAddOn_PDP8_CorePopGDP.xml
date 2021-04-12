@@ -19,6 +19,8 @@
 <scenario>
     <world>
 
+        <!-- CHANGED BACK TO THIS REGION NAME CAPITALIZATION "Viet Nam" TO MATCH WITH ISO CODE FILE -->
+
         <region name="Viet Nam">
             <demographics>
                 <populationMiniCAM year="1975">
