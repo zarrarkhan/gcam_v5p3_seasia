@@ -28,8 +28,8 @@
 	<ScenarioComponents>
         <Value name = "climate">../input/gcamdata/xml/hector.xml</Value>
 		<Value name = "socioeconomics">../input/gcamdata/xml/socioeconomics_gSSP2.xml</Value>
-		<!-- INSERT CORE SOCIO-ECONOMIC ASSUMPTIONS FOR VIETNAM FROM PDP8 -->
-		<Value name = "socioeconomics">../input/gcamdata/new_xml/socioeconomics_vnmAddOn_PDP8_CorePopGDP.xml</Value>
+		<!-- INSERT CORE SOCIO-ECONOMIC ASSUMPTIONS FOR VIETNAM (ie. GDP=PDP8-med and POP=GSO-med -->
+		<Value name = "socioeconomics">../input/gcamdata/new_xml/socioeconomics_vnmAddOn_PDP8-GSO_CorePopGDP.xml</Value>
 
 		<Value name = "resources">../input/gcamdata/xml/resources.xml</Value>
 		<Value name = "energy_supply">../input/gcamdata/xml/en_supply.xml</Value>
