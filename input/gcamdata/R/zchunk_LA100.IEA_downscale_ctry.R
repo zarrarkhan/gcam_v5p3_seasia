@@ -8,7 +8,7 @@
 #' @param ... other optional parameters, depending on command
 #' @return Depends on \code{command}: either a vector of required inputs,
 #' a vector of output names, or (if \code{command} is "MAKE") all
-#' the generated outputs: \code{L100.IEA_en_bal_ctry_hist}. The corresponding file in the
+#' the generated outputs: \code{L100.IEA_en_bal_ctry_hist},\code{L100.IEA_en_bal_ctry_hist_thailand_imports}. The corresponding file in the
 #' original data system was \code{LA100.IEA_downscale_ctry.R} (energy level1).
 #' @details Combine OECD and non-OECD data; perform upfront adjustments for other Africa, Turkey, and South
 #' Africa; split out and handle the 1990 split of Yugoslavia and USSR, back-projecting individual country
@@ -27,9 +27,11 @@ module_energy_LA100.IEA_downscale_ctry <- function(command, ...) {
              OPTIONAL_FILE = "energy/IEA_EnergyBalances_2019",
              FILE = "energy/mappings/IEA_product_downscaling",
              FILE = "energy/mappings/IEA_memo_ctry",
-             FILE = "energy/mappings/IEA_ctry"))
+             FILE = "energy/mappings/IEA_ctry",
+             FILE = "energy/thailand_hydropower_imports_fut"))
   } else if(command == driver.DECLARE_OUTPUTS) {
-    return(c("L100.IEA_en_bal_ctry_hist"))
+    return(c("L100.IEA_en_bal_ctry_hist",
+             "L100.IEA_en_bal_ctry_hist_thailand_imports"))
   } else if(command == driver.MAKE) {
 
     `1990` <- `1990_share` <- `1990_sum` <- COUNTRY <- EcYield_kgm2_hi <- EcYield_kgm2_lo <- FLOW <-
@@ -45,6 +47,7 @@ module_energy_LA100.IEA_downscale_ctry <- function(command, ...) {
     IEA_product_downscaling <- get_data(all_data, "energy/mappings/IEA_product_downscaling")
     IEA_memo_ctry <- get_data(all_data, "energy/mappings/IEA_memo_ctry")
     IEA_ctry <- get_data(all_data, "energy/mappings/IEA_ctry")
+    thailand_hydropower_imports_fut <- get_data(all_data, "energy/thailand_hydropower_imports_fut")
 
     # If the (proprietary) raw IEA datasets are available, go through the full computations below
     # If not, use the pre-saved summary file (i.e., the output of this chunk!) assuming it's available
@@ -308,6 +311,67 @@ module_energy_LA100.IEA_downscale_ctry <- function(command, ...) {
         add_comments("split out and handle the 1990 split of Yugoslavia and USSR; use population to downscale IEA composite regions") %>%
         add_comments("to individual countries; filter out countries without data in any year.") ->
         L100.IEA_en_bal_ctry_hist
+
+      # Adjustment for Thailand Breakout
+      # All imports in Thailand in 2015 were hydro-electricity from Laos
+      # Assign all Imports to Thailand Hydro
+      # Remove the same amount from Laos
+
+      # Read in Thailand Hydro Imports
+      thailand_hydropower_imports_fut %>%
+        filter(year==MODEL_FINAL_BASE_YEAR)%>%
+        group_by(iso,year) %>%
+        summarize(`2015` = sum(hydro_imports_GWh, na.rm=T)) %>%
+        ungroup() %>%
+        mutate(FLOW="ELMAINE",PRODUCT="Hydro")%>%
+        select(-year)->
+        L100.IEA_en_bal_ctry_hist_thailand_imports
+
+
+      # Subtract Imports from Laos
+      L100.IEA_en_bal_ctry_hist_thailand_imports %>%
+        mutate(iso = "lao",
+               `2015`=-`2015`) ->
+        L100.IEA_en_bal_ctry_hist_laos_subtract
+
+      # Add Into Tha Hydro
+      L100.IEA_en_bal_ctry_hist %>%
+        filter(iso %in% c("tha"),
+               PRODUCT=="Hydro", FLOW=="ELMAINE")%>%
+        bind_rows(L100.IEA_en_bal_ctry_hist_thailand_imports) %>%
+        gather(key="year",value="value",-FLOW,-PRODUCT,-iso) %>%
+        group_by(FLOW, PRODUCT, iso, year) %>%
+        summarize(value=sum(value,na.rm=T)) %>%
+        ungroup() %>%
+        spread(key="year",value="value") ->
+          L100.IEA_en_bal_ctry_hist_tha_hydro
+
+      # Subtract from Laos
+      L100.IEA_en_bal_ctry_hist %>%
+        filter(iso %in% c("lao"),
+               PRODUCT=="Hydro", FLOW=="ELMAINE")%>%
+        bind_rows(L100.IEA_en_bal_ctry_hist_laos_subtract) %>%
+        gather(key="year",value="value",-FLOW,-PRODUCT,-iso) %>%
+        group_by(FLOW, PRODUCT, iso, year) %>%
+        summarize(value=sum(value,na.rm=T)) %>%
+        ungroup() %>%
+        spread(key="year",value="value") ->
+        L100.IEA_en_bal_ctry_hist_lao_hydro
+
+      L100.IEA_en_bal_ctry_hist_tha_hydro_ELOUTPUT <- L100.IEA_en_bal_ctry_hist_tha_hydro %>% mutate(FLOW="ELOUTPUT")
+      L100.IEA_en_bal_ctry_hist_lao_hydro_ELOUTPUT <-  L100.IEA_en_bal_ctry_hist_lao_hydro %>% mutate(FLOW="ELOUTPUT")
+
+
+      # Bind Back into Original
+      L100.IEA_en_bal_ctry_hist %>%
+        filter(!((iso=="tha"|iso=="lao") & PRODUCT=="Hydro" & (FLOW=="ELMAINE"|FLOW=="ELOUTPUT")))%>%
+        bind_rows(L100.IEA_en_bal_ctry_hist_tha_hydro) %>%
+        bind_rows(L100.IEA_en_bal_ctry_hist_lao_hydro) %>%
+        bind_rows(L100.IEA_en_bal_ctry_hist_tha_hydro_ELOUTPUT) %>%
+        bind_rows(L100.IEA_en_bal_ctry_hist_lao_hydro_ELOUTPUT)->
+        L100.IEA_en_bal_ctry_hist
+
+
     } else {
       # raw IEA datasets not available, so return NA
       # Downstream chunks will be responsible for checking this
@@ -327,7 +391,18 @@ module_energy_LA100.IEA_downscale_ctry <- function(command, ...) {
       add_flags(FLAG_NO_TEST) ->
       L100.IEA_en_bal_ctry_hist
 
-    return_data(L100.IEA_en_bal_ctry_hist)
+    L100.IEA_en_bal_ctry_hist_thailand_imports%>%
+      add_title("IEA energy balances downscaled to 202 countries by iso code, FLOW, PRODUCT, and historical year Thailand Imports", overwrite = TRUE) %>%
+      add_units("GWh") %>%
+      add_comments("** RAW DATA NOT READ FROM IEA FILES **") %>%
+      add_legacy_name("L100.IEA_en_bal_ctry_hist_thailand_imports") %>%
+      add_precursors("L100.Pop_thous_ctry_Yh", "energy/IEA_EnergyBalances_2019",
+                     "energy/mappings/IEA_product_downscaling", "energy/mappings/IEA_ctry", "energy/mappings/IEA_memo_ctry") %>%
+      add_flags(FLAG_NO_TEST) ->
+      L100.IEA_en_bal_ctry_hist_thailand_imports
+
+    return_data(L100.IEA_en_bal_ctry_hist,
+                L100.IEA_en_bal_ctry_hist_thailand_imports)
   } else {
     stop("Unknown command")
   }

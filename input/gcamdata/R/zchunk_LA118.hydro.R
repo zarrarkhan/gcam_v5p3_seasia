@@ -21,7 +21,9 @@ module_energy_LA118.hydro <- function(command, ...) {
     return(c(FILE = "common/iso_GCAM_regID",
              FILE = "energy/Hydropower_potential",
              "L100.IEA_en_bal_ctry_hist",
-             FILE = "energy/A18.hydro_output"))
+             "L100.IEA_en_bal_ctry_hist_thailand_imports",
+             FILE = "energy/A18.hydro_output",
+             FILE = "energy/thailand_hydropower_imports_fut"))
   } else if(command == driver.DECLARE_OUTPUTS) {
     return(c("L118.out_EJ_R_elec_hydro_Yfut"))
   } else if(command == driver.MAKE) {
@@ -33,6 +35,8 @@ module_energy_LA118.hydro <- function(command, ...) {
     Hydropower_potential <- get_data(all_data, "energy/Hydropower_potential")
     A18.hydro_output <- get_data(all_data, "energy/A18.hydro_output")
     L100.IEA_en_bal_ctry_hist <- get_data(all_data, "L100.IEA_en_bal_ctry_hist")
+    L100.IEA_en_bal_ctry_hist_thailand_imports <- get_data(all_data, "L100.IEA_en_bal_ctry_hist_thailand_imports")
+    thailand_hydropower_imports_fut <- get_data(all_data, "energy/thailand_hydropower_imports_fut")
 
     # L100.IEA_en_bal_ctry_hist might be null (meaning the data system is running
     # without the proprietary IEA data files). If this is the case, we substitute a
@@ -215,6 +219,54 @@ module_energy_LA118.hydro <- function(command, ...) {
         add_title("L118.out_EJ_R_elec_hydro_Yfut") ->
         L118.out_EJ_R_elec_hydro_Yfut
 
+      # Remove hydro power imports from base year from future projections as those have already been included
+      # Add remaining additional hydro power imports into Region for Thailand
+
+      as.numeric(L100.IEA_en_bal_ctry_hist_thailand_imports[as.character(MODEL_FINAL_BASE_YEAR)]) * CONV_GWH_EJ ->
+        L100.IEA_en_bal_ctry_hist_thailand_imports_baseyear_EJ
+
+      # Subtract already included imports from Laos
+      thailand_hydropower_imports_fut %>%
+        filter(year>MODEL_FINAL_BASE_YEAR)%>%
+        group_by(iso,year) %>%
+        summarize(hydro_imports_GWh_sum = sum(hydro_imports_GWh, na.rm=T)) %>%
+        ungroup() %>%
+        mutate(hydro_imports_EJ = hydro_imports_GWh_sum * CONV_GWH_EJ,
+               hydro_imports_new_EJ = hydro_imports_EJ - L100.IEA_en_bal_ctry_hist_thailand_imports_baseyear_EJ) ->
+        thailand_hydropower_imports_fut_EJ
+
+      # Use final year projection and hold constant to 2100
+      thailand_hydropower_imports_fut_EJ_final <- (thailand_hydropower_imports_fut_EJ%>%tail(1))$hydro_imports_new_EJ
+
+      # Set to GCAM region and years
+      thailand_hydropower_imports_fut_EJ %>%
+        select(GCAM_region_ID=iso, year, hydro_imports_new_EJ) %>%
+        mutate(sector = "electricity generation",
+               fuel = "hydro",
+               GCAM_region_ID = 33) %>%
+        complete(year = unique(L118.out_EJ_R_elec_hydro_Yfut$year)[unique(L118.out_EJ_R_elec_hydro_Yfut$year) > MODEL_FINAL_BASE_YEAR],
+                 nesting(GCAM_region_ID,sector,fuel)) %>%
+        replace_na(list(hydro_imports_new_EJ = thailand_hydropower_imports_fut_EJ_final)) ->
+        L118.out_EJ_R_elec_hydro_Yfut_tha_hydro_imports
+
+      # Subtract from southeast-asia
+      L118.out_EJ_R_elec_hydro_Yfut_tha_hydro_imports %>%
+        mutate(hydro_imports_new_EJ = - hydro_imports_new_EJ,
+               GCAM_region_ID=29) ->
+        L118.out_EJ_R_elec_hydro_Yfut_sea_hydro_imports
+
+      # Add to existing hydro in Thailand (Region 33)
+      # Remove from Region Southeast asia (Region 29)
+      L118.out_EJ_R_elec_hydro_Yfut %>%
+        left_join(L118.out_EJ_R_elec_hydro_Yfut_tha_hydro_imports) %>%
+        mutate(value = if_else((GCAM_region_ID==33 & !is.na(hydro_imports_new_EJ)), value + hydro_imports_new_EJ, value)) %>%
+        select(-hydro_imports_new_EJ) %>%
+        left_join(L118.out_EJ_R_elec_hydro_Yfut_sea_hydro_imports) %>%
+        mutate(value = if_else((GCAM_region_ID==29 & !is.na(hydro_imports_new_EJ)), value + hydro_imports_new_EJ, value)) %>%
+        select(-hydro_imports_new_EJ) ->
+        L118.out_EJ_R_elec_hydro_Yfut
+
+
       # ===================================================
 
       L118.out_EJ_R_elec_hydro_Yfut %>%
@@ -223,8 +275,12 @@ module_energy_LA118.hydro <- function(command, ...) {
         add_comments("In most cases, a growth potential for each country was calculated,
                    multiplied by its share in the region, and added to the base-year ouput") %>%
         add_legacy_name("L118.out_EJ_R_elec_hydro_Yfut") %>%
-        add_precursors("common/iso_GCAM_regID", "energy/Hydropower_potential",
-                       "L100.IEA_en_bal_ctry_hist", "energy/A18.hydro_output") ->
+        add_precursors("common/iso_GCAM_regID",
+                       "energy/Hydropower_potential",
+                       "L100.IEA_en_bal_ctry_hist",
+                       "energy/A18.hydro_output",
+                       "L100.IEA_en_bal_ctry_hist_thailand_imports",
+                       "energy/thailand_hydropower_imports_fut") ->
         L118.out_EJ_R_elec_hydro_Yfut
 
       # At this point output should be identical to the prebuilt version

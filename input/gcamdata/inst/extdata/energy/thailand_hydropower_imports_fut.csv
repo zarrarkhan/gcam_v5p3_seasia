@@ -1,0 +1,51 @@
+# File: thailand_hydropower_imports_fut.csv
+# Title: Thailand Hydropower Imports
+# Units: GWh
+# Source:  Thailand Power Development Plan (PDP2015), page 76 https://www.egat.co.th/en/images/about-egat/PDP2015_Eng.pdf
+# Column types: ccnn
+# ----------
+iso,iso_from,year,hydro_imports_GWh
+tha,lao,2015,11976
+tha,lao,2016,12279
+tha,lao,2017,12339
+tha,lao,2018,12758
+tha,lao,2019,19699
+tha,lao,2020,19825
+tha,lao,2021,19825
+tha,lao,2022,19825
+tha,lao,2023,19825
+tha,lao,2024,19825
+tha,lao,2025,19825
+tha,lao,2026,22555
+tha,lao,2027,22555
+tha,lao,2028,22555
+tha,lao,2029,22345
+tha,lao,2030,21940
+tha,lao,2031,21940
+tha,lao,2032,21940
+tha,lao,2033,21940
+tha,lao,2034,21940
+tha,lao,2035,17140
+tha,lao,2036,19034
+tha,mmr,2015,0
+tha,mmr,2016,0
+tha,mmr,2017,0
+tha,mmr,2018,0
+tha,mmr,2019,0
+tha,mmr,2020,0
+tha,mmr,2021,0
+tha,mmr,2022,0
+tha,mmr,2023,0
+tha,mmr,2024,0
+tha,mmr,2025,0
+tha,mmr,2026,0
+tha,mmr,2027,3500
+tha,mmr,2028,7000
+tha,mmr,2029,10499
+tha,mmr,2030,13999
+tha,mmr,2031,17499
+tha,mmr,2032,20999
+tha,mmr,2033,24498
+tha,mmr,2034,27998
+tha,mmr,2035,31498
+tha,mmr,2036,31498

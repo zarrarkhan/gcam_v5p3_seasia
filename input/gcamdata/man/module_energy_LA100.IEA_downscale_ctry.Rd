@@ -14,7 +14,7 @@ module_energy_LA100.IEA_downscale_ctry(command, ...)
 \value{
 Depends on \code{command}: either a vector of required inputs,
 a vector of output names, or (if \code{command} is "MAKE") all
-the generated outputs: \code{L100.IEA_en_bal_ctry_hist}. The corresponding file in the
+the generated outputs: \code{L100.IEA_en_bal_ctry_hist},\code{L100.IEA_en_bal_ctry_hist_thailand_imports}. The corresponding file in the
 original data system was \code{LA100.IEA_downscale_ctry.R} (energy level1).
 }
 \description{
