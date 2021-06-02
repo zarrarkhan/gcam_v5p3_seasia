@@ -1,0 +1,1126 @@
+# Copyright 2019 Battelle Memorial Institute; see the LICENSE file.
+
+#' module_gcamseasia_L244.building_seasia
+#'
+#' Creates GCAM-SEAsia building output files for writing to xml.
+#'
+#' @param command API command to execute
+#' @param ... other optional parameters, depending on command
+#' @return Depends on \code{command}: either a vector of required inputs,
+#' a vector of output names, or (if \code{command} is "MAKE") all
+#' the generated outputs: \code{L244.DeleteConsumer_SEAbld}, \code{L244.DeleteSupplysector_SEAbld},
+#' \code{L244.PriceExp_IntGains_gcamSEA}, \code{L244.Floorspace_gcamSEA}, \code{L244.DemandFunction_serv_gcamSEA}, \code{L244.DemandFunction_flsp_gcamSEA},
+#' \code{L244.Satiation_flsp_gcamSEA}, \code{L244.SatiationAdder_gcamSEA}, \code{L244.ThermalBaseService_gcamSEA}, \code{L244.GenericBaseService_gcamSEA},
+#' \code{L244.ThermalServiceSatiation_gcamSEA}, \code{L244.GenericServiceSatiation_gcamSEA}, \code{L244.Intgains_scalar_gcamSEA},
+#' \code{L244.ShellConductance_bld_gcamSEA}, \code{L244.Supplysector_bld_gcamSEA}, \code{L244.FinalEnergyKeyword_bld_gcamSEA}, \code{L244.SubsectorShrwt_bld_gcamSEA},
+#' \code{L244.SubsectorShrwtFllt_bld_gcamSEA}, \code{L244.SubsectorInterp_bld_gcamSEA}, \code{L244.SubsectorInterpTo_bld_gcamSEA},
+#' \code{L244.SubsectorLogit_bld_gcamSEA}, \code{L244.StubTech_bld_gcamSEA}, \code{L244.StubTechCalInput_bld_gcamSEA}, \code{L244.StubTechMarket_bld_gcamSEA},
+#' \code{L244.GlobalTechIntGainOutputRatio_gcamSEA}, \code{L244.GlobalTechInterpTo_bld_gcamSEA}, \code{L244.GlobalTechEff_bld_gcamSEA},
+#' \code{L244.GlobalTechShrwt_bld_gcamSEA}, \code{L244.GlobalTechCost_bld_gcamSEA}, \code{L244.GlobalTechSCurve_bld_gcamSEA}, \code{L244.HDDCDD_A2_GFDL_gcamSEA},
+#' \code{L244.HDDCDD_AEO_2015_gcamSEA}, \code{L244.HDDCDD_constdds_gcamSEA}.
+#' The corresponding file in the original data system was \code{L244.building_USA.R} (gcam-usa level2).
+#' @details Creates GCAM-SEAsia building output files for writing to xml.
+#' @importFrom assertthat assert_that
+#' @importFrom dplyr bind_rows distinct filter if_else group_by left_join mutate select semi_join summarise
+#' @importFrom tidyr complete gather nesting replace_na crossing
+#' @author RLH November 2017, MAW April 2021
+
+module_gcamseasia_L244.building_seasia <- function(command, ...) {
+  if(command == driver.DECLARE_INPUTS) {
+    return(c(FILE = "common/GCAM_region_names",
+             FILE = "common/iso_GCAM_regID",
+             FILE = "energy/A44.gcam_consumer",
+             FILE = "energy/A44.sector",
+             FILE = "gcam-seasia/IND_bld_techs",
+             FILE = "gcam-seasia/IND_A44_shell",
+             FILE = "gcam-seasia/IND_A44_demandFn_flsp",
+             FILE = "gcam-seasia/IND_A44_demandFn_serv",
+             FILE = "gcam-seasia/A44.gcam_consumer",
+             FILE = "gcam-seasia/IND_A44_satiation_flsp",
+             FILE = "gcam-seasia/IND_A44_sector",
+             FILE = "gcam-seasia/IND_A44_subsector_interp",
+             FILE = "gcam-seasia/IND_A44_subsector_logit",
+             FILE = "gcam-seasia/IND_A44_subsector_shrwt",
+             FILE = "gcam-seasia/IND_A44_tech_cost",
+             FILE = "gcam-seasia/IND_A44_tech_eff",
+             FILE = "gcam-seasia/IND_A44_tech_eff_avg",
+              FILE = "gcam-usa/A44.globaltech_shares",
+             FILE = "gcam-seasia/IND_A44_tech_intgains",
+             FILE = "gcam-seasia/IND_A44_tech_retirement",
+             FILE = "gcam-seasia/IND_A44_tech_shrwt",
+             FILE = "gcam-seasia/IND_A44_tech_interp",
+             FILE = "gcam-seasia/IND_A44_demand_satiation_mult",
+             FILE = "gcam-seasia/Various_flsp_Mm2",
+             FILE = "gcam-seasia/IESS_bld_serv_fuel",
+             "L144.flsp_bm2_R_res_Yh",
+             "L144.flsp_bm2_R_comm_Yh",
+             "L144.in_EJ_R_bld_serv_F_Yh",
+             "L143.HDDCDD_scen_R_Y",
+             "L101.Pop_thous_R_Yh",
+             "L101.Pop_thous_Scen_R_Yfut",
+             "L100.gdp_mil90usd_ctry_Yh"))
+  } else if(command == driver.DECLARE_OUTPUTS) {
+    return(c("L244.DeleteConsumer_SEAbld",
+             "L244.DeleteSupplysector_SEAbld",
+             "L244.PriceExp_IntGains_gcamSEA",
+             "L244.Floorspace_gcamSEA",
+             "L244.DemandFunction_serv_gcamSEA",
+             "L244.DemandFunction_flsp_gcamSEA",
+             "L244.Satiation_flsp_gcamSEA",
+             "L244.SatiationAdder_gcamSEA",
+             "L244.ThermalBaseService_gcamSEA",
+             "L244.GenericBaseService_gcamSEA",
+             "L244.ThermalServiceSatiation_gcamSEA",
+             "L244.GenericServiceSatiation_gcamSEA",
+             "L244.Intgains_scalar_gcamSEA",
+             "L244.ShellConductance_bld_gcamSEA",
+             "L244.Supplysector_bld_gcamSEA",
+             "L244.FinalEnergyKeyword_bld_gcamSEA",
+             "L244.SubsectorShrwt_bld_gcamSEA",
+             "L244.SubsectorShrwtFllt_bld_gcamSEA",
+             "L244.SubsectorInterp_bld_gcamSEA",
+             "L244.SubsectorInterpTo_bld_gcamSEA",
+             "L244.SubsectorLogit_bld_gcamSEA",
+             "L244.StubTech_bld_gcamSEA",
+             "L244.StubTechCalInput_bld_gcamSEA",
+             "L244.StubTechMarket_bld_gcamSEA",
+             "L244.GlobalTechIntGainOutputRatio_gcamSEA",
+             "L244.GlobalTechInterpTo_bld_gcamSEA",
+             "L244.GlobalTechEff_bld_gcamSEA",
+             "L244.GlobalTechShrwt_bld_gcamSEA",
+             "L244.GlobalTechCost_bld_gcamSEA",
+             "L244.GlobalTechSCurve_bld_gcamSEA",
+             "L244.HDDCDD_A2_GFDL_gcamSEA",
+             "L244.HDDCDD_constdds_gcamSEA"
+             #"L244.HDDCDD_AEO_2015_gcamSEA"
+             ))
+  } else if(command == driver.MAKE) {
+
+    # Silence package checks
+    GCM <- Scen <- base.building.size <- base.service <- calibrated.value <- comm <-
+      degree.days <- efficiency <- efficiency_tech1 <- efficiency_tech2 <- fuel <-
+      gcam.consumer <- grid_region <- half_life_new <- half_life_stock <- input.cost <-
+      input.ratio <- internal.gains.market.name <- internal.gains.output.ratio <-
+      internal.gains.scalar <- market.name <- minicam.energy.input <- multiplier <-
+      object <- pcFlsp_mm2 <- pcGDP <- pcflsp_mm2cap <- pop <- region <- resid <-
+      satiation.adder <- satiation.level <- sector <- sector.name <- service <- share <-
+      share.weight <- share_tech1 <- share_tech2 <- share_type <- state <- steepness_new <-
+      steepness_stock <- stockavg <- subsector <- subsector.name <- supplysector <-
+      tech_type <- technology <- technology1 <- technology2 <-
+      thermal.building.service.input <- to.value <- value <- year <- year.fillout <- . <-
+      pop_year <- Sector <- pop_share <- growth <- flsp_growth <- NULL
+
+    all_data <- list(...)[[1]]
+
+    # Load required inputs
+    GCAM_region_names <- get_data(all_data, "common/GCAM_region_names", strip_attributes = TRUE)
+    iso_GCAM_regID <- get_data(all_data, "common/iso_GCAM_regID", strip_attributes = TRUE)
+    A44.gcam_consumer_en <- get_data(all_data, "energy/A44.gcam_consumer", strip_attributes = TRUE)
+    A44.sector_en <- get_data(all_data, "energy/A44.sector", strip_attributes = TRUE)
+    IND_bld_techs <- get_data(all_data, "gcam-seasia/IND_bld_techs", strip_attributes = TRUE)
+    #states_subregions <- get_data(all_data, "gcam-usa/states_subregions", strip_attributes = TRUE)
+    IND_A44_shell <- get_data(all_data, "gcam-seasia/IND_A44_shell", strip_attributes = TRUE)
+    IND_A44_demandFn_flsp <- get_data(all_data, "gcam-seasia/IND_A44_demandFn_flsp", strip_attributes = TRUE)
+    IND_A44_demandFn_serv <- get_data(all_data, "gcam-seasia/IND_A44_demandFn_serv", strip_attributes = TRUE)
+    A44.gcam_consumer <- get_data(all_data, "gcam-seasia/A44.gcam_consumer", strip_attributes = TRUE)
+    IND_A44_satiation_flsp <- get_data(all_data, "gcam-seasia/IND_A44_satiation_flsp", strip_attributes = TRUE)
+    IND_A44_sector <- get_data(all_data, "gcam-seasia/IND_A44_sector", strip_attributes = TRUE)
+    IND_A44_subsector_interp <- get_data(all_data, "gcam-seasia/IND_A44_subsector_interp", strip_attributes = TRUE)
+    IND_A44_subsector_logit <- get_data(all_data, "gcam-seasia/IND_A44_subsector_logit", strip_attributes = TRUE)
+    IND_A44_subsector_shrwt <- get_data(all_data, "gcam-seasia/IND_A44_subsector_shrwt", strip_attributes = TRUE)
+    IND_A44_tech_cost <- get_data(all_data, "gcam-seasia/IND_A44_tech_cost", strip_attributes = TRUE)
+    IND_A44_tech_eff <- get_data(all_data, "gcam-seasia/IND_A44_tech_eff", strip_attributes = TRUE) %>%
+      gather_years()
+    IND_A44_tech_eff_avg <- get_data(all_data, "gcam-seasia/IND_A44_tech_eff_avg", strip_attributes = TRUE)
+    A44.globaltech_shares <- get_data(all_data, "gcam-usa/A44.globaltech_shares", strip_attributes = TRUE)
+    IND_A44_tech_intgains <- get_data(all_data, "gcam-seasia/IND_A44_tech_intgains", strip_attributes = TRUE)
+    IND_A44_tech_retirement <- get_data(all_data, "gcam-seasia/IND_A44_tech_retirement", strip_attributes = TRUE)
+    IND_A44_tech_shrwt <- get_data(all_data, "gcam-seasia/IND_A44_tech_shrwt", strip_attributes = TRUE)
+    IND_A44_tech_interp <- get_data(all_data, "gcam-seasia/IND_A44_tech_interp", strip_attributes = TRUE)
+    IND_A44_demand_satiation_mult <- get_data(all_data, "gcam-seasia/IND_A44_demand_satiation_mult", strip_attributes = TRUE)
+    Various_flsp_Mm2 <- get_data(all_data, "gcam-seasia/Various_flsp_Mm2", strip_attributes = TRUE)
+    IESS_bld_serv_fuel <- get_data(all_data, "gcam-seasia/IESS_bld_serv_fuel", strip_attributes = TRUE)
+    L144.flsp_bm2_R_res_Yh <- get_data(all_data, "L144.flsp_bm2_R_res_Yh", strip_attributes = TRUE)
+    L144.flsp_bm2_R_comm_Yh <- get_data(all_data, "L144.flsp_bm2_R_comm_Yh", strip_attributes = TRUE)
+    L144.in_EJ_R_bld_serv_F_Yh <- get_data(all_data, "L144.in_EJ_R_bld_serv_F_Yh", strip_attributes = TRUE)
+    L143.HDDCDD_scen_R_Y <- get_data(all_data, "L143.HDDCDD_scen_R_Y", strip_attributes = TRUE)
+    L101.Pop_thous_R_Yh <- get_data(all_data, "L101.Pop_thous_R_Yh", strip_attributes = TRUE)
+    L101.Pop_thous_Scen_R_Yfut <- get_data(all_data, "L101.Pop_thous_Scen_R_Yfut", strip_attributes = TRUE)
+    L100.gdp_mil90usd_ctry_Yh <- get_data(all_data, "L100.gdp_mil90usd_ctry_Yh", strip_attributes = TRUE)
+
+    # ===================================================
+    # Data Processing
+
+    # Note: Building energy demands and floorspace are calculated endogenously - these are undergoing review
+    # per-capita demand = (satiation.level - satiation.adder) * (1 - exp( -log2 / satiation.impedance * Demand.Driver)) + satiation.adder)
+    #
+    # floorspace = (satiation.level - satiation.adder) *
+    # [1 - exp{(-ln(2) * per-capita-GDP/satiation.impedance) * (energy_cost/base_energy_cost)^price_effect_exponent}] + satiation.adder
+    #
+    # satiation.level: maximum per-capita demand that can be achieved
+    # satiation.adder: value that allow the starting position of any region to be set along the demand function
+    # satiation.impedance: shape parameter
+
+    # ===================================================
+    # 0. Pre-Processing
+    # ===================================================
+    # Need to delete the buildings sector in the SEAsia region (gcam.consumers and supplysectors)
+    L244.DeleteConsumer_SEAbld <- tibble(region = gcam.SEA_REGION  , gcam.consumer = A44.gcam_consumer_en$gcam.consumer)
+    L244.DeleteSupplysector_SEAbld <- tibble(region = gcam.SEA_REGION  , supplysector = A44.sector_en$supplysector)
+
+    # ===================================================
+    # 0.5. Population
+    # ===================================================
+    # Bind historical and future population data and filter for the target region(s) (SEAsia)
+    # TODO: to change the region the XML is produced for, change "gcam.SEA_REGION" in constants.R
+    # Select SSP scenario
+    L244.Pop_thous <- L101.Pop_thous_Scen_R_Yfut %>%
+      filter( scenario == "gSSP2" ) %>%
+      bind_rows( L101.Pop_thous_R_Yh ) %>%
+      left_join_error_no_match( GCAM_region_names, by = c( "GCAM_region_ID" ) ) %>%
+      # filter for target region(s)
+      filter( region == gcam.SEA_REGION ) %>%
+      # select relevant columns
+      select( -c( scenario, GCAM_region_ID ) )
+
+    # L244.PriceExp_IntGains_gcamSEA: price exponent on floorspace and naming of internal gains trial markets
+    L244.PriceExp_IntGains_gcamSEA <- write_to_all_states(A44.gcam_consumer, LEVEL2_DATA_NAMES[["PriceExp_IntGains"]],
+                                                          region_list = gcam.SEA_REGION )
+
+    # ===================================================
+    # 1. Floorspace
+    # ===================================================
+    # L244.Floorspace_gcamSEA: base year floorspace
+    # Keep all historical years for now - these are needed in calculating satiation adders later on
+
+    # ===================================================
+    # 1.1. Residential Floorspace
+    # ===================================================
+    L244.Floorspace_resid <- L144.flsp_bm2_R_res_Yh %>%
+      left_join_error_no_match( GCAM_region_names, by = c( "GCAM_region_ID" ) ) %>%
+      # filter for target region(s)
+      filter( region == gcam.SEA_REGION ) %>%
+      # select relevant columns
+      select( -c( GCAM_region_ID ) ) %>%
+      rename( base.building.size = value ) %>%
+      # add column that contains gcam.consumer
+      mutate( gcam.consumer = "resid",
+        base.building.size = round( base.building.size, energy.DIGITS_FLOORSPACE ) ) %>%
+      left_join_error_no_match( A44.gcam_consumer_en, by = "gcam.consumer" ) %>%
+      select( LEVEL2_DATA_NAMES[["Floorspace"]] )
+
+    # ===================================================
+    # 1.1.1 split residential floorspace into urban and rural
+    # ===================================================
+    # Apportion to urban and rural on the basis of the historical data
+    # using just two endpoints and interpolating in between years because data is missing for some years
+    # TODO: use actual data instead of interpolation
+    # TODO: see if we have more recent floorspace data
+    flsp_shares <- Various_flsp_Mm2 %>%
+      mutate( res_total_bm2 = ( urban + rural ) * CONV_MIL_BIL,
+              urban_share = urban * CONV_MIL_BIL / res_total_bm2,
+              rural_share = 1 - urban_share ) %>%
+      filter( !is.na( rural ) )
+
+    # years to be used to interpolate between
+    first_scale_year <- min( flsp_shares$year )
+    last_scale_year <- max( flsp_shares$year )
+
+    # values to be used to interpolate between
+    rural_share_initial <- ( flsp_shares$rural_share[ flsp_shares$year == first_scale_year ] )
+    rural_share_final <- ( flsp_shares$rural_share[ flsp_shares$year == last_scale_year ] )
+
+    res_rural_shares <- flsp_shares %>%
+      # remove all columns except for year
+      select( year ) %>%
+      mutate( share =  NA )
+
+    # TODO: do this in tidyr
+    # res_rural_shares <- flsp_shares %>%
+    #   # remove all columns except for year
+    #   select( year ) %>%
+    #   mutate( share = if_else( year == first_scale_year, rural_share_initial,
+    #                          if_else( year == last_scale_year, rural_share_final, NA ) ) )
+    res_rural_shares$share[ res_rural_shares$year == first_scale_year ] <- rural_share_initial
+    res_rural_shares$share[ res_rural_shares$year == last_scale_year ] <- rural_share_final
+    res_rural_shares_comp_cases <- res_rural_shares[ complete.cases( res_rural_shares ), ]
+    res_rural_shares$share <- approx( x = res_rural_shares_comp_cases$year, y = res_rural_shares_comp_cases$share, xout = res_rural_shares$year, rule = 2 )$y
+
+    # copy the minimum year rural share back to all other historical years, and the max year rural share to all future years
+    res_rural_shares_his <- res_rural_shares %>%
+      filter( year == min( year ) ) %>%
+      select( -year ) %>%
+      repeat_add_columns( tibble::tibble( year = MODEL_YEARS ) ) %>%
+      filter( year <= first_scale_year )
+
+    res_rural_shares_fut <- res_rural_shares %>%
+      filter( year == max( year ) ) %>%
+      select( -year ) %>%
+      repeat_add_columns( tibble::tibble( year = MODEL_YEARS ) ) %>%
+      filter( year >= last_scale_year )
+
+    # bind all years into one dataframe
+    res_shares_all <- res_rural_shares_his %>%
+      bind_rows( res_rural_shares, res_rural_shares_fut ) %>%
+      rename( rural_share = share ) %>%
+      mutate( urban_share = 1 - rural_share )
+
+    # Multiply the residential floorspace total by the rural and urban shares
+    L244.Floorspace_resid_rural_Yh <- L244.Floorspace_resid %>%
+    # can't use a left_join_error_no_match due to differing years
+      left_join( res_shares_all, by = c( "year" ) ) %>%
+      mutate(  base.building.size = base.building.size * rural_share,
+               gcam.consumer = "resid rural",
+               nodeInput = "resid rural",
+               building.node.input = "resid_rural_building" ) %>%
+      select( -c( rural_share, urban_share ) )
+
+    L244.Floorspace_resid_urban_Yh <- L244.Floorspace_resid %>%
+      # can't use a left_join_error_no_match due to differing years
+      left_join( res_shares_all, by = c( "year" ) ) %>%
+      mutate(  base.building.size = base.building.size * urban_share,
+               gcam.consumer = "resid urban",
+               nodeInput = "resid urban",
+               building.node.input = "resid_urban_building" ) %>%
+      select( -c( rural_share, urban_share ) )
+
+    # bind rural and urban tables
+    L244.Floorspace_resid_Yh <- L244.Floorspace_resid_rural_Yh %>%
+      bind_rows( L244.Floorspace_resid_urban_Yh ) %>%
+      # filter for GCAM years
+      filter( year %in% MODEL_YEARS )
+
+    # ===================================================
+    # 1.2. Commercial Floorspace
+    # ===================================================
+    L244.Floorspace_comm <- L144.flsp_bm2_R_comm_Yh %>%
+      left_join_error_no_match( GCAM_region_names, by = c( "GCAM_region_ID" ) ) %>%
+      # filter for target region(s)
+      filter( region == gcam.SEA_REGION ) %>%
+      # select relevant columns
+      select( -c( GCAM_region_ID ) ) %>%
+      rename(base.building.size = value) %>%
+      mutate( gcam.consumer = "comm",
+               base.building.size = round(base.building.size, energy.DIGITS_FLOORSPACE)) %>%
+      left_join_error_no_match(A44.gcam_consumer, by = "gcam.consumer") %>%
+      select(LEVEL2_DATA_NAMES[["Floorspace"]]) %>%
+      # filter for GCAM years
+      filter( year %in% MODEL_YEARS )
+
+    L244.Floorspace_gcamSEA <- bind_rows(L244.Floorspace_resid_Yh, L244.Floorspace_comm)
+
+    # L244.DemandFunction_serv_gcamSEA and L244.DemandFunction_flsp_gcamSEA: demand function types
+    L244.DemandFunction_serv_gcamSEA <- write_to_all_states(IND_A44_demandFn_serv, LEVEL2_DATA_NAMES[["DemandFunction_serv"]],
+                                                            region_list = gcam.SEA_REGION)
+    L244.DemandFunction_flsp_gcamSEA <- write_to_all_states(IND_A44_demandFn_flsp, LEVEL2_DATA_NAMES[["DemandFunction_flsp"]],
+                                                            region_list = gcam.SEA_REGION)
+
+    # ===================================================
+    # 1.3. Floorspace Satiation Levels
+    # ===================================================
+    # L244.Satiation_flsp_gcamSEA: Satiation levels assumed for floorspace
+    L244.Satiation_flsp_gcamSEA <- IND_A44_satiation_flsp %>%
+      gather( gcam.consumer, value, `resid rural`, `resid urban`, comm ) %>%
+      # Need to make sure that the satiation level is greater than the floorspace in the final base year
+      left_join_error_no_match(L244.Floorspace_gcamSEA %>%
+                                 filter(year == max(MODEL_BASE_YEARS)), by = c("region", "gcam.consumer")) %>%
+      left_join_error_no_match(L244.Pop_thous %>% rename(pop = value), by = c("region", "year")) %>%
+      mutate(year = as.integer(year),
+             # value.y = population
+             pcflsp_mm2cap = base.building.size / pop,
+             # Satiation level = must be greater than the observed value in the final calibration year, so if observed value is
+             # greater than calculated, multiply observed by 1.001
+             satiation.level = round(pmax(value * CONV_THOUS_BIL, pcflsp_mm2cap * 1.001), energy.DIGITS_SATIATION_ADDER)) %>%
+      left_join_error_no_match(A44.gcam_consumer, by = c("gcam.consumer", "nodeInput", "building.node.input")) %>%
+      select(LEVEL2_DATA_NAMES[["BldNodes"]], "satiation.level")
+
+    # L244.SatiationAdder_gcamSEA: Satiation adders in floorspace demand function
+    # Required for shaping the future floorspace growth trajectories in each region
+    # Match in the per-capita GDP, total floorspace, and population (for calculating per-capita floorspace)
+
+    # We will filter GDP to energy.SATIATION_YEAR, but this may be greater than the historical years present
+    # under timeshift conditions. So we adjust energy.SATIATION_YEAR
+    energy.SATIATION_YEAR <- min(max(MODEL_BASE_YEARS), energy.SATIATION_YEAR)
+
+    # TODO: this results in an infinite value
+    L244.SatiationAdder_gcamSEA <- L100.gdp_mil90usd_ctry_Yh %>%
+      # convert from million to thousand
+      mutate( value = value * CONV_MIL_THOUS ) %>%
+      # filter for target region(s)
+      left_join_error_no_match( iso_GCAM_regID, by = c( "iso" ) ) %>%
+      left_join_error_no_match( GCAM_region_names, by = c( "GCAM_region_ID" ) ) %>%
+      filter( region == gcam.SEA_REGION,
+              year == energy.SATIATION_YEAR ) %>%
+      select( -c( iso, country_name, region_GCAM3, GCAM_region_ID ) ) %>%
+      # calculate total GDP for SEAsia
+      group_by( region, year ) %>%
+      mutate( value = sum( value ) ) %>%
+      distinct( region, year, value ) %>%
+      ungroup() %>%
+      left_join( L244.Satiation_flsp_gcamSEA, by = c( "region") ) %>%
+      rename(pcGDP = value) %>%
+      # Add floorspace
+      left_join_error_no_match(L244.Floorspace_gcamSEA, by = c("region", "gcam.consumer", "year", "nodeInput", "building.node.input")) %>%
+      # Add population
+      left_join_error_no_match(L244.Pop_thous, by = c("region", "year")) %>%
+      rename(pop = value) %>%
+      # Calculate per capita floorspace
+      mutate(pcFlsp_mm2 = base.building.size / pop,
+             # Calculate the satiation adders
+             satiation.adder = round(satiation.level - (
+               exp(log(2) * pcGDP / energy.GDP_MID_SATIATION) * (satiation.level - pcFlsp_mm2)),
+               energy.DIGITS_SATIATION_ADDER),
+             # The satiation adder (million square meters of floorspace per person) needs to be less than the per-capita demand in the final calibration year
+             satiation.adder = if_else(satiation.adder > pcFlsp_mm2, pcFlsp_mm2 * 0.999, satiation.adder)) %>%
+      select(LEVEL2_DATA_NAMES[["SatiationAdder"]])
+
+    # ===================================================
+    # 2. Heating and Cooling Degree Days (thermal services only)
+    # ===================================================
+    # First, separate the thermal from the generic services. Generic services will be assumed to produce
+    # internal gain energy, so anything in the internal gains assumptions table will be assumed generic
+    generic_services <- unique(IND_A44_tech_intgains$supplysector)
+    thermal_services <- dplyr::setdiff(unique(IND_A44_sector$supplysector), generic_services)
+
+    # L244.HDDCDD: Heating and cooling degree days by scenario
+    L244.HDDCDD_scen <- L143.HDDCDD_scen_R_Y %>%
+      left_join_error_no_match( GCAM_region_names, by = c( "GCAM_region_ID" ) ) %>%
+      # filter for target region(s)
+      filter( region == gcam.SEA_REGION ) %>%
+      # select relevant columns
+      select( -c( GCAM_region_ID ) ) %>%
+      rename(degree.days = value)
+
+    # Let's make a climate normal (historical average) for each region, using a selected interval of years
+    # Don't want to just set one year, because we want average values for all regions
+    L244.HDDCDD_normal <- L244.HDDCDD_scen %>%
+      filter(year %in% seq(1981, 2000),
+             # The AEO_2015 scenario changes this "normal climate" for each region,
+             # which is not desirable since it does not incldue historical data
+             # and is not the standard reference assumption.  Thus, we remove it
+             # from this calculation.
+             SRES != "AEO_2015") %>%
+      group_by(region, variable) %>%
+      summarise(degree.days = mean(degree.days)) %>%
+      ungroup()
+
+    # Subset the heating and cooling services, separately
+    heating_services <- thermal_services[grepl("heating", thermal_services)]
+    cooling_services <- thermal_services[grepl("cooling", thermal_services)]
+
+    L244.HDDCDD_temp <- tidyr::crossing(region = gcam.SEA_REGION, thermal.building.service.input = thermal_services) %>%
+      # Add in gcam.consumer
+      left_join_error_no_match(IND_bld_techs %>%
+                                 select(service, gcam.consumer = sector) %>%
+                                 distinct(), by = c("thermal.building.service.input" = "service")) %>%
+      # Add in nodeInput and building.node.input
+      left_join_error_no_match(A44.gcam_consumer, by = "gcam.consumer") %>%
+      select(LEVEL2_DATA_NAMES[["BldNodes"]], thermal.building.service.input) %>%
+      # Add in model years
+      repeat_add_columns(tibble(year = MODEL_YEARS)) %>%
+      # Add HDD/CDD so that we can join with L244.HDDCDD_scen_state, remove at end
+      mutate(variable = if_else(thermal.building.service.input %in% heating_services, "HDD", "CDD")) %>%
+      # Add in degree days
+      # L244.HDDCDD_scen_state has multiple scenarios, rows in this tbl_df are intended to be duplicated for each scenario
+      # left_join_error_no_match throws an error when rows are duplicated (as intended), so left_join is used
+      left_join(L244.HDDCDD_scen, by = c("region", "variable", "year")) %>%
+      mutate(degree.days = round(degree.days, energy.DIGITS_HDDCDD))
+
+    L244.HDDCDD_constdds_SEA <- L244.HDDCDD_temp %>%
+      filter(SRES == "constdd") %>%
+      select(-SRES, -GCM, -variable)
+
+    L244.HDDCDD_A2_GFDL_SEA <- L244.HDDCDD_temp %>%
+      filter(SRES == "A2") %>%
+      select(-SRES, -GCM, -variable)
+
+    # L244.HDDCDD_AEO_2015_SEA <- L244.HDDCDD_temp %>%
+    #   filter(SRES == "AEO_2015") %>%
+    #   select(-SRES, -GCM, -variable)
+
+    # ===================================================
+    # 3. Shell Conductance
+    # ===================================================
+    # L244.ShellConductance_bld_gcamusa: Shell conductance (inverse of shell efficiency)
+    L244.ShellConductance_bld_gcamSEA <- IND_A44_shell %>%
+      # Convert to long form
+      gather_years() %>%
+      # Interpolate to model years
+      complete(gcam.consumer, year = c(year, MODEL_YEARS)) %>%
+      group_by(gcam.consumer) %>%
+      mutate(value = round(approx_fun(year, value), energy.DIGITS_EFFICIENCY)) %>%
+      ungroup() %>%
+      filter(year %in% MODEL_YEARS) %>%
+      # Add region
+      mutate( region = gcam.SEA_REGION ) %>%
+      # Add nodeInput and building.node.input
+      left_join_error_no_match(A44.gcam_consumer, by = "gcam.consumer") %>%
+      mutate(floor.to.surface.ratio = energy.FLOOR_TO_SURFACE_RATIO,
+             shell.year = year) %>%
+      # Rename columns
+      rename(shell.conductance = value) %>%
+      select(LEVEL2_DATA_NAMES[["ShellConductance"]])
+
+    # ===================================================
+    # 4. Buildings Sectors, Subsectors, etc.
+    # ===================================================
+
+    # The remainder of the building-level parameters require information about the output of each service, which we do not have yet
+
+    # L244.Supplysector_bld: Supplysector info for buildings
+    L244.Supplysector_bld_gcamSEA <- write_to_all_states(IND_A44_sector, c(LEVEL2_DATA_NAMES[["Supplysector"]], LOGIT_TYPE_COLNAME),
+                                                         region_list = gcam.SEA_REGION)
+
+    # L244.FinalEnergyKeyword_bld: Supply sector keywords for detailed building sector
+    L244.FinalEnergyKeyword_bld_gcamSEA <- write_to_all_states(IND_A44_sector, LEVEL2_DATA_NAMES[["FinalEnergyKeyword"]],
+                                                               region_list = gcam.SEA_REGION)
+
+    # L244.SubsectorLogit_bld: Subsector logit exponents of building sector
+    L244.SubsectorLogit_bld_gcamSEA <- write_to_all_states(IND_A44_subsector_logit, c(LEVEL2_DATA_NAMES[["SubsectorLogit"]], LOGIT_TYPE_COLNAME),
+                                                           region_list = gcam.SEA_REGION)
+
+    # L244.SubsectorShrwt_bld and L244.SubsectorShrwtFllt_bld: Subsector shareweights of building sector
+    if(any(!is.na(IND_A44_subsector_shrwt$year))) {
+      L244.SubsectorShrwt_bld_gcamSEA <- write_to_all_states(IND_A44_subsector_shrwt %>%
+                                                               filter(!is.na(year)), LEVEL2_DATA_NAMES[["SubsectorShrwt"]],
+                                                             region_list = gcam.SEA_REGION)
+    }
+    if(any(!is.na(IND_A44_subsector_shrwt$year.fillout))) {
+      L244.SubsectorShrwtFllt_bld_gcamSEA <- write_to_all_states(IND_A44_subsector_shrwt %>%
+                                                                   filter(!is.na(year.fillout)), LEVEL2_DATA_NAMES[["SubsectorShrwtFllt"]],
+                                                                 region_list = gcam.SEA_REGION)
+    }
+
+    # L244.SubsectorInterp_bld and L244.SubsectorInterpTo_bld: Subsector shareweight interpolation of building sector
+    if(any(is.na(IND_A44_subsector_interp$to.value))) {
+      L244.SubsectorInterp_bld_gcamSEA <- write_to_all_states(IND_A44_subsector_interp %>%
+                                                                filter(is.na(to.value)), LEVEL2_DATA_NAMES[["SubsectorInterp"]],
+                                                              region_list = gcam.SEA_REGION)
+    }
+    if(any(!is.na(IND_A44_subsector_interp$to.value))) {
+      L244.SubsectorInterpTo_bld_gcamSEA <- write_to_all_states(IND_A44_subsector_interp %>%
+                                                                  filter(!is.na(to.value)), LEVEL2_DATA_NAMES[["SubsectorInterpTo"]],
+                                                                region_list = gcam.SEA_REGION)
+    }
+
+    # L244.StubTech_bld_gcamSEA: Identification of stub technologies for buildings
+    L244.StubTech_bld_gcamSEA <- IND_A44_tech_eff %>%
+      select(supplysector, subsector, technology) %>%
+      distinct() %>%
+      write_to_all_states(LEVEL2_DATA_NAMES[["Tech"]], region_list = gcam.SEA_REGION) %>%
+      rename(stub.technology = technology)
+
+    # L244.GlobalTechEff_bld: Assumed efficiencies (all years) of buildings technologies
+    L244.end_use_eff <- IND_A44_tech_eff %>%
+      complete(nesting(supplysector, subsector, technology, minicam.energy.input), year = c(year, MODEL_YEARS)) %>%
+      group_by(supplysector, subsector, technology, minicam.energy.input) %>%
+      mutate(value = approx_fun(year, value)) %>%
+      ungroup() %>%
+      filter(year %in% MODEL_YEARS) %>%
+      mutate(value = round(value, energy.DIGITS_CALOUTPUT)) %>%
+      rename(efficiency = value)
+
+    # TODO: Note from previous author: this code assumes that base-year efficiences are identical (should fix to copy over to make sure)
+    L244.GlobalTechEff_bld <- L244.end_use_eff %>%
+      rename(sector.name = supplysector,
+             subsector.name = subsector) %>%
+      select(LEVEL2_DATA_NAMES[["GlobalTechEff"]])
+
+    # L244.StubTechMarket_bld: Specify market names for fuel inputs to all technologies in each state
+    # TODO: make sure market names are correct
+    # TODO: Electricity market will be whatever region is being used
+    L244.StubTechMarket_bld <- L244.end_use_eff %>%
+      mutate(market.name = gcam.SEA_REGION) %>%
+      rename(stub.technology = technology) %>%
+      write_to_all_states(LEVEL2_DATA_NAMES[["StubTechMarket"]], region_list = gcam.SEA_REGION) %>%
+      select(LEVEL2_DATA_NAMES[["StubTechMarket"]])
+
+    # L244.StubTechCalInput_bld: Calibrated energy consumption by buildings technologies
+    # The input that has energy consumption is at an aggregated level and needs to be broken out
+    # the IESS file has fuel shares for "buildings" as a whole
+    bld_agg_energy_consumption <- L144.in_EJ_R_bld_serv_F_Yh %>%
+      left_join_error_no_match( GCAM_region_names, by = c( "GCAM_region_ID" ) ) %>%
+      # filter for target region(s)
+      filter( region == gcam.SEA_REGION ) %>%
+      # select relevant columns
+      select( -c( GCAM_region_ID ) ) %>%
+      filter(year %in% MODEL_YEARS) %>%
+      # aggregate energy consumption by fuel and year for building sector as a whole
+      group_by( fuel, year, region ) %>%
+      mutate( value = sum( value ) ) %>%
+      distinct( fuel, year, region, value )
+
+    # create a table that has service fuel shares for the model base years
+    # TODO: get regional fuel consumption by service by year- using India for now
+    bld_service_fuel_energy_consumption <- IESS_bld_serv_fuel %>%
+      # TODO: resid rural water heaters "solar" is missing from IESS
+      # TODO: if solar is missing, can it come in in future years?
+      # TODO: can allocate solar a very small share if this prevents it from coming in in the future
+      repeat_add_columns( tibble( year = MODEL_BASE_YEARS ) ) %>%
+      # join with the table that has energy consumption by fuel and year
+      left_join_error_no_match( bld_agg_energy_consumption, by = c( "year", "fuel" ) ) %>%
+      # multiply the energy consumption value by share to get energy consumption for detailed services
+      mutate( value = share * value,
+      # change sector names to match format
+              sector = gsub( "commercial", "comm", sector ),
+              sector = gsub( "residential rural", "resid rural", sector ),
+              sector = gsub( "residential urban", "resid urban", sector ) ) %>%
+      # combine sector and service columns to get supplysector
+      unite( supplysector, sector, service, sep = " " )
+
+
+    L244.in_EJ_R_bld_serv_F_Yh <- bld_service_fuel_energy_consumption %>%
+      mutate(calibrated.value = round(value, energy.DIGITS_CALOUTPUT)) %>%
+      # Add subsector and energy.input
+      # IND_bld_techs has hi and lo efficiency, so left_join_error_no_match does not work
+      left_join( IND_bld_techs, by = c( "supplysector", "fuel" ) ) %>%
+      select(region, supplysector, subsector, minicam.energy.input, year, calibrated.value) %>%
+      distinct(region, supplysector, subsector, minicam.energy.input, year, calibrated.value)
+
+    # Shares allocated to partitioned technologies need to be computed first using efficiencies
+    L244.globaltech_eff_prt <- IND_A44_tech_eff %>%
+      semi_join(IND_A44_tech_eff_avg, by = c("supplysector", "subsector")) %>%
+      filter(year == gcamusa.EFFICIENCY_PARTITION_YEAR) %>%
+      select(supplysector, subsector, technology, efficiency = value)
+
+    # Calculate technology shares using efficiency values
+    L244.globaltech_shares <- IND_A44_tech_eff_avg %>%
+      # Adding specific technology efficiency to stock average efficiency
+      left_join_error_no_match(L244.globaltech_eff_prt, by = c("supplysector", "subsector", "technology2" = "technology")) %>%
+      rename(efficiency_tech2 = efficiency) %>%
+      left_join_error_no_match(L244.globaltech_eff_prt, by = c("supplysector", "subsector", "technology3" = "technology")) %>%
+      rename(efficiency_tech3 = efficiency) %>%
+      # Calculate technology shares using stock average efficiency and individual technology efficiencies
+      # Equation can be derived by solving following system of equations:
+      # stockavg = efficiency_tech2 * share_tech2 + efficiency_tech3 * share_tech3
+      # share_tech2 + share_tech3 = 1
+      mutate(share_tech2 = (stockavg - efficiency_tech3) / (efficiency_tech2 - efficiency_tech3),
+             share_tech3 = 1 - share_tech2) %>%
+      # Keep only same names as A44.globaltech_shares and bind with A44.globaltech_shares
+      select( -c( technology1, `minicam-energy-input`, stockavg, efficiency_tech2, efficiency_tech3 ) ) %>%
+      rename( technology1 = technology2,
+              technology2 = technology3,
+              share_tech1 = share_tech2,
+              share_tech2 = share_tech3 ) %>%
+      # TODO: Need an A44.globaltech_shares equivalent for SEASia technologies (I don't think we do, see Google Sheet)
+      # TODO: expand A44.globaltech_shares to include SEAsia technologies, make initial assumptions
+      # TODO: not entirely sure how to do this. Hard to tell which technologies should be included.
+      # TODO: In GCAM-USA, it has techs that are in calibrated_techs_bld_usa but not in A44.globaltech_eff_avg
+      # uncommenting the bind_rows for now
+      # bind_rows(A44.globaltech_shares) %>%
+      # Clunky, but we want only one technology and share value, currently have technology1, technology2, share1, share2
+      gather(share_type, share, share_tech1, share_tech2)%>%
+      gather(tech_type, technology, technology1, technology2) %>%
+      # Filter for same technology and share number, then remove tech_type and share_type columns
+      filter(substr(tech_type, nchar(tech_type), nchar(tech_type)) == substr(share_type, nchar(share_type), nchar(share_type))) %>%
+      select(-tech_type, -share_type)
+
+    # For calibration table, start with global tech efficiency table, and match in tech shares.
+    L244.StubTechCalInput_bld_gcamSEA <- L244.GlobalTechEff_bld %>%
+      filter(year %in% MODEL_BASE_YEARS) %>%
+      # add region column
+      mutate( region = gcam.SEA_REGION ) %>%
+      rename(supplysector = sector.name, subsector = subsector.name, stub.technology = technology) %>%
+      # Using left_join because we don't have shares for all technologies, NAs will be set to 1
+      left_join(L244.globaltech_shares, by = c("supplysector", "subsector", "stub.technology" = "technology")) %>%
+      replace_na(list(share = 1)) %>%
+      # Add energy by state/service/fuel
+      # can't use left_join_error_no_match because solar is missing
+      left_join(L244.in_EJ_R_bld_serv_F_Yh, by = c("region", "supplysector", "subsector", "minicam.energy.input", "year")) %>%
+      # remove NAs (solar)
+      filter( !is.na( calibrated.value ) ) %>%
+      # calibrated.value = energy * share
+      mutate(calibrated.value = round(share * calibrated.value, energy.DIGITS_CALOUTPUT),
+             share.weight.year = year,
+             calOutputValue = calibrated.value) %>%
+      # Set subsector and technology shareweights
+      set_subsector_shrwt() %>%
+      mutate(tech.share.weight =  if_else(calibrated.value > 0, 1, 0)) %>%
+      select(LEVEL2_DATA_NAMES[["StubTechCalInput"]])
+
+    # L244.GlobalTechShrwt_bld_gcamSEA: Default shareweights for global building technologies
+    L244.GlobalTechShrwt_bld_gcamSEA <- IND_A44_tech_shrwt %>%
+      gather_years(value_col = "share.weight") %>%
+      complete(nesting(supplysector, subsector, technology), year = c(year, MODEL_YEARS)) %>%
+      group_by(supplysector, subsector, technology) %>%
+      mutate(share.weight = approx_fun(year, share.weight)) %>%
+      ungroup() %>%
+      filter(year %in% MODEL_YEARS) %>%
+      rename(sector.name = supplysector,
+             subsector.name = subsector) %>%
+      select(LEVEL2_DATA_NAMES[["GlobalTechYr"]], share.weight)
+
+    # L244.GlobalTechInterpTo_bld: Technology shareweight interpolation (selected techs only)
+    L244.GlobalTechInterpTo_bld <- IND_A44_tech_interp %>%
+      set_years() %>%
+      mutate(sector.name = supplysector,
+             subsector.name = subsector) %>%
+      select(LEVEL2_DATA_NAMES[["GlobalTechInterpTo"]])
+
+    # L244.GlobalTechCost_bld: Non-fuel costs of global building technologies
+    L244.GlobalTechCost_bld_gcamSEA <- IND_A44_tech_cost %>%
+      gather_years(value_col = "input.cost") %>%
+      complete(nesting(supplysector, subsector, technology), year = c(year, MODEL_YEARS)) %>%
+      group_by(supplysector, subsector, technology) %>%
+      mutate(input.cost = approx_fun(year, input.cost)) %>%
+      ungroup() %>%
+      filter(year %in% MODEL_YEARS) %>%
+      rename(sector.name = supplysector, subsector.name = subsector) %>%
+      mutate(minicam.non.energy.input = "non-energy") %>%
+      select(LEVEL2_DATA_NAMES[["GlobalTechCost"]])
+
+    # L244.GlobalTechSCurve_bld: Retirement rates for building technologies
+    L244.GlobalTechSCurve_bld <- L244.GlobalTechCost_bld_gcamSEA %>%
+      filter(year %in% c(max(MODEL_BASE_YEARS), MODEL_FUTURE_YEARS),
+             sector.name %in% IND_A44_tech_retirement$supplysector) %>%
+      # Add lifetimes and steepness
+      left_join_error_no_match(IND_A44_tech_retirement, by = c("sector.name" = "supplysector")) %>%
+      # Set steepness/halflife values to stock for base years, new for future years
+      mutate(steepness = if_else(year == max(MODEL_BASE_YEARS), steepness_stock, steepness_new),
+             half.life = if_else(year == max(MODEL_BASE_YEARS), half_life_stock, half_life_new)) %>%
+      select(LEVEL2_DATA_NAMES[["GlobalTechSCurve"]])
+
+    # L244.GlobalTechIntGainOutputRatio: Output ratios of internal gain energy from non-thermal building services
+    calibrated_techs_bld_SEA_consumer <- IND_bld_techs %>%
+      select(gcam.consumer = sector, supplysector) %>%
+      distinct()
+
+    L244.GlobalTechIntGainOutputRatio <- IND_A44_tech_intgains %>%
+      repeat_add_columns(tibble(year = MODEL_YEARS))%>%
+      # Add gcam.consumer (sector)
+      left_join_error_no_match(calibrated_techs_bld_SEA_consumer, by = "supplysector") %>%
+      rename(sector.name = supplysector,
+             subsector.name = subsector) %>%
+      # Add internal.gains.market.name
+      left_join_error_no_match(A44.gcam_consumer, by = "gcam.consumer") %>%
+      # Add efficiency
+      left_join_error_no_match(L244.GlobalTechEff_bld,
+                               by = c("sector.name", "subsector.name", "technology", "year")) %>%
+      mutate(internal.gains.output.ratio = round(input.ratio / efficiency, energy.DIGITS_EFFICIENCY)) %>%
+      select(LEVEL2_DATA_NAMES[["GlobalTechYr"]], internal.gains.output.ratio, internal.gains.market.name)
+
+    # L244.GenericBaseService and L244.ThermalBaseService: Base year output of buildings services (per unit floorspace)
+    # Base-service: Multiply energy consumption by efficiency for each technology, and aggregate by service
+    L244.base_service <- L244.StubTechCalInput_bld_gcamSEA %>%
+      # Add in efficiency by technology
+      left_join_error_no_match(L244.GlobalTechEff_bld,
+                               by = c("supplysector" = "sector.name", "subsector" = "subsector.name",
+                                      "stub.technology" = "technology", "year", "minicam.energy.input")) %>%
+      # Calculate base.service = calibrated.value(energy) * efficiency
+      mutate(base.service = round(calibrated.value * efficiency, energy.DIGITS_CALOUTPUT)) %>%
+      # Aggregate base service by service (supplysector)
+      group_by(region, supplysector, year) %>%
+      summarise(base.service = sum(base.service)) %>%
+      ungroup() %>%
+      # Add gcam.consumer (sector)
+      left_join_error_no_match(calibrated_techs_bld_SEA_consumer, by = "supplysector") %>%
+      # Add nodeInput and building.node.input
+      left_join_error_no_match(A44.gcam_consumer, by = "gcam.consumer")
+
+    # Separate thermal and generic services into separate tables with different ID strings
+    L244.GenericBaseService_gcamSEA <- L244.base_service %>%
+      filter(supplysector %in% generic_services) %>%
+      rename(building.service.input = supplysector) %>%
+      select(LEVEL2_DATA_NAMES[["GenericBaseService"]])
+
+    L244.ThermalBaseService_gcamSEA <- L244.base_service %>%
+      filter(supplysector %in% thermal_services) %>%
+      rename(thermal.building.service.input = supplysector) %>%
+      select(LEVEL2_DATA_NAMES[["ThermalBaseService"]])
+
+    # L244.GenericServiceSatiation_gcamSEA: Satiation levels assumed for non-thermal building services
+    # Just multiply the base-service by an exogenous multiplier
+    L244.GenericServiceSatiation_gcamSEA <- L244.GenericBaseService_gcamSEA %>%
+      filter(year == max(MODEL_BASE_YEARS)) %>%
+      # Add floorspace
+      left_join_error_no_match(L244.Floorspace_gcamSEA, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year")) %>%
+      # Add multiplier
+      # TODO: Need multiplier for SEA, currently just changed to SEAsia sectors, but the values are not correct
+      left_join_error_no_match(IND_A44_demand_satiation_mult, by = c("building.service.input" = "supplysector")) %>%
+      # Satiation level = service per floorspace * multiplier
+      mutate(satiation.level = round(base.service / base.building.size * multiplier, energy.DIGITS_COEFFICIENT)) %>%
+      select(LEVEL2_DATA_NAMES[["GenericServiceSatiation"]])
+
+    # L244.ThermalServiceSatiation: Satiation levels assumed for thermal building services
+    L244.ThermalServiceSatiation_gcamSEA <- L244.ThermalBaseService_gcamSEA %>%
+      filter(year == max(MODEL_BASE_YEARS)) %>%
+      # Add floorspace
+      left_join_error_no_match(L244.Floorspace_gcamSEA, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year")) %>%
+      # Add multiplier
+      # TODO: Need multiplier for SEA, currently just changed to SEAsia sectors, but the values are not correct
+      left_join_error_no_match(IND_A44_demand_satiation_mult, by = c("thermal.building.service.input" = "supplysector")) %>%
+      # Satiation level = service per floorspace * multiplier
+      mutate(satiation.level = round(base.service / base.building.size * multiplier, energy.DIGITS_COEFFICIENT)) %>%
+      select(LEVEL2_DATA_NAMES[["ThermalServiceSatiation"]])
+
+    # L244.Intgains_scalar: Scalers relating internal gain energy to increased/reduced cooling/heating demands
+    # TODO: don't know what these values should be for SEAsia
+    # TODO: constants have been made, but are using USA values
+    variable <- c("HDD", "CDD")
+    scalar <- c(energy.INTERNAL_GAINS_SCALAR_SEA_H, energy.INTERNAL_GAINS_SCALAR_SEA_C)
+    DDnorm <- c(gcamSEA.BASE_HDD_SEA, gcamSEA.BASE_CDD_SEA)
+    SEA.base.scalar <- tibble(variable, scalar, DDnorm)
+    threshold_HDD <- 500
+
+    L244.Intgains_scalar_gcamSEA <- L244.ThermalServiceSatiation_gcamSEA %>%
+      # Assign HDD or CDD
+      mutate(variable = if_else(thermal.building.service.input %in% heating_services, "HDD", "CDD")) %>%
+      # Add DDnorm & scalar
+      left_join_error_no_match(SEA.base.scalar, by = "variable") %>%
+      # Add degree days
+      left_join_error_no_match(L244.HDDCDD_normal, by = c("region", "variable")) %>%
+      mutate(internal.gains.scalar = round(scalar * degree.days / DDnorm, energy.DIGITS_HDDCDD),
+             # Prevent very warm places from having negative heating demands, using exogenous threshold
+             internal.gains.scalar = if_else(variable == "HDD" & degree.days < threshold_HDD, 0, internal.gains.scalar)) %>%
+      select(LEVEL2_DATA_NAMES[["Intgains_scalar"]])
+
+
+    # ===================================================
+    # Produce outputs
+    L244.DeleteConsumer_SEAbld %>%
+      add_title("Deletes building sector in SEA region to rewrite with gcam-seasia data") %>%
+      add_units("NA") %>%
+      add_comments("gcam.consumer column from A44.gcam_consumer") %>%
+      add_legacy_name("L244.DeleteConsumer_SEAbld") %>%
+      add_precursors("energy/A44.gcam_consumer") ->
+      L244.DeleteConsumer_SEAbld
+
+    L244.DeleteSupplysector_SEAbld %>%
+      add_title("Deletes building sector in SEA region to rewrite with gcam-seasia data") %>%
+      add_units("NA") %>%
+      add_comments("supplysector column from A44.sector") %>%
+      add_legacy_name("L244.DeleteSupplysector_SEAbld") %>%
+      add_precursors("energy/A44.sector") ->
+      L244.DeleteSupplysector_SEAbld
+
+    L244.PriceExp_IntGains_gcamSEA %>%
+      add_title("Price exponent on floorspace and naming of internal gains trial markets") %>%
+      add_units("Unitless") %>%
+      add_comments("A44.gcam_consumer written to all states") %>%
+      add_legacy_name("L244.PriceExp_IntGains") %>%
+      add_precursors("gcam-seasia/A44.gcam_consumer") ->
+      L244.PriceExp_IntGains_gcamSEA
+
+    L244.Floorspace_gcamSEA %>%
+      add_title("base year floorspace") %>%
+      add_units("billion m2") %>%
+      add_comments("Data from L144.flsp_bm2_R_res_Yh and L144.flsp_bm2_R_comm_Yh") %>%
+      add_legacy_name("L244.Floorspace") %>%
+      add_precursors("L144.flsp_bm2_R_res_Yh", "L144.flsp_bm2_R_comm_Yh", "gcam-seasia/A44.gcam_consumer",
+                     "gcam-seasia/Various_flsp_Mm2") ->
+      L244.Floorspace_gcamSEA
+
+    L244.DemandFunction_serv_gcamSEA %>%
+      add_title("Service demand function types") %>%
+      add_units("NA") %>%
+      add_comments("IND_A44_demandFn_serv written to all states") %>%
+      add_legacy_name("L244.DemandFunction_serv") %>%
+      add_precursors("gcam-seasia/IND_A44_demandFn_serv") ->
+      L244.DemandFunction_serv_gcamSEA
+
+    L244.DemandFunction_flsp_gcamSEA %>%
+      add_title("Floorspace demand function types") %>%
+      add_units("NA") %>%
+      add_comments("IND_A44_demandFn_flsp written to all states") %>%
+      add_legacy_name("L244.DemandFunction_flsp") %>%
+      add_precursors("gcam-seasia/IND_A44_demandFn_flsp") ->
+      L244.DemandFunction_flsp_gcamSEA
+
+    L244.Satiation_flsp_gcamSEA %>%
+      add_title("Satiation levels assumed for floorspace") %>%
+      add_units("million m2 / person") %>%
+      add_comments("Values from IND_A44_satiation_flsp or L244.Floorspace_gcamSEA/L244.Pop_thous") %>%
+      add_comments("Whichever is larger") %>%
+      add_legacy_name("L244.Satiation_flsp") %>%
+      add_precursors("gcam-seasia/IND_A44_satiation_flsp", "gcam-seasia/A44.gcam_consumer", "L101.Pop_thous_R_Yh", "L101.Pop_thous_Scen_R_Yfut",
+                     "L144.flsp_bm2_R_res_Yh", "L144.flsp_bm2_R_comm_Yh", "gcam-seasia/Various_flsp_Mm2") ->
+      L244.Satiation_flsp_gcamSEA
+
+    L244.SatiationAdder_gcamSEA %>%
+      add_title("Satiation adders in floorspace demand function") %>%
+      add_units("million m2 / person") %>%
+      add_comments("Calculated with function dependent on satiation level; per capita floorspace; and per capita GDP") %>%
+      add_legacy_name("L244.SatiationAdder") %>%
+      add_precursors("gcam-seasia/IND_A44_satiation_flsp", "gcam-seasia/A44.gcam_consumer", "L101.Pop_thous_R_Yh", "L101.Pop_thous_Scen_R_Yfut",
+                     "L144.flsp_bm2_R_res_Yh", "L144.flsp_bm2_R_comm_Yh", "L100.gdp_mil90usd_ctry_Yh") ->
+      L244.SatiationAdder_gcamSEA
+
+    L244.ThermalBaseService_gcamSEA %>%
+      add_title("Base year output of thermal buildings services") %>%
+      add_units("EJ per unit floorspace") %>%
+      add_comments("Multiplied energy consumption by efficiency for each technology, then aggregated by service") %>%
+      add_legacy_name("L244.ThermalBaseService") %>%
+      add_precursors("L144.in_EJ_R_bld_serv_F_Yh", "gcam-seasia/IND_bld_techs",
+                     "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-usa/A44.globaltech_shares",
+                     "gcam-seasia/A44.gcam_consumer", "gcam-seasia/IESS_bld_serv_fuel") ->
+      L244.ThermalBaseService_gcamSEA
+
+    L244.GenericBaseService_gcamSEA %>%
+      add_title("Base year output of generic buildings services") %>%
+      add_units("EJ per unit floorspace") %>%
+      add_comments("Multiplied energy consumption by efficiency for each technology, then aggregated by service") %>%
+      add_legacy_name("L244.GenericBaseService") %>%
+      add_precursors("L144.in_EJ_R_bld_serv_F_Yh", "gcam-seasia/IND_bld_techs",
+                     "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-usa/A44.globaltech_shares",
+                     "gcam-seasia/A44.gcam_consumer", "gcam-seasia/IESS_bld_serv_fuel") ->
+      L244.GenericBaseService_gcamSEA
+
+    L244.GenericServiceSatiation_gcamSEA %>%
+      add_title("Satiation levels assumed for non-thermal building services") %>%
+      add_units("EJ/billion m2 floorspace") %>%
+      add_comments("Satiation level = base service / floorspace * exogenous multiplier") %>%
+      add_legacy_name("L244.GenericServiceSatiation") %>%
+      add_precursors("L144.in_EJ_R_bld_serv_F_Yh", "gcam-seasia/IND_bld_techs",
+                     "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-usa/A44.globaltech_shares",
+                     "gcam-seasia/A44.gcam_consumer", "L144.flsp_bm2_R_res_Yh", "L144.flsp_bm2_R_comm_Yh",
+                     "gcam-seasia/IND_A44_demand_satiation_mult", "gcam-seasia/IESS_bld_serv_fuel") ->
+      L244.GenericServiceSatiation_gcamSEA
+
+    L244.ThermalServiceSatiation_gcamSEA %>%
+      add_title("Satiation levels assumed for thermal building services") %>%
+      add_units("EJ/billion m2 floorspace") %>%
+      add_comments("Satiation level = base service / floorspace * exogenous multiplier") %>%
+      add_legacy_name("L244.ThermalServiceSatiation") %>%
+      add_precursors("L144.in_EJ_R_bld_serv_F_Yh", "gcam-seasia/IND_bld_techs",
+                     "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-usa/A44.globaltech_shares",
+                     "gcam-seasia/A44.gcam_consumer", "L144.flsp_bm2_R_res_Yh", "L144.flsp_bm2_R_comm_Yh",
+                     "gcam-seasia/IND_A44_demand_satiation_mult", "gcam-seasia/IESS_bld_serv_fuel") ->
+      L244.ThermalServiceSatiation_gcamSEA
+
+    L244.Intgains_scalar_gcamSEA %>%
+      add_title("Scalers relating internal gain energy to increased/reduced cooling/heating demands") %>%
+      add_units("Unitless") %>%
+      add_comments("internal.gains.scalar = exogenous scalar * degree.days / exogenous degree day norm") %>%
+      add_legacy_name("L244.Intgains_scalar") %>%
+      add_precursors("L144.in_EJ_R_bld_serv_F_Yh", "gcam-seasia/IND_bld_techs",
+                     "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-usa/A44.globaltech_shares",
+                     "gcam-seasia/A44.gcam_consumer", "L144.flsp_bm2_R_res_Yh", "L144.flsp_bm2_R_comm_Yh",
+                     "gcam-seasia/IND_A44_demand_satiation_mult", "L143.HDDCDD_scen_R_Y") ->
+      L244.Intgains_scalar_gcamSEA
+
+    L244.ShellConductance_bld_gcamSEA %>%
+      add_title("Shell conductance (inverse of shell efficiency) by state") %>%
+      add_units("Unitless") %>%
+      add_comments("values from IND_A44_shell") %>%
+      add_legacy_name("L244.ShellConductance_bld") %>%
+      add_precursors("gcam-seasia/IND_A44_shell", "gcam-seasia/A44.gcam_consumer") ->
+      L244.ShellConductance_bld_gcamSEA
+
+    L244.Supplysector_bld_gcamSEA %>%
+      add_title("Supplysector info for buildings") %>%
+      add_units("Unitless") %>%
+      add_comments("IND_A44_sector written to all states") %>%
+      add_legacy_name("L244.Supplysector_bld") %>%
+      add_precursors("gcam-seasia/IND_A44_sector") ->
+      L244.Supplysector_bld_gcamSEA
+
+    L244.FinalEnergyKeyword_bld_gcamSEA %>%
+      add_title("Supply sector keywords for detailed building sector") %>%
+      add_units("NA") %>%
+      add_comments("IND_A44_sector written to all states") %>%
+      add_legacy_name("L244.FinalEnergyKeyword_bld") %>%
+      add_precursors("gcam-seasia/IND_A44_sector") ->
+      L244.FinalEnergyKeyword_bld_gcamSEA
+
+    if(exists("L244.SubsectorShrwt_bld")) {
+      L244.SubsectorShrwt_bld_gcamSEA %>%
+        add_title("Subsector shareweights of building sector") %>%
+        add_units("Unitless") %>%
+        add_comments("IND_A44_subsector_shrwt written to all regions") %>%
+        add_legacy_name("L244.SubsectorShrwt_bld") %>%
+        add_precursors("gcam-seasia/IND_A44_subsector_shrwt") ->
+        L244.SubsectorShrwt_bld_gcamSEA
+    } else {
+      missing_data() %>%
+        add_legacy_name("L244.SubsectorShrwt_bld") ->
+        L244.SubsectorShrwt_bld_gcamSEA
+    }
+
+    if(exists("L244.SubsectorShrwtFllt_bld_gcamSEA")) {
+      L244.SubsectorShrwtFllt_bld_gcamSEA %>%
+        add_title("Subsector shareweights of building sector") %>%
+        add_units("Unitless") %>%
+        add_comments("IND_A44_subsector_shrwt written to all regions") %>%
+        add_legacy_name("L244.SubsectorShrwtFllt_bld") %>%
+        add_precursors("gcam-seasia/IND_A44_subsector_shrwt") ->
+        L244.SubsectorShrwtFllt_bld_gcamSEA
+    } else {
+      missing_data() %>%
+        add_legacy_name("L244.SubsectorShrwtFllt_bld") ->
+        L244.SubsectorShrwtFllt_bld_gcamSEA
+    }
+
+
+    if(exists("L244.SubsectorInterp_bld_gcamSEA")) {
+      L244.SubsectorInterp_bld_gcamSEA %>%
+        add_title("Subsector shareweight interpolation of building sector") %>%
+        add_units("NA") %>%
+        add_comments("IND_A44_subsector_interp written to all regions") %>%
+        add_legacy_name("L244.SubsectorInterp_bld") %>%
+        add_precursors("gcam-seasia/IND_A44_subsector_interp") ->
+        L244.SubsectorInterp_bld_gcamSEA
+    } else {
+      missing_data() %>%
+        add_legacy_name("L244.SubsectorInterp_bld") ->
+        L244.SubsectorInterp_bld_gcamSEA
+    }
+
+    if(exists("L244.SubsectorInterpTo_bld_gcamSEA")) {
+      L244.SubsectorInterpTo_bld_gcamSEA %>%
+        add_title("Subsector shareweight interpolation of building sector") %>%
+        add_units("NA") %>%
+        add_comments("IND_A44_subsector_interp written to all regions") %>%
+        add_legacy_name("L244.SubsectorInterpTo_bld") %>%
+        add_precursors("gcam-seasia/IND_A44_subsector_interp") ->
+        L244.SubsectorInterpTo_bld_gcamSEA
+    } else {
+      missing_data() %>%
+        add_legacy_name("L244.SubsectorInterpTo_bld") ->
+        L244.SubsectorInterpTo_bld_gcamSEA
+    }
+
+    L244.SubsectorLogit_bld_gcamSEA %>%
+      add_title("Subsector logit exponents of building sector") %>%
+      add_units("Unitless") %>%
+      add_comments("IND_A44_subsector_logit written to all states") %>%
+      add_legacy_name("L244.SubsectorLogit_bld") %>%
+      add_precursors("gcam-seasia/IND_A44_subsector_logit") ->
+      L244.SubsectorLogit_bld_gcamSEA
+
+    L244.StubTech_bld_gcamSEA %>%
+      add_title("Identification of stub technologies for buildings") %>%
+      add_units("NA") %>%
+      add_comments("IND_A44_tech_eff written to all states") %>%
+      add_legacy_name("L244.StubTech_bld") %>%
+      add_precursors("gcam-seasia/IND_A44_tech_eff") ->
+      L244.StubTech_bld_gcamSEA
+
+    L244.StubTechCalInput_bld_gcamSEA %>%
+      add_title("Calibrated energy consumption and share weights by buildings technologies") %>%
+      add_units("calibrated.value: EJ/yr; shareweights: Unitless") %>%
+      add_comments("Energy consumption multiplied by shares to get calibrated energy") %>%
+      add_comments("Shares calculated using efficiency averages") %>%
+      add_legacy_name("L244.StubTechCalInput_bld") %>%
+      add_precursors("L144.in_EJ_R_bld_serv_F_Yh", "gcam-seasia/IND_bld_techs", "gcam-seasia/IND_A44_tech_eff",
+                     "gcam-seasia/IND_A44_tech_eff_avg", "gcam-usa/A44.globaltech_shares", "gcam-seasia/IESS_bld_serv_fuel") ->
+      L244.StubTechCalInput_bld_gcamSEA
+
+    L244.StubTechMarket_bld %>%
+      add_title("market names for fuel inputs to all technologies in each state") %>%
+      add_units("NA") %>%
+      add_comments("Categories from IND_A44_tech_eff written to all states") %>%
+      add_comments("Market set to states for electricity") %>%
+      add_legacy_name("L244.StubTechMarket_bld") %>%
+      add_precursors("gcam-seasia/IND_A44_tech_eff") ->
+      L244.StubTechMarket_bld_gcamSEA
+
+    L244.GlobalTechIntGainOutputRatio %>%
+      add_title("Output ratios of internal gain energy from non-thermal building services") %>%
+      add_units("Unitless") %>%
+      add_comments("internal.gains.output.ratio = input.ratio from IND_A44_tech_intgains divided by efficiency from L244.GlobalTechEff_bld") %>%
+      add_legacy_name("L244.GlobalTechIntGainOutputRatio") %>%
+      add_precursors("gcam-seasia/IND_A44_tech_intgains", "gcam-seasia/IND_bld_techs",
+                     "gcam-seasia/A44.gcam_consumer", "gcam-seasia/IND_A44_tech_eff") ->
+      L244.GlobalTechIntGainOutputRatio_gcamSEA
+
+    L244.GlobalTechInterpTo_bld %>%
+      add_title("Technology shareweight interpolation") %>%
+      add_units("NA") %>%
+      add_comments("Directly from IND_A44_tech_interp") %>%
+      add_legacy_name("L244.GlobalTechInterpTo_bld") %>%
+      add_precursors("gcam-seasia/IND_A44_tech_interp") ->
+      L244.GlobalTechInterpTo_bld_gcamSEA
+
+    L244.GlobalTechEff_bld %>%
+      add_title("Assumed efficiencies (all years) of buildings technologies") %>%
+      add_units("Unitless") %>%
+      add_comments("Values from IND_A44_tech_eff") %>%
+      add_legacy_name("L244.GlobalTechEff_bld") %>%
+      add_precursors("gcam-seasia/IND_A44_tech_eff") ->
+      L244.GlobalTechEff_bld_gcamSEA
+
+    L244.GlobalTechShrwt_bld_gcamSEA %>%
+      add_title("Default shareweights for global building technologies") %>%
+      add_units("Unitless") %>%
+      add_comments("Values interpolated to model years from IND_A44_tech_shrwt") %>%
+      add_legacy_name("L244.GlobalTechShrwt_bld") %>%
+      add_precursors("gcam-seasia/IND_A44_tech_shrwt") ->
+      L244.GlobalTechShrwt_bld_gcamSEA
+
+    L244.GlobalTechCost_bld_gcamSEA %>%
+      add_title("Non-fuel costs of global building technologies") %>%
+      add_units("1975$/GJ") %>%
+      add_comments("Values from IND_A44_tech_cost") %>%
+      add_legacy_name("L244.GlobalTechCost_bld") %>%
+      add_precursors("gcam-seasia/IND_A44_tech_cost") ->
+      L244.GlobalTechCost_bld_gcamSEA
+
+    L244.GlobalTechSCurve_bld %>%
+      add_title("Retirement rates for building technologies") %>%
+      add_units("lifetime/half.life = years") %>%
+      add_comments("Lifetime, steepness, and half.life from IND_A44_tech_retirement") %>%
+      add_legacy_name("L244.GlobalTechSCurve_bld") %>%
+      add_precursors("gcam-seasia/IND_A44_tech_cost", "gcam-seasia/IND_A44_tech_retirement") ->
+      L244.GlobalTechSCurve_bld_gcamSEA
+
+    # L244.HDDCDD_AEO_2015_SEA %>%
+    #   add_title("Heating and Cooling Degree Days by State consistent with AEO 2015") %>%
+    #   add_units("Fahrenheit Degree Days") %>%
+    #   add_comments("L143.HDDCDD_scen_R_Y assigned to GCAM residential / commercial building consumers") %>%
+    #   add_legacy_name("L244.HDDCDD_QER_QER") %>%
+    #   same_precursors_as("L244.HDDCDD_A2_GFDL_SEA") ->
+    #   L244.HDDCDD_AEO_2015_gcamSEA
+
+    L244.HDDCDD_A2_GFDL_SEA %>%
+      add_title("Heating and Cooling Degree Days by State for GFDL A2") %>%
+      add_units("Fahrenheit Degree Days") %>%
+      add_comments("L143.HDDCDD_scen_R_Y assigned to GCAM subsectors") %>%
+      add_legacy_name("L244.HDDCDD_A2_GFDL") %>%
+      add_precursors("L143.HDDCDD_scen_R_Y", "gcam-seasia/IND_A44_sector",
+                     "gcam-seasia/IND_bld_techs", "gcam-seasia/A44.gcam_consumer") ->
+      L244.HDDCDD_A2_GFDL_gcamSEA
+
+    L244.HDDCDD_constdds_SEA %>%
+      add_title("Heating and Cooling Degree Days by State - constant at historical levels") %>%
+      add_units("Fahrenheit Degree Days") %>%
+      add_comments("L143.HDDCDD_scen_R_Y assigned to GCAM subsectors") %>%
+      same_precursors_as("L244.HDDCDD_A2_GFDL_SEA") ->
+      L244.HDDCDD_constdds_gcamSEA
+
+    return_data(L244.DeleteConsumer_SEAbld,
+                L244.DeleteSupplysector_SEAbld,
+                L244.PriceExp_IntGains_gcamSEA,
+                L244.Floorspace_gcamSEA,
+                L244.DemandFunction_serv_gcamSEA,
+                L244.DemandFunction_flsp_gcamSEA,
+                L244.Satiation_flsp_gcamSEA,
+                L244.SatiationAdder_gcamSEA,
+                L244.ThermalBaseService_gcamSEA,
+                L244.GenericBaseService_gcamSEA,
+                L244.ThermalServiceSatiation_gcamSEA,
+                L244.GenericServiceSatiation_gcamSEA,
+                L244.Intgains_scalar_gcamSEA,
+                L244.ShellConductance_bld_gcamSEA,
+                L244.Supplysector_bld_gcamSEA,
+                L244.FinalEnergyKeyword_bld_gcamSEA,
+                L244.SubsectorShrwt_bld_gcamSEA,
+                L244.SubsectorShrwtFllt_bld_gcamSEA,
+                L244.SubsectorInterp_bld_gcamSEA,
+                L244.SubsectorInterpTo_bld_gcamSEA,
+                L244.SubsectorLogit_bld_gcamSEA,
+                L244.StubTech_bld_gcamSEA,
+                L244.StubTechCalInput_bld_gcamSEA,
+                L244.StubTechMarket_bld_gcamSEA,
+                L244.GlobalTechIntGainOutputRatio_gcamSEA,
+                L244.GlobalTechInterpTo_bld_gcamSEA,
+                L244.GlobalTechEff_bld_gcamSEA,
+                L244.GlobalTechShrwt_bld_gcamSEA,
+                L244.GlobalTechCost_bld_gcamSEA,
+                L244.GlobalTechSCurve_bld_gcamSEA,
+                L244.HDDCDD_A2_GFDL_gcamSEA,
+                #L244.HDDCDD_AEO_2015_gcamSEA,
+                L244.HDDCDD_constdds_gcamSEA)
+  } else {
+    stop("Unknown command")
+  }
+}
