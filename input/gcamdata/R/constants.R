@@ -36,10 +36,11 @@ MODEL_YEARS             <- c(MODEL_BASE_YEARS, MODEL_FUTURE_YEARS)
 MODEL_FINAL_BASE_YEAR   <- 2015
 
 
-# GCAM constants ======================================================================
+# . constants ======================================================================
 
 gcam.USA_CODE            <- 1
 gcam.USA_REGION          <- "USA"
+gcam.SEA_REGION       <- "Southeast Asia"
 gcam.WESTERN_EUROPE_CODE <- 13
 gcam.LOGIT_TYPES         <- c("relative-cost-logit", "absolute-cost-logit")
 gcam.EQUIV_TABLE         <- "EQUIV_TABLE"
@@ -416,6 +417,9 @@ energy.GDP_MID_SATIATION      <- 10.5
 
 energy.INTERNAL_GAINS_SCALAR_USA_H <- -930
 energy.INTERNAL_GAINS_SCALAR_USA_C <- 350
+
+energy.INTERNAL_GAINS_SCALAR_SEA_H <- -930
+energy.INTERNAL_GAINS_SCALAR_SEA_C <- 350
 
 # Used to avoid negative/zero energy when disaggregating detailed industries (cement, fertilizer)
 energy.MIN_IN_EJ_IND <- 1e-3
@@ -798,6 +802,12 @@ water.LIVESTOCK_TYPES                     <- c("Beef","Dairy","Pork","Poultry","
 water.DELETE_DEMAND_TYPES              <- c("water_td_elec_W","water_td_elec_C","water_td_dom_W","water_td_dom_C", "water_td_ind_W","water_td_ind_C")
 water.MAPPED_WATER_TYPES_SHORT            <- c("C", "W")
 names(water.MAPPED_WATER_TYPES_SHORT)     <- water.MAPPED_WATER_TYPES
+
+# SEAsia constants ======================================================================
+
+# Degree day norms
+gcamSEA.BASE_HDD_SEA <- 4524 # https://www.eia.gov/totalenergy/data/annual/showtext.php?t=ptb0107
+gcamSEA.BASE_CDD_SEA <- 1215 # https://www.eia.gov/totalenergy/data/annual/showtext.php?t=ptb010
 
 # Time shift conditions ======================================================================
 # Uncomment these lines to run under 'timeshift' conditions
