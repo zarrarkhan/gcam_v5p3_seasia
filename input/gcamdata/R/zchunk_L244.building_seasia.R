@@ -44,7 +44,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
              FILE = "gcam-seasia/IND_A44_tech_cost",
              FILE = "gcam-seasia/IND_A44_tech_eff",
              FILE = "gcam-seasia/IND_A44_tech_eff_avg",
-              FILE = "gcam-usa/A44.globaltech_shares",
+             FILE = "gcam-seasia/IND_A44_globaltech_shares",
              FILE = "gcam-seasia/IND_A44_tech_intgains",
              FILE = "gcam-seasia/IND_A44_tech_retirement",
              FILE = "gcam-seasia/IND_A44_tech_shrwt",
@@ -118,7 +118,6 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
     A44.gcam_consumer_en <- get_data(all_data, "energy/A44.gcam_consumer", strip_attributes = TRUE)
     A44.sector_en <- get_data(all_data, "energy/A44.sector", strip_attributes = TRUE)
     IND_bld_techs <- get_data(all_data, "gcam-seasia/IND_bld_techs", strip_attributes = TRUE)
-    #states_subregions <- get_data(all_data, "gcam-usa/states_subregions", strip_attributes = TRUE)
     IND_A44_shell <- get_data(all_data, "gcam-seasia/IND_A44_shell", strip_attributes = TRUE)
     IND_A44_demandFn_flsp <- get_data(all_data, "gcam-seasia/IND_A44_demandFn_flsp", strip_attributes = TRUE)
     IND_A44_demandFn_serv <- get_data(all_data, "gcam-seasia/IND_A44_demandFn_serv", strip_attributes = TRUE)
@@ -132,7 +131,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
     IND_A44_tech_eff <- get_data(all_data, "gcam-seasia/IND_A44_tech_eff", strip_attributes = TRUE) %>%
       gather_years()
     IND_A44_tech_eff_avg <- get_data(all_data, "gcam-seasia/IND_A44_tech_eff_avg", strip_attributes = TRUE)
-    A44.globaltech_shares <- get_data(all_data, "gcam-usa/A44.globaltech_shares", strip_attributes = TRUE)
+    IND_A44_globaltech_shares <- get_data(all_data, "gcam-seasia/IND_A44_globaltech_shares", strip_attributes = TRUE)
     IND_A44_tech_intgains <- get_data(all_data, "gcam-seasia/IND_A44_tech_intgains", strip_attributes = TRUE)
     IND_A44_tech_retirement <- get_data(all_data, "gcam-seasia/IND_A44_tech_retirement", strip_attributes = TRUE)
     IND_A44_tech_shrwt <- get_data(all_data, "gcam-seasia/IND_A44_tech_shrwt", strip_attributes = TRUE)
@@ -214,8 +213,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
     # ===================================================
     # Apportion to urban and rural on the basis of the historical data
     # using just two endpoints and interpolating in between years because data is missing for some years
-    # TODO: use actual data instead of interpolation
-    # TODO: see if we have more recent floorspace data
+    # TODO: use actual data instead of interpolation if we have more recent/complete floorspace data
     flsp_shares <- Various_flsp_Mm2 %>%
       mutate( res_total_bm2 = ( urban + rural ) * CONV_MIL_BIL,
               urban_share = urban * CONV_MIL_BIL / res_total_bm2,
@@ -230,21 +228,17 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
     rural_share_initial <- ( flsp_shares$rural_share[ flsp_shares$year == first_scale_year ] )
     rural_share_final <- ( flsp_shares$rural_share[ flsp_shares$year == last_scale_year ] )
 
-    res_rural_shares <- flsp_shares %>%
-      # remove all columns except for year
-      select( year ) %>%
-      mutate( share =  NA )
-
-    # TODO: do this in tidyr
-    # res_rural_shares <- flsp_shares %>%
+    # Linearly interpolate residential shares between the initial and final years/shares
+     res_rural_shares <- flsp_shares %>%
     #   # remove all columns except for year
-    #   select( year ) %>%
-    #   mutate( share = if_else( year == first_scale_year, rural_share_initial,
-    #                          if_else( year == last_scale_year, rural_share_final, NA ) ) )
-    res_rural_shares$share[ res_rural_shares$year == first_scale_year ] <- rural_share_initial
-    res_rural_shares$share[ res_rural_shares$year == last_scale_year ] <- rural_share_final
-    res_rural_shares_comp_cases <- res_rural_shares[ complete.cases( res_rural_shares ), ]
-    res_rural_shares$share <- approx( x = res_rural_shares_comp_cases$year, y = res_rural_shares_comp_cases$share, xout = res_rural_shares$year, rule = 2 )$y
+       select( year ) %>%
+       mutate( share = case_when( year == first_scale_year ~ rural_share_initial,
+                                  year == last_scale_year ~ rural_share_final,
+                                  TRUE ~  as.numeric( NA ) ),
+               share = approx( x = year,
+                                y = share,
+                                xout = year,
+                                rule = 2 )$y)
 
     # copy the minimum year rural share back to all other historical years, and the max year rural share to all future years
     res_rural_shares_his <- res_rural_shares %>%
@@ -320,6 +314,8 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
     # ===================================================
     # L244.Satiation_flsp_gcamSEA: Satiation levels assumed for floorspace
     L244.Satiation_flsp_gcamSEA <- IND_A44_satiation_flsp %>%
+      # select the target region
+      filter( region == gcam.SEA_REGION ) %>%
       gather( gcam.consumer, value, `resid rural`, `resid urban`, comm ) %>%
       # Need to make sure that the satiation level is greater than the floorspace in the final base year
       left_join_error_no_match(L244.Floorspace_gcamSEA %>%
@@ -342,32 +338,29 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
     # under timeshift conditions. So we adjust energy.SATIATION_YEAR
     energy.SATIATION_YEAR <- min(max(MODEL_BASE_YEARS), energy.SATIATION_YEAR)
 
-    # TODO: this results in an infinite value
     L244.SatiationAdder_gcamSEA <- L100.gdp_mil90usd_ctry_Yh %>%
       # convert from million to thousand
       mutate( value = value * CONV_MIL_THOUS ) %>%
+      rename( GDP = value ) %>%
       # filter for target region(s)
       left_join_error_no_match( iso_GCAM_regID, by = c( "iso" ) ) %>%
-      left_join_error_no_match( GCAM_region_names, by = c( "GCAM_region_ID" ) ) %>%
-      filter( region == gcam.SEA_REGION,
+      filter( country_name == gcam.SEA_REGION,
               year == energy.SATIATION_YEAR ) %>%
-      select( -c( iso, country_name, region_GCAM3, GCAM_region_ID ) ) %>%
-      # calculate total GDP for SEAsia
-      group_by( region, year ) %>%
-      mutate( value = sum( value ) ) %>%
-      distinct( region, year, value ) %>%
-      ungroup() %>%
+      rename( region = country_name ) %>%
+      select( -c( iso, region_GCAM3, GCAM_region_ID ) ) %>%
       left_join( L244.Satiation_flsp_gcamSEA, by = c( "region") ) %>%
-      rename(pcGDP = value) %>%
       # Add floorspace
       left_join_error_no_match(L244.Floorspace_gcamSEA, by = c("region", "gcam.consumer", "year", "nodeInput", "building.node.input")) %>%
       # Add population
       left_join_error_no_match(L244.Pop_thous, by = c("region", "year")) %>%
-      rename(pop = value) %>%
+      rename( pop = value ) %>%
+      # dividing by 1000 to get per capita instead of per 1,000 people
+      mutate( pcGDP = ( GDP / pop ) / 1000 ) %>%
       # Calculate per capita floorspace
       mutate(pcFlsp_mm2 = base.building.size / pop,
              # Calculate the satiation adders
              satiation.adder = round(satiation.level - (
+               # TODO: check on energy.GDP_MID_SATIATION to ensure it is correct
                exp(log(2) * pcGDP / energy.GDP_MID_SATIATION) * (satiation.level - pcFlsp_mm2)),
                energy.DIGITS_SATIATION_ADDER),
              # The satiation adder (million square meters of floorspace per person) needs to be less than the per-capita demand in the final calibration year
@@ -396,13 +389,33 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
     L244.HDDCDD_normal <- L244.HDDCDD_scen %>%
       filter(year %in% seq(1981, 2000),
              # The AEO_2015 scenario changes this "normal climate" for each region,
-             # which is not desirable since it does not incldue historical data
+             # which is not desirable since it does not include historical data
              # and is not the standard reference assumption.  Thus, we remove it
              # from this calculation.
              SRES != "AEO_2015") %>%
       group_by(region, variable) %>%
       summarise(degree.days = mean(degree.days)) %>%
       ungroup()
+
+    # L244.HDDCDD: Heating and cooling degree days for USA, used to calculate internal gains
+    L244.HDDCDD_normal_USA <- L143.HDDCDD_scen_R_Y %>%
+      left_join_error_no_match( GCAM_region_names, by = c( "GCAM_region_ID" ) ) %>%
+      # filter for target region(s)
+      filter( region == gcam.USA_REGION ) %>%
+      # select relevant columns
+      select( -c( GCAM_region_ID ) ) %>%
+      rename(degree.days.USA = value) %>%
+      filter(year %in% seq(1981, 2000),
+             # The AEO_2015 scenario changes this "normal climate" for each region,
+             # which is not desirable since it does not include historical data
+             # and is not the standard reference assumption.  Thus, we remove it
+             # from this calculation.
+             SRES != "AEO_2015") %>%
+      group_by(region, variable) %>%
+      summarise(degree.days.USA = mean(degree.days.USA)) %>%
+      ungroup() %>%
+      # remove region column for left_joining
+      select( -region )
 
     # Subset the heating and cooling services, separately
     heating_services <- thermal_services[grepl("heating", thermal_services)]
@@ -527,8 +540,6 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       select(LEVEL2_DATA_NAMES[["GlobalTechEff"]])
 
     # L244.StubTechMarket_bld: Specify market names for fuel inputs to all technologies in each state
-    # TODO: make sure market names are correct
-    # TODO: Electricity market will be whatever region is being used
     L244.StubTechMarket_bld <- L244.end_use_eff %>%
       mutate(market.name = gcam.SEA_REGION) %>%
       rename(stub.technology = technology) %>%
@@ -602,18 +613,14 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
               technology2 = technology3,
               share_tech1 = share_tech2,
               share_tech2 = share_tech3 ) %>%
-      # TODO: Need an A44.globaltech_shares equivalent for SEASia technologies (I don't think we do, see Google Sheet)
-      # TODO: expand A44.globaltech_shares to include SEAsia technologies, make initial assumptions
-      # TODO: not entirely sure how to do this. Hard to tell which technologies should be included.
-      # TODO: In GCAM-USA, it has techs that are in calibrated_techs_bld_usa but not in A44.globaltech_eff_avg
-      # uncommenting the bind_rows for now
-      # bind_rows(A44.globaltech_shares) %>%
+      bind_rows(IND_A44_globaltech_shares) %>%
       # Clunky, but we want only one technology and share value, currently have technology1, technology2, share1, share2
       gather(share_type, share, share_tech1, share_tech2)%>%
       gather(tech_type, technology, technology1, technology2) %>%
       # Filter for same technology and share number, then remove tech_type and share_type columns
       filter(substr(tech_type, nchar(tech_type), nchar(tech_type)) == substr(share_type, nchar(share_type), nchar(share_type))) %>%
       select(-tech_type, -share_type)
+      # there are NAs due to some technologies not having high efficiency equivalents
 
     # For calibration table, start with global tech efficiency table, and match in tech shares.
     L244.StubTechCalInput_bld_gcamSEA <- L244.GlobalTechEff_bld %>%
@@ -736,6 +743,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       left_join_error_no_match(L244.Floorspace_gcamSEA, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year")) %>%
       # Add multiplier
       # TODO: Need multiplier for SEA, currently just changed to SEAsia sectors, but the values are not correct
+      # TODO: ask Sha or Page about demand satiation multiplier
       left_join_error_no_match(IND_A44_demand_satiation_mult, by = c("building.service.input" = "supplysector")) %>%
       # Satiation level = service per floorspace * multiplier
       mutate(satiation.level = round(base.service / base.building.size * multiplier, energy.DIGITS_COEFFICIENT)) %>%
@@ -747,17 +755,14 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       # Add floorspace
       left_join_error_no_match(L244.Floorspace_gcamSEA, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year")) %>%
       # Add multiplier
-      # TODO: Need multiplier for SEA, currently just changed to SEAsia sectors, but the values are not correct
       left_join_error_no_match(IND_A44_demand_satiation_mult, by = c("thermal.building.service.input" = "supplysector")) %>%
       # Satiation level = service per floorspace * multiplier
       mutate(satiation.level = round(base.service / base.building.size * multiplier, energy.DIGITS_COEFFICIENT)) %>%
       select(LEVEL2_DATA_NAMES[["ThermalServiceSatiation"]])
 
     # L244.Intgains_scalar: Scalers relating internal gain energy to increased/reduced cooling/heating demands
-    # TODO: don't know what these values should be for SEAsia
-    # TODO: constants have been made, but are using USA values
     variable <- c("HDD", "CDD")
-    scalar <- c(energy.INTERNAL_GAINS_SCALAR_SEA_H, energy.INTERNAL_GAINS_SCALAR_SEA_C)
+    scalar <- c(energy.INTERNAL_GAINS_SCALAR_USA_H, energy.INTERNAL_GAINS_SCALAR_USA_C)
     DDnorm <- c(gcamSEA.BASE_HDD_SEA, gcamSEA.BASE_CDD_SEA)
     SEA.base.scalar <- tibble(variable, scalar, DDnorm)
     threshold_HDD <- 500
@@ -765,11 +770,15 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
     L244.Intgains_scalar_gcamSEA <- L244.ThermalServiceSatiation_gcamSEA %>%
       # Assign HDD or CDD
       mutate(variable = if_else(thermal.building.service.input %in% heating_services, "HDD", "CDD")) %>%
-      # Add DDnorm & scalar
+      # Add scalar
       left_join_error_no_match(SEA.base.scalar, by = "variable") %>%
       # Add degree days
       left_join_error_no_match(L244.HDDCDD_normal, by = c("region", "variable")) %>%
-      mutate(internal.gains.scalar = round(scalar * degree.days / DDnorm, energy.DIGITS_HDDCDD),
+      left_join_error_no_match(L244.HDDCDD_normal_USA, by = c("variable")) %>%
+      group_by(thermal.building.service.input) %>%
+      mutate( scalar_mult = degree.days / degree.days.USA ) %>%
+      ungroup() %>%
+      mutate(internal.gains.scalar = round(scalar * scalar_mult, energy.DIGITS_HDDCDD),
              # Prevent very warm places from having negative heating demands, using exogenous threshold
              internal.gains.scalar = if_else(variable == "HDD" & degree.days < threshold_HDD, 0, internal.gains.scalar)) %>%
       select(LEVEL2_DATA_NAMES[["Intgains_scalar"]])
