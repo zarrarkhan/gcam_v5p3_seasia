@@ -40,7 +40,7 @@ MODEL_FINAL_BASE_YEAR   <- 2015
 
 gcam.USA_CODE            <- 1
 gcam.USA_REGION          <- "USA"
-gcam.SEA_REGION       <- "Southeast Asia"
+gcam.SEA_REGION          <- "Thailand"
 gcam.WESTERN_EUROPE_CODE <- 13
 gcam.LOGIT_TYPES         <- c("relative-cost-logit", "absolute-cost-logit")
 gcam.EQUIV_TABLE         <- "EQUIV_TABLE"
@@ -417,9 +417,6 @@ energy.GDP_MID_SATIATION      <- 10.5
 
 energy.INTERNAL_GAINS_SCALAR_USA_H <- -930
 energy.INTERNAL_GAINS_SCALAR_USA_C <- 350
-
-energy.INTERNAL_GAINS_SCALAR_SEA_H <- -930
-energy.INTERNAL_GAINS_SCALAR_SEA_C <- 350
 
 # Used to avoid negative/zero energy when disaggregating detailed industries (cement, fertilizer)
 energy.MIN_IN_EJ_IND <- 1e-3
@@ -806,8 +803,8 @@ names(water.MAPPED_WATER_TYPES_SHORT)     <- water.MAPPED_WATER_TYPES
 # SEAsia constants ======================================================================
 
 # Degree day norms
-gcamSEA.BASE_HDD_SEA <- 4524 # https://www.eia.gov/totalenergy/data/annual/showtext.php?t=ptb0107
-gcamSEA.BASE_CDD_SEA <- 1215 # https://www.eia.gov/totalenergy/data/annual/showtext.php?t=ptb010
+gcamSEA.BASE_HDD_SEA <- 11 # calculated in L244.building_seasia.R
+gcamSEA.BASE_CDD_SEA <- 5866
 
 # Time shift conditions ======================================================================
 # Uncomment these lines to run under 'timeshift' conditions
