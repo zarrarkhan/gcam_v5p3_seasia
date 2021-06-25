@@ -1,0 +1,139 @@
+# File:KualaLumpur_Malaysia_pop.csv
+# Title:KualaLumpur and rest-of-Malaysia population (all years)
+# Units: millions
+# Description: Computed off-line
+# Column types: cin
+# ----------
+"region","year","population"
+"KualaLumpur",1971,0.623162803
+"KualaLumpur",1972,0.637913195
+"KualaLumpur",1973,0.653030305
+"KualaLumpur",1974,0.668716362
+"KualaLumpur",1975,0.685113886
+"KualaLumpur",1976,0.702379478
+"KualaLumpur",1977,0.720496801
+"KualaLumpur",1978,0.739228701
+"KualaLumpur",1979,0.758223105
+"KualaLumpur",1980,0.777266517
+"KualaLumpur",1981,0.796192197
+"KualaLumpur",1982,0.815184348
+"KualaLumpur",1983,0.834799525
+"KualaLumpur",1984,0.855804398
+"KualaLumpur",1985,0.878710459
+"KualaLumpur",1986,0.903766691
+"KualaLumpur",1987,0.930708337
+"KualaLumpur",1988,0.958900542
+"KualaLumpur",1989,0.987431861
+"KualaLumpur",1990,1.015646035
+"KualaLumpur",1991,1.043255209
+"KualaLumpur",1992,1.07044753
+"KualaLumpur",1993,1.097612812
+"KualaLumpur",1994,1.125361688
+"KualaLumpur",1995,1.154096927
+"KualaLumpur",1996,1.1839526
+"KualaLumpur",1997,1.214663384
+"KualaLumpur",1998,1.245750462
+"KualaLumpur",1999,1.276544053
+"KualaLumpur",2000,1.306566466
+"KualaLumpur",2001,1.33556928
+"KualaLumpur",2002,1.363693887
+"KualaLumpur",2003,1.391320524
+"KualaLumpur",2004,1.419026024
+"KualaLumpur",2005,1.4471895
+"KualaLumpur",2006,1.47599459
+"KualaLumpur",2007,1.505197381
+"KualaLumpur",2008,1.534244134
+"KualaLumpur",2009,1.562355221
+"KualaLumpur",2010,1.589
+"KualaLumpur",2011,1.613950329
+"KualaLumpur",2012,1.637453503
+"KualaLumpur",2013,1.660027208
+"KualaLumpur",2014,1.682429102
+"KualaLumpur",2015,1.70520729
+"KualaLumpur",2016,1.72851105
+"KualaLumpur",2017,1.752170262
+"KualaLumpur",2018,1.776019875
+"KualaLumpur",2019,1.799777667
+"KualaLumpur",2020,1.82322389
+"KualaLumpur",2025,1.934981952
+"KualaLumpur",2030,2.033286992
+"KualaLumpur",2035,2.116155861
+"KualaLumpur",2040,2.183101629
+"KualaLumpur",2045,2.238031842
+"KualaLumpur",2050,2.284261153
+"KualaLumpur",2055,2.322588739
+"KualaLumpur",2060,2.350817446
+"KualaLumpur",2065,2.36667385
+"KualaLumpur",2070,2.369410601
+"KualaLumpur",2075,2.360991696
+"KualaLumpur",2080,2.344802091
+"KualaLumpur",2085,2.32468641
+"KualaLumpur",2090,2.303220857
+"KualaLumpur",2095,2.281017588
+"KualaLumpur",2100,2.257661608
+"Rest of Malaysia",1971,10.4392672
+"Rest of Malaysia",1972,10.68636681
+"Rest of Malaysia",1973,10.9396097
+"Rest of Malaysia",1974,11.20238364
+"Rest of Malaysia",1975,11.47707611
+"Rest of Malaysia",1976,11.76631052
+"Rest of Malaysia",1977,12.0698132
+"Rest of Malaysia",1978,12.3836113
+"Rest of Malaysia",1979,12.7018069
+"Rest of Malaysia",1980,13.02082348
+"Rest of Malaysia",1981,13.3378678
+"Rest of Malaysia",1982,13.65602565
+"Rest of Malaysia",1983,13.98462048
+"Rest of Malaysia",1984,14.3364956
+"Rest of Malaysia",1985,14.72021954
+"Rest of Malaysia",1986,15.13996331
+"Rest of Malaysia",1987,15.59129166
+"Rest of Malaysia",1988,16.06356946
+"Rest of Malaysia",1989,16.54152814
+"Rest of Malaysia",1990,17.01417397
+"Rest of Malaysia",1991,17.47668479
+"Rest of Malaysia",1992,17.93221247
+"Rest of Malaysia",1993,18.38728719
+"Rest of Malaysia",1994,18.85213831
+"Rest of Malaysia",1995,19.33351307
+"Rest of Malaysia",1996,19.8336574
+"Rest of Malaysia",1997,20.34812662
+"Rest of Malaysia",1998,20.86889954
+"Rest of Malaysia",1999,21.38475595
+"Rest of Malaysia",2000,21.88769353
+"Rest of Malaysia",2001,22.37355072
+"Rest of Malaysia",2002,22.84469611
+"Rest of Malaysia",2003,23.30749948
+"Rest of Malaysia",2004,23.77162398
+"Rest of Malaysia",2005,24.2434205
+"Rest of Malaysia",2006,24.72596541
+"Rest of Malaysia",2007,25.21517262
+"Rest of Malaysia",2008,25.70176587
+"Rest of Malaysia",2009,26.17268478
+"Rest of Malaysia",2010,26.619
+"Rest of Malaysia",2011,27.03700967
+"Rest of Malaysia",2012,27.4307365
+"Rest of Malaysia",2013,27.80889279
+"Rest of Malaysia",2014,28.1841709
+"Rest of Malaysia",2015,28.56575271
+"Rest of Malaysia",2016,28.95613895
+"Rest of Malaysia",2017,29.35247974
+"Rest of Malaysia",2018,29.75201013
+"Rest of Malaysia",2019,30.15000233
+"Rest of Malaysia",2020,30.543
+"Rest of Malaysia",2025,32.415
+"Rest of Malaysia",2030,34.062
+"Rest of Malaysia",2035,35.45
+"Rest of Malaysia",2040,36.571
+"Rest of Malaysia",2045,37.492
+"Rest of Malaysia",2050,38.266
+"Rest of Malaysia",2055,38.908
+"Rest of Malaysia",2060,39.381
+"Rest of Malaysia",2065,39.647
+"Rest of Malaysia",2070,39.693
+"Rest of Malaysia",2075,39.551
+"Rest of Malaysia",2080,39.28
+"Rest of Malaysia",2085,38.943
+"Rest of Malaysia",2090,38.584
+"Rest of Malaysia",2095,38.212
+"Rest of Malaysia",2100,37.821
