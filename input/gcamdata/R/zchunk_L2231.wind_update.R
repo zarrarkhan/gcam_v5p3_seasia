@@ -13,7 +13,7 @@
 #' original data system was \code{L2231.wind_update.R} (energy level2).
 #' @details Updates region-specific onshore wind supply curves using improved global wind resource estimate from Eurek et al. (2016).
 #' @importFrom assertthat assert_that
-#' @importFrom dplyr filter mutate select group_by summarise distinct arrange bind_rows rename
+#' @importFrom dplyr filter mutate select group_by summarise distinct arrange bind_rows rename count
 #' @importFrom tidyr gather
 #' @importFrom stats optimize
 #' @author MB GI AJS March 2019
