@@ -160,6 +160,21 @@ module_energy_L2231.wind_update <- function(command, ...) {
                                energy.DIGITS_MAX_SUB_RESOURCE)) %>%
       select(region, mid.price) -> L2231.mid.price
 
+    # Add mid.price for regions with only one price point
+    (L2231.onshore_wind_curve %>%
+      count(region) %>%
+        filter(n==1))$region %>%
+      unique()-> L2231.onshore_wind_curve_single_regions
+
+    # Set mid.price to available price
+    L2231.onshore_wind_curve %>%
+      filter(region %in% L2231.onshore_wind_curve_single_regions) %>%
+      select(region, mid.price = price)-> L2231.mid.price_singleprice
+
+    # Combine with L2231.mid.price
+    L2231.mid.price %>%
+      bind_rows(L2231.mid.price_singleprice) -> L2231.mid.price
+
     L2231.onshore_wind_curve %>%
       left_join_error_no_match(L2231.mid.price, by = c("region")) -> L2231.onshore_wind_curve
 
