@@ -43,13 +43,16 @@ module_energy_Xbatch_industry_xml_KualaLumpur_Malaysia<- function(command, ...) 
              "X232.nonghg_max_reduction_ind_KualaLumpur_Malaysia",
              "X232.nonghg_steepness_ind_KualaLumpur_Malaysia",
              "X232.hfc_future_ind_KualaLumpur_Malaysia",
+             "X232.MAC_higwp_ind_KualaLumpur_Malaysia",
              "X232.nonco2_max_reduction_indproc_KualaLumpur_Malaysia",
              "X232.nonco2_steepness_indproc_KualaLumpur_Malaysia",
              "X232.pol_emissions_ind_KualaLumpur_Malaysia",
              "X232.ghg_emissions_ind_KualaLumpur_Malaysia",
              "X232.StubTechMarket_ind_KualaLumpur_Malaysia",
              "X232.StubTechSecMarket_ind_KualaLumpur_Malaysia",
-             "X232.nonco2_indproc_KualaLumpur_Malaysia"))
+             "X232.nonco2_indproc_KualaLumpur_Malaysia",
+             "X232.hfc_all_indproc_KualaLumpur_Malaysia",
+             "X232.pfc_all_indproc_KualaLumpur_Malaysia"))
   } else if(command == driver.DECLARE_OUTPUTS) {
     return(c(XML = "industry_KualaLumpur_Malaysia.xml"))
   } else if(command == driver.MAKE) {
@@ -88,6 +91,7 @@ module_energy_Xbatch_industry_xml_KualaLumpur_Malaysia<- function(command, ...) 
     X232.nonghg_max_reduction_ind_KualaLumpur_Malaysia<- get_data(all_data, "X232.nonghg_max_reduction_ind_KualaLumpur_Malaysia")
     X232.nonghg_steepness_ind_KualaLumpur_Malaysia<- get_data(all_data, "X232.nonghg_steepness_ind_KualaLumpur_Malaysia")
     X232.hfc_future_ind_KualaLumpur_Malaysia<- get_data(all_data, "X232.hfc_future_ind_KualaLumpur_Malaysia")
+    X232.MAC_higwp_ind_KualaLumpur_Malaysia <- get_data(all_data, "X232.MAC_higwp_ind_KualaLumpur_Malaysia")
     X232.nonco2_max_reduction_indproc_KualaLumpur_Malaysia<- get_data(all_data, "X232.nonco2_max_reduction_indproc_KualaLumpur_Malaysia")
     X232.nonco2_steepness_indproc_KualaLumpur_Malaysia<- get_data(all_data, "X232.nonco2_steepness_indproc_KualaLumpur_Malaysia")
     X232.pol_emissions_ind_KualaLumpur_Malaysia<- get_data(all_data, "X232.pol_emissions_ind_KualaLumpur_Malaysia")
@@ -95,6 +99,8 @@ module_energy_Xbatch_industry_xml_KualaLumpur_Malaysia<- function(command, ...) 
     X232.StubTechMarket_ind_KualaLumpur_Malaysia<- get_data(all_data, "X232.StubTechMarket_ind_KualaLumpur_Malaysia")
     X232.StubTechSecMarket_ind_KualaLumpur_Malaysia<- get_data(all_data, "X232.StubTechSecMarket_ind_KualaLumpur_Malaysia")
     X232.nonco2_indproc_KualaLumpur_Malaysia<- get_data(all_data, "X232.nonco2_indproc_KualaLumpur_Malaysia")
+    X232.hfc_all_indproc_KualaLumpur_Malaysia <- get_data(all_data, "X232.hfc_all_indproc_KualaLumpur_Malaysia")
+    X232.pfc_all_indproc_KualaLumpur_Malaysia <- get_data(all_data, "X232.pfc_all_indproc_KualaLumpur_Malaysia")
 
     # ===================================================
 
@@ -131,6 +137,7 @@ module_energy_Xbatch_industry_xml_KualaLumpur_Malaysia<- function(command, ...) 
       add_xml_data(X232.nonghg_max_reduction_ind_KualaLumpur_Malaysia, "GDPCtrlMax") %>%
       add_xml_data(X232.nonghg_steepness_ind_KualaLumpur_Malaysia, "GDPCtrlSteep") %>%
       add_xml_data(X232.hfc_future_ind_KualaLumpur_Malaysia, "OutputEmissCoeff") %>%
+      add_xml_data(X232.MAC_higwp_ind_KualaLumpur_Malaysia, "MAC") %>%
       add_xml_data(X232.nonco2_max_reduction_indproc_KualaLumpur_Malaysia, "GDPCtrlMax") %>%
       add_xml_data(X232.nonco2_steepness_indproc_KualaLumpur_Malaysia, "GDPCtrlSteep") %>%
       add_xml_data(X232.pol_emissions_ind_KualaLumpur_Malaysia, "InputEmissions") %>%
@@ -138,6 +145,8 @@ module_energy_Xbatch_industry_xml_KualaLumpur_Malaysia<- function(command, ...) 
       add_xml_data(X232.StubTechMarket_ind_KualaLumpur_Malaysia, "StubTechMarket") %>%
       add_xml_data(X232.StubTechSecMarket_ind_KualaLumpur_Malaysia, "StubTechSecMarket") %>%
       add_xml_data(X232.nonco2_indproc_KualaLumpur_Malaysia, "StbTechOutputEmissions") %>%
+      add_xml_data(X232.hfc_all_indproc_KualaLumpur_Malaysia, "StbTechOutputEmissions") %>%
+      add_xml_data(X232.pfc_all_indproc_KualaLumpur_Malaysia, "StbTechOutputEmissions") %>%
       add_precursors("X232.DeleteFinalDemand_ind_KualaLumpur_Malaysia",
                      "X232.DeleteSupplysector_ind_KualaLumpur_Malaysia",
                      "X232.Supplysector_ind_KualaLumpur_Malaysia",
@@ -169,13 +178,16 @@ module_energy_Xbatch_industry_xml_KualaLumpur_Malaysia<- function(command, ...) 
                      "X232.nonghg_max_reduction_ind_KualaLumpur_Malaysia",
                      "X232.nonghg_steepness_ind_KualaLumpur_Malaysia",
                      "X232.hfc_future_ind_KualaLumpur_Malaysia",
+                     "X232.MAC_higwp_ind_KualaLumpur_Malaysia",
                      "X232.nonco2_max_reduction_indproc_KualaLumpur_Malaysia",
                      "X232.nonco2_steepness_indproc_KualaLumpur_Malaysia",
                      "X232.pol_emissions_ind_KualaLumpur_Malaysia",
                      "X232.ghg_emissions_ind_KualaLumpur_Malaysia",
                      "X232.StubTechMarket_ind_KualaLumpur_Malaysia",
                      "X232.StubTechSecMarket_ind_KualaLumpur_Malaysia",
-                     "X232.nonco2_indproc_KualaLumpur_Malaysia") ->
+                     "X232.nonco2_indproc_KualaLumpur_Malaysia",
+                     "X232.hfc_all_indproc_KualaLumpur_Malaysia",
+                     "X232.pfc_all_indproc_KualaLumpur_Malaysia") ->
       industry_KualaLumpur_Malaysia.xml
 
     return_data(industry_KualaLumpur_Malaysia.xml)

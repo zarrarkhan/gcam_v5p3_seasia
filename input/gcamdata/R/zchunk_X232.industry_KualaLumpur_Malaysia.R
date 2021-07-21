@@ -50,6 +50,9 @@ module_energy_X232.industry_KualaLumpur_Malaysia <- function(command, ...) {
              "L201.nonghg_max_reduction",
              "L201.nonghg_steepness",
              "L241.hfc_future",
+             "L241.hfc_all",
+             "L241.pfc_all",
+             "L252.MAC_higwp",
              "L201.en_pol_emissions",
              "L201.en_ghg_emissions",
              "L232.nonco2_prc",
@@ -87,13 +90,16 @@ module_energy_X232.industry_KualaLumpur_Malaysia <- function(command, ...) {
              "X232.nonghg_max_reduction_ind_KualaLumpur_Malaysia",
              "X232.nonghg_steepness_ind_KualaLumpur_Malaysia",
              "X232.hfc_future_ind_KualaLumpur_Malaysia",
+             "X232.MAC_higwp_ind_KualaLumpur_Malaysia",
              "X232.nonco2_max_reduction_indproc_KualaLumpur_Malaysia",
              "X232.nonco2_steepness_indproc_KualaLumpur_Malaysia",
              "X232.pol_emissions_ind_KualaLumpur_Malaysia",
              "X232.ghg_emissions_ind_KualaLumpur_Malaysia",
              "X232.StubTechMarket_ind_KualaLumpur_Malaysia",
              "X232.StubTechSecMarket_ind_KualaLumpur_Malaysia",
-             "X232.nonco2_indproc_KualaLumpur_Malaysia"))
+             "X232.nonco2_indproc_KualaLumpur_Malaysia",
+             "X232.hfc_all_indproc_KualaLumpur_Malaysia",
+             "X232.pfc_all_indproc_KualaLumpur_Malaysia"))
   } else if(command == driver.MAKE) {
 
     # Silence package checks
@@ -137,6 +143,9 @@ module_energy_X232.industry_KualaLumpur_Malaysia <- function(command, ...) {
     L201.nonghg_max_reduction <- get_data(all_data, "L201.nonghg_max_reduction", strip_attributes = TRUE)
     L201.nonghg_steepness <- get_data(all_data, "L201.nonghg_steepness", strip_attributes = TRUE)
     L241.hfc_future <- get_data(all_data, "L241.hfc_future", strip_attributes = TRUE)
+    L241.hfc_all <- get_data(all_data, "L241.hfc_all", strip_attributes = TRUE)
+    L241.pfc_all <- get_data(all_data, "L241.pfc_all", strip_attributes = TRUE)
+    L252.MAC_higwp <- get_data(all_data, "L252.MAC_higwp", strip_attributes = TRUE)
     L201.en_pol_emissions <- get_data(all_data, "L201.en_pol_emissions", strip_attributes = TRUE)
     L201.en_ghg_emissions <- get_data(all_data, "L201.en_ghg_emissions", strip_attributes = TRUE)
     L232.nonco2_prc <- get_data(all_data, "L232.nonco2_prc", strip_attributes = TRUE)
@@ -170,6 +179,9 @@ module_energy_X232.industry_KualaLumpur_Malaysia <- function(command, ...) {
     L201.nonghg_max_reduction <- filter(L201.nonghg_max_reduction, supplysector %in% Industry_sectors)
     L201.nonghg_steepness <- filter(L201.nonghg_steepness, supplysector %in% Industry_sectors)
     L241.hfc_future <- filter(L241.hfc_future, supplysector %in% Industry_sectors)
+    L241.hfc_all <- filter(L241.hfc_all, supplysector %in% Industry_sectors)
+    L241.pfc_all <- filter(L241.pfc_all, supplysector %in% Industry_sectors)
+    L252.MAC_higwp <- filter(L252.MAC_higwp, supplysector %in% Industry_sectors)
     L232.nonco2_max_reduction <- filter(L232.nonco2_max_reduction, supplysector %in% Industry_sectors)
     L232.nonco2_steepness <- filter(L232.nonco2_steepness, supplysector %in% Industry_sectors)
 
@@ -199,6 +211,7 @@ module_energy_X232.industry_KualaLumpur_Malaysia <- function(command, ...) {
       L201.nonghg_max_reduction = L201.nonghg_max_reduction,
       L201.nonghg_steepness = L201.nonghg_steepness,
       L241.hfc_future = L241.hfc_future,
+      L252.MAC_higwp = L252.MAC_higwp,
       L232.nonco2_max_reduction = L232.nonco2_max_reduction,
       L232.nonco2_steepness = L232.nonco2_steepness
       )
@@ -266,6 +279,20 @@ module_energy_X232.industry_KualaLumpur_Malaysia <- function(command, ...) {
                                     share_data = X232.pop_gdp_share_KualaLumpur_Malaysia, value.column = "input.emissions", share.column = "gdpshare")
 
     X232.nonco2_indproc_KualaLumpur_Malaysia <- L232.nonco2_prc %>%
+      filter(supplysector %in% Industry_sectors) %>%
+      downscale_to_breakout_regions(data = .,
+                                    composite_region = "Malaysia",
+                                    disag_regions = c("KualaLumpur","Rest of Malaysia"),
+                                    share_data = X232.pop_gdp_share_KualaLumpur_Malaysia, value.column = "input.emissions", share.column = "gdpshare")
+
+    X232.hfc_all_indproc_KualaLumpur_Malaysia <- L241.hfc_all %>%
+      filter(supplysector %in% Industry_sectors) %>%
+      downscale_to_breakout_regions(data = .,
+                                    composite_region = "Malaysia",
+                                    disag_regions = c("KualaLumpur","Rest of Malaysia"),
+                                    share_data = X232.pop_gdp_share_KualaLumpur_Malaysia, value.column = "input.emissions", share.column = "gdpshare")
+
+    X232.pfc_all_indproc_KualaLumpur_Malaysia <- L241.pfc_all %>%
       filter(supplysector %in% Industry_sectors) %>%
       downscale_to_breakout_regions(data = .,
                                     composite_region = "Malaysia",
@@ -515,6 +542,13 @@ module_energy_X232.industry_KualaLumpur_Malaysia <- function(command, ...) {
       add_precursors("L241.hfc_future") ->
       X232.hfc_future_ind_KualaLumpur_Malaysia
 
+    X232.list_nochange_data_KualaLumpur_Malaysia[["L252.MAC_higwp"]] %>%
+      add_title("MAC curves of f-gases from industry in KualaLumpur_Malaysia") %>%
+      add_units("portion of emissions reduced as a fn of the carbon price") %>%
+      add_comments("Copied") %>%
+      add_precursors("L252.MAC_higwp") ->
+      X232.MAC_higwp_ind_KualaLumpur_Malaysia
+
     X232.list_nochange_data_KualaLumpur_Malaysia[["L232.nonco2_max_reduction"]] %>%
       add_title("max reduction of industrial process emissions") %>%
       add_units("unitless portion") %>%
@@ -564,6 +598,20 @@ module_energy_X232.industry_KualaLumpur_Malaysia <- function(command, ...) {
       add_precursors("L232.nonco2_prc") ->
       X232.nonco2_indproc_KualaLumpur_Malaysia
 
+    X232.hfc_all_indproc_KualaLumpur_Malaysia %>%
+      add_title("industrial process emissions of HFCs") %>%
+      add_units("Gg/yr") %>%
+      add_comments("downscaled from parent region") %>%
+      add_precursors("L241.hfc_all") ->
+      X232.hfc_all_indproc_KualaLumpur_Malaysia
+
+    X232.pfc_all_indproc_KualaLumpur_Malaysia %>%
+      add_title("industrial process emissions of PFCs") %>%
+      add_units("Gg/yr") %>%
+      add_comments("downscaled from parent region") %>%
+      add_precursors("L241.pfc_all") ->
+      X232.pfc_all_indproc_KualaLumpur_Malaysia
+
     return_data(X232.DeleteFinalDemand_ind_KualaLumpur_Malaysia,
                 X232.DeleteSupplysector_ind_KualaLumpur_Malaysia,
                 X232.Supplysector_ind_KualaLumpur_Malaysia,
@@ -595,13 +643,16 @@ module_energy_X232.industry_KualaLumpur_Malaysia <- function(command, ...) {
                 X232.nonghg_max_reduction_ind_KualaLumpur_Malaysia,
                 X232.nonghg_steepness_ind_KualaLumpur_Malaysia,
                 X232.hfc_future_ind_KualaLumpur_Malaysia,
+                X232.MAC_higwp_ind_KualaLumpur_Malaysia,
                 X232.nonco2_max_reduction_indproc_KualaLumpur_Malaysia,
                 X232.nonco2_steepness_indproc_KualaLumpur_Malaysia,
                 X232.pol_emissions_ind_KualaLumpur_Malaysia,
                 X232.ghg_emissions_ind_KualaLumpur_Malaysia,
                 X232.StubTechMarket_ind_KualaLumpur_Malaysia,
                 X232.StubTechSecMarket_ind_KualaLumpur_Malaysia,
-                X232.nonco2_indproc_KualaLumpur_Malaysia)
+                X232.nonco2_indproc_KualaLumpur_Malaysia,
+                X232.hfc_all_indproc_KualaLumpur_Malaysia,
+                X232.pfc_all_indproc_KualaLumpur_Malaysia)
   } else {
     stop("Unknown command")
   }
