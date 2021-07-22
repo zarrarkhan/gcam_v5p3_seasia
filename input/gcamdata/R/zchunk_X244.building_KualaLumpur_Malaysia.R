@@ -60,9 +60,11 @@ module_energy_X244.building_KualaLumpur_Malaysia <- function(command, ...) {
              "L201.nonghg_steepness",
              "L241.hfc_future",
              "L201.en_pol_emissions",
-             "L201.en_ghg_emissions"))
+             "L201.en_ghg_emissions",
+             "L244.DeleteThermalService"))
   } else if(command == driver.DECLARE_OUTPUTS) {
-    return(c("X244.DeleteConsumer_bld_KualaLumpur_Malaysia",
+    return(c("X244.DeleteThermalService_bld_KualaLumpur_Malaysia",
+             "X244.DeleteConsumer_bld_KualaLumpur_Malaysia",
              "X244.DeleteSupplysector_bld_KualaLumpur_Malaysia",
              "X244.SubregionalShares_KualaLumpur_Malaysia",
                 "X244.PriceExp_IntGains_KualaLumpur_Malaysia",
@@ -140,6 +142,7 @@ module_energy_X244.building_KualaLumpur_Malaysia <- function(command, ...) {
     L241.hfc_future <- get_data(all_data, "L241.hfc_future", strip_attributes = TRUE)
     L201.en_pol_emissions <- get_data(all_data, "L201.en_pol_emissions", strip_attributes = TRUE)
     L201.en_ghg_emissions <- get_data(all_data, "L201.en_ghg_emissions", strip_attributes = TRUE)
+    L244.DeleteThermalService <- get_data(all_data, "L244.DeleteThermalService", strip_attributes = TRUE)
 
     # ===================================================
 
@@ -158,6 +161,7 @@ module_energy_X244.building_KualaLumpur_Malaysia <- function(command, ...) {
     L241.hfc_future <- filter(L241.hfc_future, supplysector %in% L244.Supplysector_bld$supplysector)
 
     X244.list_nochange_data_KualaLumpur_Malaysia <- list(
+      L244.DeleteThermalService = L244.DeleteThermalService,
       L244.SubregionalShares = L244.SubregionalShares,
       L244.PriceExp_IntGains = L244.PriceExp_IntGains,
       L244.DemandFunction_serv = L244.DemandFunction_serv,
@@ -264,6 +268,13 @@ module_energy_X244.building_KualaLumpur_Malaysia <- function(command, ...) {
 
     # ===================================================
     # Produce outputs
+
+    X244.list_nochange_data_KualaLumpur_Malaysia[["L244.DeleteThermalService"]] %>%
+      add_title("Delete thermal services for buildings sector in Malaysia", overwrite=TRUE) %>%
+      add_units("Unitless") %>%
+      add_comments("Malaysia region name hard-wired") %>%
+      add_precursors("L244.DeleteThermalService") ->
+      X244.DeleteThermalService_bld_KualaLumpur_Malaysia
 
     X244.DeleteConsumer_bld_KualaLumpur_Malaysia %>%
       add_title("Delete gcam-consumer objects for buildings sector in Malaysia", overwrite=TRUE) %>%
@@ -496,7 +507,8 @@ module_energy_X244.building_KualaLumpur_Malaysia <- function(command, ...) {
       add_precursors("L201.en_ghg_emissions") ->
       X244.ghg_emissions_bld_KualaLumpur_Malaysia
 
-    return_data(X244.DeleteConsumer_bld_KualaLumpur_Malaysia,
+    return_data(X244.DeleteThermalService_bld_KualaLumpur_Malaysia,
+                X244.DeleteConsumer_bld_KualaLumpur_Malaysia,
                 X244.DeleteSupplysector_bld_KualaLumpur_Malaysia,
                 X244.SubregionalShares_KualaLumpur_Malaysia,
                 X244.PriceExp_IntGains_KualaLumpur_Malaysia,
