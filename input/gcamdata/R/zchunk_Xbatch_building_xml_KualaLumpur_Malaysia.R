@@ -90,7 +90,6 @@ module_energy_Xbatch_building_xml_KualaLumpur_Malaysia <- function(command, ...)
 
     # Produce outputs
     create_xml("building_KualaLumpur_Malaysia.xml") %>%
-      add_xml_data(X244.DeleteThermalService_bld_KualaLumpur_Malaysia, "DeleteThermalService") %>%
       add_xml_data(X244.DeleteConsumer_bld_KualaLumpur_Malaysia, "DeleteConsumer") %>%
       add_xml_data(X244.DeleteSupplysector_bld_KualaLumpur_Malaysia, "DeleteSupplysector") %>%
       add_logit_tables_xml(X244.Supplysector_bld_KualaLumpur_Malaysia, "Supplysector") %>%
@@ -154,8 +153,15 @@ module_energy_Xbatch_building_xml_KualaLumpur_Malaysia <- function(command, ...)
                      "X244.nonghg_steepness_bld_KualaLumpur_Malaysia",
                      "X244.hfc_future_bld_KualaLumpur_Malaysia",
                      "X244.pol_emissions_bld_KualaLumpur_Malaysia",
-                     "X244.ghg_emissions_bld_KualaLumpur_Malaysia") ->
+                     "X244.ghg_emissions_bld_KualaLumpur_Malaysia",
+                     "X244.DeleteThermalService_bld_KualaLumpur_Malaysia") ->
       building_KualaLumpur_Malaysia.xml
+
+    if(nrow(X244.DeleteThermalService_bld_KualaLumpur_Malaysia) > 0) {
+      building_KualaLumpur_Malaysia.xml %>%
+        add_xml_data(X244.DeleteThermalService_bld_KualaLumpur_Malaysia, "DeleteThermalService") ->
+        building_KualaLumpur_Malaysia.xml
+    }
 
     return_data(building_KualaLumpur_Malaysia.xml)
   } else {
