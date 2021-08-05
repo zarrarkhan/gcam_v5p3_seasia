@@ -53,5 +53,7 @@ comm cooking,gas,gas,delivered gas,comm,gas,gas,comm cooking
 comm cooking,refined liquids,refined liquids,refined liquids enduse,comm,refined liquids,refined liquids,comm cooking
 resid rural water heaters,electricity,electric water heater,elect_td_bld,resid rural,electricity,electric water heater,resid rural water heaters
 resid rural water heaters,refined liquids,LPG water heater,refined liquids enduse,resid rural,refined liquids,LPG water heater,resid rural water heaters
+resid rural water heaters,solar,solar water heater,global solar resource,resid rural,solar,solar water heater,resid rural water heaters
 resid urban water heaters,electricity,electric water heater,elect_td_bld,resid urban,electricity,electric water heater,resid urban water heaters
 resid urban water heaters,refined liquids,LPG water heater,refined liquids enduse,resid urban,refined liquids,LPG water heater,resid urban water heaters
+resid urban water heaters,solar,solar water heater,global solar resource,resid urban,solar,solar water heater,resid urban water heaters

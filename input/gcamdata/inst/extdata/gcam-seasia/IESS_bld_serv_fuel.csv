@@ -46,5 +46,7 @@ commercial,cooking,gas,gas,14.96214627,0.925097394
 commercial,cooking,refined liquids,refined liquids,49.80507832,0.26204469
 residential rural,water heaters,electricity,electric water heater,3.205542,0.013488728
 residential rural,water heaters,refined liquids,LPG water heater,2,0.01052281
+residential rural,water heaters,solar,solar water heater,0.5,0.5
 residential urban,water heaters,electricity,electric water heater,1.374458,0.005783637
 residential urban,water heaters,refined liquids,LPG water heater,0.8,0.004209124
+residential urban,water heaters,solar,solar water heater,0.5,0.5

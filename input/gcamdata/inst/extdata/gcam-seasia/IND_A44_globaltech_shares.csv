@@ -10,17 +10,19 @@ resid rural lighting,electricity,bulb,,1,0
 resid rural lighting,electricity,tubelight,,1,0
 resid rural lighting,electricity,cfl,,1,0
 resid rural lighting,electricity,led,,1,0
-resid rural lighting,electricity,kerosene lamp,,1,0
+resid rural lighting,refined liquids,kerosene lamp,,1,0
 resid urban lighting,electricity,bulb,,1,0
 resid urban lighting,electricity,tubelight,,1,0
 resid urban lighting,electricity,cfl,,1,0
 resid urban lighting,electricity,led,,1,0
-resid urban lighting,electricity,kerosene lamp,,1,0
+resid urban lighting,refined liquids,kerosene lamp,,1,0
 resid rural televisions,electricity,television,television hi-eff,1,0
 resid urban televisions,electricity,television,television hi-eff,1,0
 resid rural other appliances,electricity,other appliances,other appliances hi-eff,1,0
 resid urban other appliances,electricity,other appliances,other appliances hi-eff,1,0
 resid rural water heaters,electricity,electric water heater,electric water heater hi-eff,1,0
 resid urban water heaters,electricity,electric water heater,electric water heater hi-eff,1,0
-resid rural water heaters,electricity,LPG water heater,LPG water heater hi-eff,1,0
-resid urban water heaters,electricity,LPG water heater,LPG water heater hi-eff,1,0
+resid rural water heaters,refined liquids,LPG water heater,LPG water heater hi-eff,1,0
+resid urban water heaters,refined liquids,LPG water heater,LPG water heater hi-eff,1,0
+resid rural water heaters,solar,solar water heater,solar water heater hi-eff,1,0
+resid urban water heaters,solar,solar water heater,solar water heater hi-eff,1,0

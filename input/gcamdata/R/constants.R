@@ -40,7 +40,6 @@ MODEL_FINAL_BASE_YEAR   <- 2015
 
 gcam.USA_CODE            <- 1
 gcam.USA_REGION          <- "USA"
-gcam.SEA_REGION          <- "Thailand"
 gcam.WESTERN_EUROPE_CODE <- 13
 gcam.LOGIT_TYPES         <- c("relative-cost-logit", "absolute-cost-logit")
 gcam.EQUIV_TABLE         <- "EQUIV_TABLE"
@@ -801,6 +800,8 @@ water.MAPPED_WATER_TYPES_SHORT            <- c("C", "W")
 names(water.MAPPED_WATER_TYPES_SHORT)     <- water.MAPPED_WATER_TYPES
 
 # SEAsia constants ======================================================================
+
+gcam.SEA_REGION <- "Thailand"
 
 # Degree day norms
 gcamSEA.BASE_HDD_SEA <- 11 # calculated in L244.building_seasia.R

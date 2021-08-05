@@ -172,7 +172,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
     # ===================================================
     # Bind historical and future population data and filter for the target region(s) (SEAsia)
     # TODO: to change the region the XML is produced for, change "gcam.SEA_REGION" in constants.R
-    # Select SSP scenario
+    # Select SSP scenario, default is gSSP2 (business as usual)
     L244.Pop_thous <- L101.Pop_thous_Scen_R_Yfut %>%
       filter( scenario == "gSSP2" ) %>%
       bind_rows( L101.Pop_thous_R_Yh ) %>%
@@ -360,7 +360,6 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       mutate(pcFlsp_mm2 = base.building.size / pop,
              # Calculate the satiation adders
              satiation.adder = round(satiation.level - (
-               # TODO: check on energy.GDP_MID_SATIATION to ensure it is correct
                exp(log(2) * pcGDP / energy.GDP_MID_SATIATION) * (satiation.level - pcFlsp_mm2)),
                energy.DIGITS_SATIATION_ADDER),
              # The satiation adder (million square meters of floorspace per person) needs to be less than the per-capita demand in the final calibration year
@@ -564,12 +563,12 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
     # create a table that has service fuel shares for the model base years
     # TODO: get regional fuel consumption by service by year- using India for now
     bld_service_fuel_energy_consumption <- IESS_bld_serv_fuel %>%
-      # TODO: resid rural water heaters "solar" is missing from IESS
-      # TODO: if solar is missing, can it come in in future years?
-      # TODO: can allocate solar a very small share if this prevents it from coming in in the future
       repeat_add_columns( tibble( year = MODEL_BASE_YEARS ) ) %>%
       # join with the table that has energy consumption by fuel and year
-      left_join_error_no_match( bld_agg_energy_consumption, by = c( "year", "fuel" ) ) %>%
+      # TODO: fuel "solar" is not in bld_agg_energy_consumption, which is why solar water heaters are not included
+      left_join( bld_agg_energy_consumption, by = c( "year", "fuel" ) ) %>%
+      # omit NAs (solar water heater)
+      na.omit() %>%
       # multiply the energy consumption value by share to get energy consumption for detailed services
       mutate( value = share * value,
       # change sector names to match format
@@ -860,7 +859,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       add_comments("Multiplied energy consumption by efficiency for each technology, then aggregated by service") %>%
       add_legacy_name("L244.ThermalBaseService") %>%
       add_precursors("L144.in_EJ_R_bld_serv_F_Yh", "gcam-seasia/IND_bld_techs",
-                     "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-usa/A44.globaltech_shares",
+                     "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-seasia/IND_A44_globaltech_shares",
                      "gcam-seasia/A44.gcam_consumer", "gcam-seasia/IESS_bld_serv_fuel") ->
       L244.ThermalBaseService_gcamSEA
 
@@ -870,7 +869,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       add_comments("Multiplied energy consumption by efficiency for each technology, then aggregated by service") %>%
       add_legacy_name("L244.GenericBaseService") %>%
       add_precursors("L144.in_EJ_R_bld_serv_F_Yh", "gcam-seasia/IND_bld_techs",
-                     "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-usa/A44.globaltech_shares",
+                     "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-seasia/IND_A44_globaltech_shares",
                      "gcam-seasia/A44.gcam_consumer", "gcam-seasia/IESS_bld_serv_fuel") ->
       L244.GenericBaseService_gcamSEA
 
@@ -880,7 +879,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       add_comments("Satiation level = base service / floorspace * exogenous multiplier") %>%
       add_legacy_name("L244.GenericServiceSatiation") %>%
       add_precursors("L144.in_EJ_R_bld_serv_F_Yh", "gcam-seasia/IND_bld_techs",
-                     "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-usa/A44.globaltech_shares",
+                     "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-seasia/IND_A44_globaltech_shares",
                      "gcam-seasia/A44.gcam_consumer", "L144.flsp_bm2_R_res_Yh", "L144.flsp_bm2_R_comm_Yh",
                      "gcam-seasia/IND_A44_demand_satiation_mult", "gcam-seasia/IESS_bld_serv_fuel") ->
       L244.GenericServiceSatiation_gcamSEA
@@ -891,7 +890,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       add_comments("Satiation level = base service / floorspace * exogenous multiplier") %>%
       add_legacy_name("L244.ThermalServiceSatiation") %>%
       add_precursors("L144.in_EJ_R_bld_serv_F_Yh", "gcam-seasia/IND_bld_techs",
-                     "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-usa/A44.globaltech_shares",
+                     "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-seasia/IND_A44_globaltech_shares",
                      "gcam-seasia/A44.gcam_consumer", "L144.flsp_bm2_R_res_Yh", "L144.flsp_bm2_R_comm_Yh",
                      "gcam-seasia/IND_A44_demand_satiation_mult", "gcam-seasia/IESS_bld_serv_fuel") ->
       L244.ThermalServiceSatiation_gcamSEA
@@ -902,7 +901,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       add_comments("internal.gains.scalar = exogenous scalar * degree.days / exogenous degree day norm") %>%
       add_legacy_name("L244.Intgains_scalar") %>%
       add_precursors("L144.in_EJ_R_bld_serv_F_Yh", "gcam-seasia/IND_bld_techs",
-                     "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-usa/A44.globaltech_shares",
+                     "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-seasia/IND_A44_globaltech_shares",
                      "gcam-seasia/A44.gcam_consumer", "L144.flsp_bm2_R_res_Yh", "L144.flsp_bm2_R_comm_Yh",
                      "gcam-seasia/IND_A44_demand_satiation_mult", "L143.HDDCDD_scen_R_Y") ->
       L244.Intgains_scalar_gcamSEA
@@ -1011,7 +1010,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       add_comments("Shares calculated using efficiency averages") %>%
       add_legacy_name("L244.StubTechCalInput_bld") %>%
       add_precursors("L144.in_EJ_R_bld_serv_F_Yh", "gcam-seasia/IND_bld_techs", "gcam-seasia/IND_A44_tech_eff",
-                     "gcam-seasia/IND_A44_tech_eff_avg", "gcam-usa/A44.globaltech_shares", "gcam-seasia/IESS_bld_serv_fuel") ->
+                     "gcam-seasia/IND_A44_tech_eff_avg", "gcam-seasia/IND_A44_globaltech_shares", "gcam-seasia/IESS_bld_serv_fuel") ->
       L244.StubTechCalInput_bld_gcamSEA
 
     L244.StubTechMarket_bld %>%
