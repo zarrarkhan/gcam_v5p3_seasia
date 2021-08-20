@@ -583,9 +583,9 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       mutate(calibrated.value = round(value, energy.DIGITS_CALOUTPUT)) %>%
       # Add subsector and energy.input
       # IND_bld_techs has hi and lo efficiency, so left_join_error_no_match does not work
-      left_join( IND_bld_techs, by = c( "supplysector", "fuel" ) ) %>%
-      select(region, supplysector, subsector, minicam.energy.input, year, calibrated.value) %>%
-      distinct(region, supplysector, subsector, minicam.energy.input, year, calibrated.value)
+      left_join( IND_bld_techs, by = c( "supplysector", "fuel", "technology" ) ) %>%
+      select(region, supplysector, subsector, minicam.energy.input, year, technology, calibrated.value) %>%
+      distinct(region, supplysector, subsector, minicam.energy.input, year, technology, calibrated.value)
 
     # Shares allocated to partitioned technologies need to be computed first using efficiencies
     L244.globaltech_eff_prt <- IND_A44_tech_eff %>%
@@ -618,8 +618,9 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       gather(tech_type, technology, technology1, technology2) %>%
       # Filter for same technology and share number, then remove tech_type and share_type columns
       filter(substr(tech_type, nchar(tech_type), nchar(tech_type)) == substr(share_type, nchar(share_type), nchar(share_type))) %>%
-      select(-tech_type, -share_type)
+      select(-tech_type, -share_type) %>%
       # there are NAs due to some technologies not having high efficiency equivalents
+      na.omit()
 
     # For calibration table, start with global tech efficiency table, and match in tech shares.
     L244.StubTechCalInput_bld_gcamSEA <- L244.GlobalTechEff_bld %>%
@@ -630,9 +631,13 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       # Using left_join because we don't have shares for all technologies, NAs will be set to 1
       left_join(L244.globaltech_shares, by = c("supplysector", "subsector", "stub.technology" = "technology")) %>%
       replace_na(list(share = 1)) %>%
+      # join back with technology table to get a column that has general technology names
+      left_join_error_no_match( IND_bld_techs, by = c( "supplysector", "subsector", "minicam.energy.input", "stub.technology" = "technology_specific")) %>%
+      # remove unnecessary columns from the join
+      select( -c( "sector", "fuel", "service" ) ) %>%
       # Add energy by state/service/fuel
       # can't use left_join_error_no_match because solar is missing
-      left_join(L244.in_EJ_R_bld_serv_F_Yh, by = c("region", "supplysector", "subsector", "minicam.energy.input", "year")) %>%
+      left_join(L244.in_EJ_R_bld_serv_F_Yh, by = c("region", "supplysector", "subsector", "technology", "minicam.energy.input", "year")) %>%
       # remove NAs (solar)
       filter( !is.na( calibrated.value ) ) %>%
       # calibrated.value = energy * share
