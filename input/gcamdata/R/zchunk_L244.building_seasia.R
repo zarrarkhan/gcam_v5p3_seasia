@@ -8,7 +8,7 @@
 #' @param ... other optional parameters, depending on command
 #' @return Depends on \code{command}: either a vector of required inputs,
 #' a vector of output names, or (if \code{command} is "MAKE") all
-#' the generated outputs: \code{L244.DeleteConsumer_SEAbld}, \code{L244.DeleteSupplysector_SEAbld},
+#' the generated outputs: \code{L244.DeleteConsumer_SEAbld}, \code{L244.DeleteSupplysector_SEAbld}, \code{L244.SubregionalShares_gcamSEA},
 #' \code{L244.PriceExp_IntGains_gcamSEA}, \code{L244.Floorspace_gcamSEA}, \code{L244.DemandFunction_serv_gcamSEA}, \code{L244.DemandFunction_flsp_gcamSEA},
 #' \code{L244.Satiation_flsp_gcamSEA}, \code{L244.SatiationAdder_gcamSEA}, \code{L244.ThermalBaseService_gcamSEA}, \code{L244.GenericBaseService_gcamSEA},
 #' \code{L244.ThermalServiceSatiation_gcamSEA}, \code{L244.GenericServiceSatiation_gcamSEA}, \code{L244.Intgains_scalar_gcamSEA},
@@ -50,6 +50,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
              FILE = "gcam-seasia/IND_A44_tech_shrwt",
              FILE = "gcam-seasia/IND_A44_tech_interp",
              FILE = "gcam-seasia/IND_A44_demand_satiation_mult",
+             FILE = "gcam-seasia/IND_A44_subregional_shares",
              FILE = "gcam-seasia/Various_flsp_Mm2",
              FILE = "gcam-seasia/IESS_bld_serv_fuel",
              "L144.flsp_bm2_R_res_Yh",
@@ -62,6 +63,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
   } else if(command == driver.DECLARE_OUTPUTS) {
     return(c("L244.DeleteConsumer_SEAbld",
              "L244.DeleteSupplysector_SEAbld",
+             "L244.SubregionalShares_gcamSEA",
              "L244.PriceExp_IntGains_gcamSEA",
              "L244.Floorspace_gcamSEA",
              "L244.DemandFunction_serv_gcamSEA",
@@ -137,6 +139,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
     IND_A44_tech_shrwt <- get_data(all_data, "gcam-seasia/IND_A44_tech_shrwt", strip_attributes = TRUE)
     IND_A44_tech_interp <- get_data(all_data, "gcam-seasia/IND_A44_tech_interp", strip_attributes = TRUE)
     IND_A44_demand_satiation_mult <- get_data(all_data, "gcam-seasia/IND_A44_demand_satiation_mult", strip_attributes = TRUE)
+    IND_A44_subregional_shares <- get_data(all_data, "gcam-seasia/IND_A44_subregional_shares", strip_attributes = TRUE)
     Various_flsp_Mm2 <- get_data(all_data, "gcam-seasia/Various_flsp_Mm2", strip_attributes = TRUE)
     IESS_bld_serv_fuel <- get_data(all_data, "gcam-seasia/IESS_bld_serv_fuel", strip_attributes = TRUE)
     L144.flsp_bm2_R_res_Yh <- get_data(all_data, "L144.flsp_bm2_R_res_Yh", strip_attributes = TRUE)
@@ -166,6 +169,76 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
     # Need to delete the buildings sector in the SEAsia region (gcam.consumers and supplysectors)
     L244.DeleteConsumer_SEAbld <- tibble(region = gcam.SEA_REGION  , gcam.consumer = A44.gcam_consumer_en$gcam.consumer)
     L244.DeleteSupplysector_SEAbld <- tibble(region = gcam.SEA_REGION  , supplysector = A44.sector_en$supplysector)
+
+    # Assign subregional shares
+    # Manipulate subregional shares input to contain relevant info
+    subregional_shares_manipulate <- IND_A44_subregional_shares %>%
+      filter( region == gcam.SEA_REGION,
+              grepl( "share", item ) ) %>%
+      gather_years() %>%
+      mutate( value = value / 100,
+              rural_share = 1 - value ) %>%
+      rename( urban_share = value ) %>%
+      select( -c( scenario, unit ) )
+
+    # urban shares
+    urban_subregional_pop_shares <- subregional_shares_manipulate %>%
+      filter( grepl( "population", item ) ) %>%
+      select( -c( item, rural_share ) ) %>%
+      mutate( gcam.consumer = "resid urban" ) %>%
+      rename( pop.year.fillout = year,
+              subregional.population.share = urban_share )
+
+    urban_subregional_income_shares <- subregional_shares_manipulate %>%
+      filter( grepl( "GDP", item ) ) %>%
+      select( -c( item, rural_share ) ) %>%
+      mutate( gcam.consumer = "resid urban" ) %>%
+      rename( pop.year.fillout = year,
+              subregional.income.share = urban_share )
+
+    urban_subregional_shares <- urban_subregional_pop_shares %>%
+      left_join_error_no_match( urban_subregional_income_shares,
+                                by = c( "region", "pop.year.fillout", "gcam.consumer" ) ) %>%
+      complete( nesting( region, gcam.consumer ), pop.year.fillout = MODEL_YEARS ) %>%
+      group_by( region, gcam.consumer ) %>%
+      mutate( subregional.population.share = approx_fun( pop.year.fillout, subregional.population.share, rule = 2 ),
+              subregional.income.share = approx_fun( pop.year.fillout, subregional.income.share, rule = 2 ),
+              inc.year.fillout = pop.year.fillout )
+
+    # rural shares
+    rural_subregional_pop_shares <- subregional_shares_manipulate %>%
+      filter( grepl( "population", item ) ) %>%
+      select( -c( item, urban_share ) ) %>%
+      mutate( gcam.consumer = "resid rural" ) %>%
+      rename( pop.year.fillout = year,
+              subregional.population.share = rural_share )
+
+    rural_subregional_income_shares <- subregional_shares_manipulate %>%
+      filter( grepl( "GDP", item ) ) %>%
+      select( -c( item, urban_share ) ) %>%
+      mutate( gcam.consumer = "resid rural" ) %>%
+      rename( pop.year.fillout = year,
+              subregional.income.share = rural_share )
+
+    rural_subregional_shares <- rural_subregional_pop_shares %>%
+      left_join_error_no_match( rural_subregional_income_shares,
+                                by = c( "region", "pop.year.fillout", "gcam.consumer" ) ) %>%
+      complete( nesting( region, gcam.consumer ), pop.year.fillout = MODEL_YEARS ) %>%
+      group_by( region, gcam.consumer ) %>%
+      mutate( subregional.population.share = approx_fun( pop.year.fillout, subregional.population.share, rule = 2 ),
+              subregional.income.share = approx_fun( pop.year.fillout, subregional.income.share, rule = 2 ),
+              inc.year.fillout = pop.year.fillout )
+
+    L244.SubregionalShares_gcamSEA <- tibble(region = gcam.SEA_REGION, gcam.consumer = A44.gcam_consumer$gcam.consumer) %>%
+      filter( gcam.consumer == "comm" ) %>%
+      repeat_add_columns( tibble::tibble( year = MODEL_YEARS ) ) %>%
+      mutate( pop.year.fillout = year,
+             subregional.population.share = 1,
+             subregional.income.share = 1) %>%
+      rename( inc.year.fillout = year ) %>%
+      bind_rows( urban_subregional_shares, rural_subregional_shares )
+
+
 
     # ===================================================
     # 0.5. Population
@@ -316,7 +389,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
     L244.Satiation_flsp_gcamSEA <- IND_A44_satiation_flsp %>%
       # select the target region
       filter( region == gcam.SEA_REGION ) %>%
-      gather( gcam.consumer, value, `resid rural`, `resid urban`, comm ) %>%
+      tidyr::gather( gcam.consumer, value, `resid rural`, `resid urban`, comm ) %>%
       # Need to make sure that the satiation level is greater than the floorspace in the final base year
       left_join_error_no_match(L244.Floorspace_gcamSEA %>%
                                  filter(year == max(MODEL_BASE_YEARS)), by = c("region", "gcam.consumer")) %>%
@@ -555,18 +628,36 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       # select relevant columns
       select( -c( GCAM_region_ID ) ) %>%
       filter(year %in% MODEL_YEARS) %>%
-      # aggregate energy consumption by fuel and year for building sector as a whole
-      group_by( fuel, year, region ) %>%
+      # aggregate energy consumption by fuel and year for building sector by comm and resid
+      separate( service, c( "resid/comm", "specific" ) ) %>%
+      group_by( `resid/comm`, fuel, year, region ) %>%
       mutate( value = sum( value ) ) %>%
-      distinct( fuel, year, region, value )
+      distinct( `resid/comm`, fuel, year, region, value )
 
     # create a table that has service fuel shares for the model base years
     # TODO: get regional fuel consumption by service by year- using India for now
-    bld_service_fuel_energy_consumption <- IESS_bld_serv_fuel %>%
+    # For the IESS, instead of having shares by fuel for buildings as a whole,
+    # we want it by resid/comm and fuel
+    IESS_bld_serv_fuel_resid_comm <- IESS_bld_serv_fuel %>%
+      separate( sector, c( "resid/comm", "drop" ), remove = F ) %>%
+      select( -c( share, drop ) ) %>%
+      group_by( `resid/comm`, fuel ) %>%
+      mutate( "total_energy" = sum( energy ),
+              "share" = energy / total_energy ) %>%
+      ungroup() %>%
+      select( -c( `resid/comm`, total_energy ) )
+
+
+    bld_service_fuel_energy_consumption <- IESS_bld_serv_fuel_resid_comm %>%
       repeat_add_columns( tibble( year = MODEL_BASE_YEARS ) ) %>%
-      # join with the table that has energy consumption by fuel and year
+      mutate( "resid/comm" = sector ) %>%
+      separate( `resid/comm`, c( "resid/comm", "drop" ) ) %>%
+      mutate( `resid/comm` = gsub( "residential", "resid", `resid/comm` ),
+              `resid/comm` = gsub( "commercial", "comm", `resid/comm` ) ) %>%
+      select( -drop ) %>%
+      # join with the table that has energy consumption by resid/comm, fuel and year
       # TODO: fuel "solar" is not in bld_agg_energy_consumption, which is why solar water heaters are not included
-      left_join( bld_agg_energy_consumption, by = c( "year", "fuel" ) ) %>%
+      left_join( bld_agg_energy_consumption, by = c( "year", "fuel", "resid/comm" ) ) %>%
       # omit NAs (solar water heater)
       na.omit() %>%
       # multiply the energy consumption value by share to get energy consumption for detailed services
@@ -614,8 +705,8 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
               share_tech2 = share_tech3 ) %>%
       bind_rows(IND_A44_globaltech_shares) %>%
       # Clunky, but we want only one technology and share value, currently have technology1, technology2, share1, share2
-      gather(share_type, share, share_tech1, share_tech2)%>%
-      gather(tech_type, technology, technology1, technology2) %>%
+      tidyr::gather(share_type, share, share_tech1, share_tech2)%>%
+      tidyr::gather(tech_type, technology, technology1, technology2) %>%
       # Filter for same technology and share number, then remove tech_type and share_type columns
       filter(substr(tech_type, nchar(tech_type), nchar(tech_type)) == substr(share_type, nchar(share_type), nchar(share_type))) %>%
       select(-tech_type, -share_type) %>%
@@ -648,6 +739,43 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       set_subsector_shrwt() %>%
       mutate(tech.share.weight =  if_else(calibrated.value > 0, 1, 0)) %>%
       select(LEVEL2_DATA_NAMES[["StubTechCalInput"]])
+
+    # Some technologies may be missing from the calibrated inputs table due to being in IESS
+    # but not in L144.in_EJ_R_bld_serv_F_Yh. We want to know what these technologies are, and
+    # assign them 0 inputs in the base years
+    # First, reformat IESS data for joining purposes
+    IESS_reformat <- IESS_bld_serv_fuel %>%
+      mutate( sector = gsub( "residential rural", "resid rural", sector ),
+              sector = gsub( "residential urban", "resid urban", sector ),
+              sector = gsub( "commercial", "comm", sector )) %>%
+      unite( supplysector, c( sector, service ), sep = " " )
+    # Then, anti-join the two dataframes of interest to see what is missing
+    missing_entries <- anti_join( IESS_reformat, L244.StubTechCalInput_bld_gcamSEA,
+               by = c( "supplysector", "fuel" = "subsector" ) )
+
+    # If there are missing entries, we need to add them to the calibrated input dataframe
+    if ( dim(missing_entries)[1] != 0 ) {
+      L244.StubTechCalInput_bld_gcamSEA <- missing_entries %>%
+        select( -c( energy, share ) ) %>%
+        rename( subsector = fuel,
+                stub.technology = technology ) %>%
+        mutate( year = 0 ) %>%
+        complete( nesting( supplysector, subsector, stub.technology ), year = MODEL_BASE_YEARS ) %>%
+        mutate( region = gcam.SEA_REGION,
+                calibrated.value = 0,
+                share.weight.year = year,
+                calOutputValue = calibrated.value ) %>%
+        # join back with technology table to get a column that has general technology names
+        left_join_error_no_match( IND_bld_techs, by = c( "supplysector", "subsector", "stub.technology" = "technology_specific")) %>%
+        # remove unnecessary columns from the join
+        select( -c( "sector", "fuel", "service" ) ) %>%
+        # Set subsector and technology shareweights
+        set_subsector_shrwt() %>%
+        mutate( tech.share.weight =  if_else( calibrated.value > 0, 1, 0 ) ) %>%
+        select( LEVEL2_DATA_NAMES[["StubTechCalInput"]] ) %>%
+        bind_rows( L244.StubTechCalInput_bld_gcamSEA )
+    }
+    else{ print("No missing technologies") }
 
     # L244.GlobalTechShrwt_bld_gcamSEA: Default shareweights for global building technologies
     L244.GlobalTechShrwt_bld_gcamSEA <- IND_A44_tech_shrwt %>%
@@ -805,6 +933,12 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
       add_legacy_name("L244.DeleteSupplysector_SEAbld") %>%
       add_precursors("energy/A44.sector") ->
       L244.DeleteSupplysector_SEAbld
+
+    L244.SubregionalShares_gcamSEA %>%
+      add_title("Shares out population and GDP to residential rural and urban") %>%
+      add_units("NA") %>%
+      add_precursors("gcam-seasia/IND_A44_subregional_shares", "gcam-seasia/A44.gcam_consumer") ->
+      L244.SubregionalShares_gcamSEA
 
     L244.PriceExp_IntGains_gcamSEA %>%
       add_title("Price exponent on floorspace and naming of internal gains trial markets") %>%
@@ -1102,6 +1236,7 @@ module_gcamseasia_L244.building_seasia <- function(command, ...) {
 
     return_data(L244.DeleteConsumer_SEAbld,
                 L244.DeleteSupplysector_SEAbld,
+                L244.SubregionalShares_gcamSEA,
                 L244.PriceExp_IntGains_gcamSEA,
                 L244.Floorspace_gcamSEA,
                 L244.DemandFunction_serv_gcamSEA,

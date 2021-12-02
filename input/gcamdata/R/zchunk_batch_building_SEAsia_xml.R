@@ -14,7 +14,7 @@ module_gcamseasia_batch_building_SEAsia_xml <- function(command, ...) {
   if(command == driver.DECLARE_INPUTS) {
     return(c("L244.DeleteConsumer_SEAbld",
              "L244.DeleteSupplysector_SEAbld",
-             #"L244.SubregionalShares_gcamSEA",
+             "L244.SubregionalShares_gcamSEA",
              "L244.PriceExp_IntGains_gcamSEA",
              "L244.Floorspace_gcamSEA",
              "L244.DemandFunction_serv_gcamSEA",
@@ -51,7 +51,7 @@ module_gcamseasia_batch_building_SEAsia_xml <- function(command, ...) {
     # Load required inputs
     L244.DeleteConsumer_SEAbld <- get_data(all_data, "L244.DeleteConsumer_SEAbld")
     L244.DeleteSupplysector_SEAbld <- get_data(all_data, "L244.DeleteSupplysector_SEAbld")
-    #L244.SubregionalShares <- get_data(all_data, "L244.SubregionalShares_gcamSEA")
+    L244.SubregionalShares <- get_data(all_data, "L244.SubregionalShares_gcamSEA")
     L244.PriceExp_IntGains <- get_data(all_data, "L244.PriceExp_IntGains_gcamSEA")
     L244.Floorspace <- get_data(all_data, "L244.Floorspace_gcamSEA")
     L244.DemandFunction_serv <- get_data(all_data, "L244.DemandFunction_serv_gcamSEA")
@@ -86,7 +86,7 @@ module_gcamseasia_batch_building_SEAsia_xml <- function(command, ...) {
     create_xml("building_SEAsia.xml") %>%
       add_xml_data(L244.DeleteConsumer_SEAbld, "DeleteConsumer") %>%
       add_xml_data(L244.DeleteSupplysector_SEAbld, "DeleteSupplysector") %>%
-      #add_xml_data(L244.SubregionalShares, "SubregionalShares") %>%
+      add_xml_data(L244.SubregionalShares, "SubregionalShares") %>%
       add_xml_data(L244.PriceExp_IntGains, "PriceExp_IntGains") %>%
       add_xml_data(L244.Floorspace, "Floorspace") %>%
       add_xml_data(L244.DemandFunction_serv, "DemandFunction_serv") %>%
@@ -115,7 +115,7 @@ module_gcamseasia_batch_building_SEAsia_xml <- function(command, ...) {
       add_xml_data(L244.GlobalTechSCurve_bld, "GlobalTechSCurve")  %>%
       add_precursors("L244.DeleteConsumer_SEAbld",
                      "L244.DeleteSupplysector_SEAbld",
-                     #"L244.SubregionalShares_gcamSEA",
+                     "L244.SubregionalShares_gcamSEA",
                      "L244.PriceExp_IntGains_gcamSEA",
                      "L244.Floorspace_gcamSEA",
                      "L244.DemandFunction_serv_gcamSEA",
