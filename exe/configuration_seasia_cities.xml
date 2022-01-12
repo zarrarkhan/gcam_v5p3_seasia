@@ -93,17 +93,17 @@
 		<Value name = "bio_neg_emiss_budget">../input/gcamdata/xml/negative_emissions_budget_gSSP2.xml</Value>
         <Value name = "wind_update">../input/gcamdata/xml/onshore_wind.xml</Value>
 
-		<Value name = "cities">../input/gcamdata/xml/socioeconomics_KualaLumpur_Malaysia.xml</Value>
-		<Value name = "cities">../input/gcamdata/xml/building_KualaLumpur_Malaysia.xml</Value>
-		<Value name = "cities">../input/gcamdata/xml/industry_KualaLumpur_Malaysia.xml</Value>
-		<Value name = "cities">../input/gcamdata/xml/transportation_KualaLumpur_Malaysia.xml</Value>
-		<Value name = "cities">../input/gcamdata/xml/liquids_limits_KualaLumpur_Malaysia.xml</Value>
+		<Value name = "cities">../input/gcamdata/xml/socioeconomics_Subregions_Malaysia.xml</Value>
+		<Value name = "cities">../input/gcamdata/xml/building_Subregions_Malaysia.xml</Value>
+		<Value name = "cities">../input/gcamdata/xml/industry_Subregions_Malaysia.xml</Value>
+		<Value name = "cities">../input/gcamdata/xml/transportation_Subregions_Malaysia.xml</Value>
+		<Value name = "cities">../input/gcamdata/xml/liquids_limits_Subregions_Malaysia.xml</Value>
 
-		<Value name = "cities">../input/gcamdata/xml/socioeconomics_Bangkok_Thailand.xml</Value>
-		<Value name = "cities">../input/gcamdata/xml/building_Bangkok_Thailand.xml</Value>
-		<Value name = "cities">../input/gcamdata/xml/industry_Bangkok_Thailand.xml</Value>
-		<Value name = "cities">../input/gcamdata/xml/transportation_Bangkok_Thailand.xml</Value>
-		<Value name = "cities">../input/gcamdata/xml/liquids_limits_Bangkok_Thailand.xml</Value>
+		<Value name = "cities">../input/gcamdata/xml/socioeconomics_Subregions_Thailand.xml</Value>
+		<Value name = "cities">../input/gcamdata/xml/building_Subregions_Thailand.xml</Value>
+		<Value name = "cities">../input/gcamdata/xml/industry_Subregions_Thailand.xml</Value>
+		<Value name = "cities">../input/gcamdata/xml/transportation_Subregions_Thailand.xml</Value>
+		<Value name = "cities">../input/gcamdata/xml/liquids_limits_Subregions_Thailand.xml</Value>
 
 		<Value name = "solver">../input/solution/cal_broyden_config.xml</Value>
 

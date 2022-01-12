@@ -1,0 +1,662 @@
+# File: Subregions_Thailand_pop.csv
+# Title: Subregions and rest-of-Thailand population (all years)
+# Units: millions
+# Description: Computed off-line
+# Column types: cin
+# ----------
+"region","year","population"
+"Thailand",1970,35.17292175
+"Bangkok",1970,3.115061895
+"Rest of Thailand",1970,30.78114318
+"Thailand",1971,36.11091401
+"Bangkok",1971,3.198134435
+"Rest of Thailand",1971,31.60201539
+"Thailand",1972,37.04890627
+"Bangkok",1972,3.281206975
+"Rest of Thailand",1972,32.4228876
+"Thailand",1973,37.98689853
+"Bangkok",1973,3.364279515
+"Rest of Thailand",1973,33.24375981
+"Thailand",1974,38.92489079
+"Bangkok",1974,3.447352055
+"Rest of Thailand",1974,34.06463202
+"Thailand",1975,39.86288305
+"Bangkok",1975,3.530424595
+"Rest of Thailand",1975,34.88550423
+"Thailand",1976,40.80087531
+"Bangkok",1976,3.613497135
+"Rest of Thailand",1976,35.70637644
+"Thailand",1977,41.73886757
+"Bangkok",1977,3.696569674
+"Rest of Thailand",1977,36.52724865
+"Thailand",1978,42.67685983
+"Bangkok",1978,3.779642214
+"Rest of Thailand",1978,37.34812086
+"Thailand",1979,43.61485209
+"Bangkok",1979,3.862714754
+"Rest of Thailand",1979,38.16899307
+"Thailand",1980,44.55284435
+"Bangkok",1980,3.945787294
+"Rest of Thailand",1980,38.98986528
+"Thailand",1981,45.4908366
+"Bangkok",1981,4.028859834
+"Rest of Thailand",1981,39.8107375
+"Thailand",1982,46.42882886
+"Bangkok",1982,4.111932374
+"Rest of Thailand",1982,40.63160971
+"Thailand",1983,47.36682112
+"Bangkok",1983,4.195004914
+"Rest of Thailand",1983,41.45248192
+"Thailand",1984,48.30481338
+"Bangkok",1984,4.278077454
+"Rest of Thailand",1984,42.27335413
+"Thailand",1985,49.24280564
+"Bangkok",1985,4.361149993
+"Rest of Thailand",1985,43.09422634
+"Thailand",1986,50.1807979
+"Bangkok",1986,4.444222533
+"Rest of Thailand",1986,43.91509855
+"Thailand",1987,51.11879016
+"Bangkok",1987,4.527295073
+"Rest of Thailand",1987,44.73597076
+"Thailand",1988,52.05678242
+"Bangkok",1988,4.610367613
+"Rest of Thailand",1988,45.55684297
+"Thailand",1989,52.99477468
+"Bangkok",1989,4.693440153
+"Rest of Thailand",1989,46.37771518
+"Thailand",1990,53.93276694
+"Bangkok",1990,4.776512693
+"Rest of Thailand",1990,47.19858739
+"Thailand",1991,54.54258349
+"Bangkok",1991,4.830520612
+"Rest of Thailand",1991,47.73226073
+"Thailand",1992,55.15240004
+"Bangkok",1992,4.88452853
+"Rest of Thailand",1992,48.26593407
+"Thailand",1993,55.76221659
+"Bangkok",1993,4.938536449
+"Rest of Thailand",1993,48.7996074
+"Thailand",1994,56.37203314
+"Bangkok",1994,4.992544368
+"Rest of Thailand",1994,49.33328074
+"Thailand",1995,56.98184969
+"Bangkok",1995,5.046552286
+"Rest of Thailand",1995,49.86695408
+"Thailand",1996,57.59166624
+"Bangkok",1996,5.100560205
+"Rest of Thailand",1996,50.40062742
+"Thailand",1997,58.20148279
+"Bangkok",1997,5.154568124
+"Rest of Thailand",1997,50.93430075
+"Thailand",1998,58.81129934
+"Bangkok",1998,5.208576043
+"Rest of Thailand",1998,51.46797409
+"Thailand",1999,59.42111589
+"Bangkok",1999,5.262583961
+"Rest of Thailand",1999,52.00164743
+"Thailand",2000,60.03093244
+"Bangkok",2000,5.31659188
+"Rest of Thailand",2000,52.53532077
+"Thailand",2001,60.5006676
+"Bangkok",2001,5.358193601
+"Rest of Thailand",2001,52.94640362
+"Thailand",2002,60.97040276
+"Bangkok",2002,5.399795323
+"Rest of Thailand",2002,53.35748648
+"Thailand",2003,61.44013791
+"Bangkok",2003,5.441397044
+"Rest of Thailand",2003,53.76856934
+"Thailand",2004,61.90987307
+"Bangkok",2004,5.482998765
+"Rest of Thailand",2004,54.17965219
+"Thailand",2005,62.37960823
+"Bangkok",2005,5.524600486
+"Rest of Thailand",2005,54.59073505
+"Thailand",2006,62.71889318
+"Bangkok",2006,5.554648989
+"Rest of Thailand",2006,54.88765604
+"Thailand",2007,63.05817814
+"Bangkok",2007,5.584697492
+"Rest of Thailand",2007,55.18457703
+"Thailand",2008,63.39746309
+"Bangkok",2008,5.614745995
+"Rest of Thailand",2008,55.48149802
+"Thailand",2009,63.73674805
+"Bangkok",2009,5.644794497
+"Rest of Thailand",2009,55.77841901
+"Thailand",2010,64.076033
+"Bangkok",2010,5.674843
+"Rest of Thailand",2010,56.07534
+"Thailand",2011,64.076033
+"Bangkok",2011,5.674843
+"Rest of Thailand",2011,56.07534
+"Thailand",2012,64.456695
+"Bangkok",2012,5.67356
+"Rest of Thailand",2012,56.41816
+"Thailand",2013,64.785909
+"Bangkok",2013,5.686252
+"Rest of Thailand",2013,56.701776
+"Thailand",2014,65.124716
+"Bangkok",2014,5.692284
+"Rest of Thailand",2014,56.997032
+"Thailand",2015,65.729098
+"Bangkok",2015,5.696409
+"Rest of Thailand",2015,57.559668
+"Thailand",2016,65.93155
+"Bangkok",2016,5.686646
+"Rest of Thailand",2016,57.739427
+"Thailand",2017,66.188503
+"Bangkok",2017,5.682415
+"Rest of Thailand",2017,57.965587
+"Thailand",2018,66.413979
+"Bangkok",2018,5.676648
+"Rest of Thailand",2018,58.164428
+"Thailand",2019,66.558935
+"Bangkok",2019,5.666264
+"Rest of Thailand",2019,58.282409
+"Thailand",2020,66.186727
+"Bangkok",2020,5.588222
+"Rest of Thailand",2020,57.970281
+"Thailand",2021,66.23850057
+"Bangkok",2021,5.592593303
+"Rest of Thailand",2021,58.01562738
+"Thailand",2022,66.29027414
+"Bangkok",2022,5.596964605
+"Rest of Thailand",2022,58.06097376
+"Thailand",2023,66.34204771
+"Bangkok",2023,5.601335908
+"Rest of Thailand",2023,58.10632014
+"Thailand",2024,66.39382129
+"Bangkok",2024,5.60570721
+"Rest of Thailand",2024,58.15166652
+"Thailand",2025,66.44559486
+"Bangkok",2025,5.610078513
+"Rest of Thailand",2025,58.1970129
+"Thailand",2026,66.49736843
+"Bangkok",2026,5.614449816
+"Rest of Thailand",2026,58.24235928
+"Thailand",2027,66.549142
+"Bangkok",2027,5.618821118
+"Rest of Thailand",2027,58.28770566
+"Thailand",2028,66.60091557
+"Bangkok",2028,5.623192421
+"Rest of Thailand",2028,58.33305204
+"Thailand",2029,66.65268914
+"Bangkok",2029,5.627563723
+"Rest of Thailand",2029,58.37839842
+"Thailand",2030,66.70446272
+"Bangkok",2030,5.631935026
+"Rest of Thailand",2030,58.4237448
+"Thailand",2031,66.49556678
+"Bangkok",2031,5.614297701
+"Rest of Thailand",2031,58.24078129
+"Thailand",2032,66.28667085
+"Bangkok",2032,5.596660375
+"Rest of Thailand",2032,58.05781779
+"Thailand",2033,66.07777492
+"Bangkok",2033,5.57902305
+"Rest of Thailand",2033,57.87485428
+"Thailand",2034,65.86887899
+"Bangkok",2034,5.561385725
+"Rest of Thailand",2034,57.69189077
+"Thailand",2035,65.65998306
+"Bangkok",2035,5.543748399
+"Rest of Thailand",2035,57.50892726
+"Thailand",2036,65.45108713
+"Bangkok",2036,5.526111074
+"Rest of Thailand",2036,57.32596375
+"Thailand",2037,65.2421912
+"Bangkok",2037,5.508473749
+"Rest of Thailand",2037,57.14300024
+"Thailand",2038,65.03329527
+"Bangkok",2038,5.490836423
+"Rest of Thailand",2038,56.96003673
+"Thailand",2039,64.82439934
+"Bangkok",2039,5.473199098
+"Rest of Thailand",2039,56.77707322
+"Thailand",2040,64.61550341
+"Bangkok",2040,5.455561773
+"Rest of Thailand",2040,56.59410972
+"Thailand",2041,64.40660748
+"Bangkok",2041,5.437924448
+"Rest of Thailand",2041,56.41114621
+"Thailand",2042,64.19771155
+"Bangkok",2042,5.420287122
+"Rest of Thailand",2042,56.2281827
+"Thailand",2043,63.98881562
+"Bangkok",2043,5.402649797
+"Rest of Thailand",2043,56.04521919
+"Thailand",2044,63.77991969
+"Bangkok",2044,5.385012472
+"Rest of Thailand",2044,55.86225568
+"Thailand",2045,63.57102376
+"Bangkok",2045,5.367375146
+"Rest of Thailand",2045,55.67929217
+"Thailand",2046,63.36212783
+"Bangkok",2046,5.349737821
+"Rest of Thailand",2046,55.49632866
+"Thailand",2047,63.15323189
+"Bangkok",2047,5.332100496
+"Rest of Thailand",2047,55.31336516
+"Thailand",2048,62.94433596
+"Bangkok",2048,5.31446317
+"Rest of Thailand",2048,55.13040165
+"Thailand",2049,62.73544003
+"Bangkok",2049,5.296825845
+"Rest of Thailand",2049,54.94743814
+"Thailand",2050,62.5265441
+"Bangkok",2050,5.27918852
+"Rest of Thailand",2050,54.76447463
+"Thailand",2051,62.11880352
+"Bangkok",2051,5.24476251
+"Rest of Thailand",2051,54.40735112
+"Thailand",2052,61.71106294
+"Bangkok",2052,5.210336501
+"Rest of Thailand",2052,54.05022761
+"Thailand",2053,61.30332236
+"Bangkok",2053,5.175910491
+"Rest of Thailand",2053,53.69310411
+"Thailand",2054,60.89558178
+"Bangkok",2054,5.141484482
+"Rest of Thailand",2054,53.3359806
+"Thailand",2055,60.48784119
+"Bangkok",2055,5.107058472
+"Rest of Thailand",2055,52.97885709
+"Thailand",2056,60.08010061
+"Bangkok",2056,5.072632463
+"Rest of Thailand",2056,52.62173358
+"Thailand",2057,59.67236003
+"Bangkok",2057,5.038206454
+"Rest of Thailand",2057,52.26461008
+"Thailand",2058,59.26461945
+"Bangkok",2058,5.003780444
+"Rest of Thailand",2058,51.90748657
+"Thailand",2059,58.85687887
+"Bangkok",2059,4.969354435
+"Rest of Thailand",2059,51.55036306
+"Thailand",2060,58.44913828
+"Bangkok",2060,4.934928425
+"Rest of Thailand",2060,51.19323955
+"Thailand",2061,58.0413977
+"Bangkok",2061,4.900502416
+"Rest of Thailand",2061,50.83611605
+"Thailand",2062,57.63365712
+"Bangkok",2062,4.866076406
+"Rest of Thailand",2062,50.47899254
+"Thailand",2063,57.22591654
+"Bangkok",2063,4.831650397
+"Rest of Thailand",2063,50.12186903
+"Thailand",2064,56.81817596
+"Bangkok",2064,4.797224387
+"Rest of Thailand",2064,49.76474552
+"Thailand",2065,56.41043538
+"Bangkok",2065,4.762798378
+"Rest of Thailand",2065,49.40762202
+"Thailand",2066,56.00269479
+"Bangkok",2066,4.728372368
+"Rest of Thailand",2066,49.05049851
+"Thailand",2067,55.59495421
+"Bangkok",2067,4.693946359
+"Rest of Thailand",2067,48.693375
+"Thailand",2068,55.18721363
+"Bangkok",2068,4.65952035
+"Rest of Thailand",2068,48.33625149
+"Thailand",2069,54.77947305
+"Bangkok",2069,4.62509434
+"Rest of Thailand",2069,47.97912799
+"Thailand",2070,54.37173247
+"Bangkok",2070,4.590668331
+"Rest of Thailand",2070,47.62200448
+"Thailand",2071,53.96399188
+"Bangkok",2071,4.556242321
+"Rest of Thailand",2071,47.26488097
+"Thailand",2072,53.5562513
+"Bangkok",2072,4.521816312
+"Rest of Thailand",2072,46.90775746
+"Thailand",2073,53.14851072
+"Bangkok",2073,4.487390302
+"Rest of Thailand",2073,46.55063395
+"Thailand",2074,52.74077014
+"Bangkok",2074,4.452964293
+"Rest of Thailand",2074,46.19351045
+"Thailand",2075,52.33302956
+"Bangkok",2075,4.418538283
+"Rest of Thailand",2075,45.83638694
+"Thailand",2076,51.98506564
+"Bangkok",2076,4.389159287
+"Rest of Thailand",2076,45.5316194
+"Thailand",2077,51.63710173
+"Bangkok",2077,4.359780291
+"Rest of Thailand",2077,45.22685186
+"Thailand",2078,51.28913781
+"Bangkok",2078,4.330401294
+"Rest of Thailand",2078,44.92208432
+"Thailand",2079,50.94117389
+"Bangkok",2079,4.301022298
+"Rest of Thailand",2079,44.61731678
+"Thailand",2080,50.59320998
+"Bangkok",2080,4.271643302
+"Rest of Thailand",2080,44.31254924
+"Thailand",2081,50.24524606
+"Bangkok",2081,4.242264305
+"Rest of Thailand",2081,44.0077817
+"Thailand",2082,49.89728215
+"Bangkok",2082,4.212885309
+"Rest of Thailand",2082,43.70301416
+"Thailand",2083,49.54931823
+"Bangkok",2083,4.183506313
+"Rest of Thailand",2083,43.39824662
+"Thailand",2084,49.20135431
+"Bangkok",2084,4.154127316
+"Rest of Thailand",2084,43.09347908
+"Thailand",2085,48.8533904
+"Bangkok",2085,4.12474832
+"Rest of Thailand",2085,42.78871154
+"Thailand",2086,48.50542648
+"Bangkok",2086,4.095369324
+"Rest of Thailand",2086,42.483944
+"Thailand",2087,48.15746257
+"Bangkok",2087,4.065990327
+"Rest of Thailand",2087,42.17917646
+"Thailand",2088,47.80949865
+"Bangkok",2088,4.036611331
+"Rest of Thailand",2088,41.87440892
+"Thailand",2089,47.46153473
+"Bangkok",2089,4.007232335
+"Rest of Thailand",2089,41.56964137
+"Thailand",2090,47.11357082
+"Bangkok",2090,3.977853338
+"Rest of Thailand",2090,41.26487383
+"Thailand",2091,46.7656069
+"Bangkok",2091,3.948474342
+"Rest of Thailand",2091,40.96010629
+"Thailand",2092,46.41764298
+"Bangkok",2092,3.919095345
+"Rest of Thailand",2092,40.65533875
+"Thailand",2093,46.06967907
+"Bangkok",2093,3.889716349
+"Rest of Thailand",2093,40.35057121
+"Thailand",2094,45.72171515
+"Bangkok",2094,3.860337353
+"Rest of Thailand",2094,40.04580367
+"Thailand",2095,45.37375124
+"Bangkok",2095,3.830958356
+"Rest of Thailand",2095,39.74103613
+"Thailand",2096,45.02578732
+"Bangkok",2096,3.80157936
+"Rest of Thailand",2096,39.43626859
+"Thailand",2097,44.6778234
+"Bangkok",2097,3.772200364
+"Rest of Thailand",2097,39.13150105
+"Thailand",2098,44.32985949
+"Bangkok",2098,3.742821367
+"Rest of Thailand",2098,38.82673351
+"Thailand",2099,43.98189557
+"Bangkok",2099,3.713442371
+"Rest of Thailand",2099,38.52196597
+"Thailand",2100,43.63393166
+"Bangkok",2100,3.684063375
+"Rest of Thailand",2100,38.21719843
+"Nonthaburi",1970,0.616237769
+"Nonthaburi",1971,0.632671612
+"Nonthaburi",1972,0.649105454
+"Nonthaburi",1973,0.665539297
+"Nonthaburi",1974,0.681973139
+"Nonthaburi",1975,0.698406982
+"Nonthaburi",1976,0.714840824
+"Nonthaburi",1977,0.731274667
+"Nonthaburi",1978,0.747708509
+"Nonthaburi",1979,0.764142352
+"Nonthaburi",1980,0.780576194
+"Nonthaburi",1981,0.797010037
+"Nonthaburi",1982,0.813443879
+"Nonthaburi",1983,0.829877722
+"Nonthaburi",1984,0.846311565
+"Nonthaburi",1985,0.862745407
+"Nonthaburi",1986,0.87917925
+"Nonthaburi",1987,0.895613092
+"Nonthaburi",1988,0.912046935
+"Nonthaburi",1989,0.928480777
+"Nonthaburi",1990,0.94491462
+"Nonthaburi",1991,0.955598747
+"Nonthaburi",1992,0.966282875
+"Nonthaburi",1993,0.976967003
+"Nonthaburi",1994,0.987651131
+"Nonthaburi",1995,0.998335259
+"Nonthaburi",1996,1.009019386
+"Nonthaburi",1997,1.019703514
+"Nonthaburi",1998,1.030387642
+"Nonthaburi",1999,1.04107177
+"Nonthaburi",2000,1.051755897
+"Nonthaburi",2001,1.059985767
+"Nonthaburi",2002,1.068215636
+"Nonthaburi",2003,1.076445505
+"Nonthaburi",2004,1.084675374
+"Nonthaburi",2005,1.092905243
+"Nonthaburi",2006,1.098849595
+"Nonthaburi",2007,1.104793946
+"Nonthaburi",2008,1.110738297
+"Nonthaburi",2009,1.116682649
+"Nonthaburi",2010,1.122627
+"Nonthaburi",2011,1.122627
+"Nonthaburi",2012,1.141673
+"Nonthaburi",2013,1.156271
+"Nonthaburi",2014,1.17387
+"Nonthaburi",2015,1.193711
+"Nonthaburi",2016,1.211924
+"Nonthaburi",2017,1.229735
+"Nonthaburi",2018,1.246295
+"Nonthaburi",2019,1.265387
+"Nonthaburi",2020,1.276745
+"Nonthaburi",2021,1.277743715
+"Nonthaburi",2022,1.278742429
+"Nonthaburi",2023,1.279741144
+"Nonthaburi",2024,1.280739858
+"Nonthaburi",2025,1.281738573
+"Nonthaburi",2026,1.282737287
+"Nonthaburi",2027,1.283736002
+"Nonthaburi",2028,1.284734717
+"Nonthaburi",2029,1.285733431
+"Nonthaburi",2030,1.286732146
+"Nonthaburi",2031,1.282702534
+"Nonthaburi",2032,1.278672922
+"Nonthaburi",2033,1.274643309
+"Nonthaburi",2034,1.270613697
+"Nonthaburi",2035,1.266584085
+"Nonthaburi",2036,1.262554473
+"Nonthaburi",2037,1.258524861
+"Nonthaburi",2038,1.254495249
+"Nonthaburi",2039,1.250465637
+"Nonthaburi",2040,1.246436025
+"Nonthaburi",2041,1.242406413
+"Nonthaburi",2042,1.238376801
+"Nonthaburi",2043,1.234347189
+"Nonthaburi",2044,1.230317577
+"Nonthaburi",2045,1.226287964
+"Nonthaburi",2046,1.222258352
+"Nonthaburi",2047,1.21822874
+"Nonthaburi",2048,1.214199128
+"Nonthaburi",2049,1.210169516
+"Nonthaburi",2050,1.206139904
+"Nonthaburi",2051,1.198274569
+"Nonthaburi",2052,1.190409235
+"Nonthaburi",2053,1.1825439
+"Nonthaburi",2054,1.174678566
+"Nonthaburi",2055,1.166813231
+"Nonthaburi",2056,1.158947897
+"Nonthaburi",2057,1.151082562
+"Nonthaburi",2058,1.143217228
+"Nonthaburi",2059,1.135351893
+"Nonthaburi",2060,1.127486559
+"Nonthaburi",2061,1.119621224
+"Nonthaburi",2062,1.11175589
+"Nonthaburi",2063,1.103890555
+"Nonthaburi",2064,1.096025221
+"Nonthaburi",2065,1.088159886
+"Nonthaburi",2066,1.080294552
+"Nonthaburi",2067,1.072429217
+"Nonthaburi",2068,1.064563883
+"Nonthaburi",2069,1.056698548
+"Nonthaburi",2070,1.048833213
+"Nonthaburi",2071,1.040967879
+"Nonthaburi",2072,1.033102544
+"Nonthaburi",2073,1.02523721
+"Nonthaburi",2074,1.017371875
+"Nonthaburi",2075,1.009506541
+"Nonthaburi",2076,1.002794301
+"Nonthaburi",2077,0.996082061
+"Nonthaburi",2078,0.989369821
+"Nonthaburi",2079,0.982657581
+"Nonthaburi",2080,0.975945341
+"Nonthaburi",2081,0.969233101
+"Nonthaburi",2082,0.962520862
+"Nonthaburi",2083,0.955808622
+"Nonthaburi",2084,0.949096382
+"Nonthaburi",2085,0.942384142
+"Nonthaburi",2086,0.935671902
+"Nonthaburi",2087,0.928959662
+"Nonthaburi",2088,0.922247422
+"Nonthaburi",2089,0.915535182
+"Nonthaburi",2090,0.908822942
+"Nonthaburi",2091,0.902110702
+"Nonthaburi",2092,0.895398463
+"Nonthaburi",2093,0.888686223
+"Nonthaburi",2094,0.881973983
+"Nonthaburi",2095,0.875261743
+"Nonthaburi",2096,0.868549503
+"Nonthaburi",2097,0.861837263
+"Nonthaburi",2098,0.855125023
+"Nonthaburi",2099,0.848412783
+"Nonthaburi",2100,0.841700543
+"SamutPrakan",1970,0.66047891
+"SamutPrakan",1971,0.678092576
+"SamutPrakan",1972,0.695706243
+"SamutPrakan",1973,0.713319909
+"SamutPrakan",1974,0.730933575
+"SamutPrakan",1975,0.748547241
+"SamutPrakan",1976,0.766160908
+"SamutPrakan",1977,0.783774574
+"SamutPrakan",1978,0.80138824
+"SamutPrakan",1979,0.819001906
+"SamutPrakan",1980,0.836615573
+"SamutPrakan",1981,0.854229239
+"SamutPrakan",1982,0.871842905
+"SamutPrakan",1983,0.889456571
+"SamutPrakan",1984,0.907070238
+"SamutPrakan",1985,0.924683904
+"SamutPrakan",1986,0.94229757
+"SamutPrakan",1987,0.959911236
+"SamutPrakan",1988,0.977524903
+"SamutPrakan",1989,0.995138569
+"SamutPrakan",1990,1.012752235
+"SamutPrakan",1991,1.024203401
+"SamutPrakan",1992,1.035654567
+"SamutPrakan",1993,1.047105733
+"SamutPrakan",1994,1.0585569
+"SamutPrakan",1995,1.070008066
+"SamutPrakan",1996,1.081459232
+"SamutPrakan",1997,1.092910398
+"SamutPrakan",1998,1.104361564
+"SamutPrakan",1999,1.11581273
+"SamutPrakan",2000,1.127263896
+"SamutPrakan",2001,1.136084607
+"SamutPrakan",2002,1.144905318
+"SamutPrakan",2003,1.153726028
+"SamutPrakan",2004,1.162546739
+"SamutPrakan",2005,1.171367449
+"SamutPrakan",2006,1.17773856
+"SamutPrakan",2007,1.18410967
+"SamutPrakan",2008,1.19048078
+"SamutPrakan",2009,1.19685189
+"SamutPrakan",2010,1.203223
+"SamutPrakan",2011,1.203223
+"SamutPrakan",2012,1.223302
+"SamutPrakan",2013,1.24161
+"SamutPrakan",2014,1.26153
+"SamutPrakan",2015,1.27931
+"SamutPrakan",2016,1.293553
+"SamutPrakan",2017,1.310766
+"SamutPrakan",2018,1.326608
+"SamutPrakan",2019,1.344875
+"SamutPrakan",2020,1.351479
+"SamutPrakan",2021,1.352536174
+"SamutPrakan",2022,1.353593348
+"SamutPrakan",2023,1.354650522
+"SamutPrakan",2024,1.355707696
+"SamutPrakan",2025,1.356764871
+"SamutPrakan",2026,1.357822045
+"SamutPrakan",2027,1.358879219
+"SamutPrakan",2028,1.359936393
+"SamutPrakan",2029,1.360993567
+"SamutPrakan",2030,1.362050741
+"SamutPrakan",2031,1.357785257
+"SamutPrakan",2032,1.353519772
+"SamutPrakan",2033,1.349254287
+"SamutPrakan",2034,1.344988803
+"SamutPrakan",2035,1.340723318
+"SamutPrakan",2036,1.336457834
+"SamutPrakan",2037,1.332192349
+"SamutPrakan",2038,1.327926865
+"SamutPrakan",2039,1.32366138
+"SamutPrakan",2040,1.319395895
+"SamutPrakan",2041,1.315130411
+"SamutPrakan",2042,1.310864926
+"SamutPrakan",2043,1.306599442
+"SamutPrakan",2044,1.302333957
+"SamutPrakan",2045,1.298068472
+"SamutPrakan",2046,1.293802988
+"SamutPrakan",2047,1.289537503
+"SamutPrakan",2048,1.285272019
+"SamutPrakan",2049,1.281006534
+"SamutPrakan",2050,1.27674105
+"SamutPrakan",2051,1.268415319
+"SamutPrakan",2052,1.260089589
+"SamutPrakan",2053,1.251763859
+"SamutPrakan",2054,1.243438129
+"SamutPrakan",2055,1.235112398
+"SamutPrakan",2056,1.226786668
+"SamutPrakan",2057,1.218460938
+"SamutPrakan",2058,1.210135208
+"SamutPrakan",2059,1.201809478
+"SamutPrakan",2060,1.193483747
+"SamutPrakan",2061,1.185158017
+"SamutPrakan",2062,1.176832287
+"SamutPrakan",2063,1.168506557
+"SamutPrakan",2064,1.160180826
+"SamutPrakan",2065,1.151855096
+"SamutPrakan",2066,1.143529366
+"SamutPrakan",2067,1.135203636
+"SamutPrakan",2068,1.126877905
+"SamutPrakan",2069,1.118552175
+"SamutPrakan",2070,1.110226445
+"SamutPrakan",2071,1.101900715
+"SamutPrakan",2072,1.093574985
+"SamutPrakan",2073,1.085249254
+"SamutPrakan",2074,1.076923524
+"SamutPrakan",2075,1.068597794
+"SamutPrakan",2076,1.061492654
+"SamutPrakan",2077,1.054387515
+"SamutPrakan",2078,1.047282375
+"SamutPrakan",2079,1.040177236
+"SamutPrakan",2080,1.033072097
+"SamutPrakan",2081,1.025966957
+"SamutPrakan",2082,1.018861818
+"SamutPrakan",2083,1.011756678
+"SamutPrakan",2084,1.004651539
+"SamutPrakan",2085,0.997546399
+"SamutPrakan",2086,0.99044126
+"SamutPrakan",2087,0.98333612
+"SamutPrakan",2088,0.976230981
+"SamutPrakan",2089,0.969125842
+"SamutPrakan",2090,0.962020702
+"SamutPrakan",2091,0.954915563
+"SamutPrakan",2092,0.947810423
+"SamutPrakan",2093,0.940705284
+"SamutPrakan",2094,0.933600144
+"SamutPrakan",2095,0.926495005
+"SamutPrakan",2096,0.919389865
+"SamutPrakan",2097,0.912284726
+"SamutPrakan",2098,0.905179586
+"SamutPrakan",2099,0.898074447
+"SamutPrakan",2100,0.890969308
