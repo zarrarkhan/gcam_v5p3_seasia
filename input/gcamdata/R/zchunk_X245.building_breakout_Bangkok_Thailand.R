@@ -237,7 +237,6 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       bind_rows( urban_subregional_shares, rural_subregional_shares )
 
 
-
     # ===================================================
     # 0.5. Population
     # ===================================================
@@ -394,7 +393,6 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
     # under timeshift conditions. So we adjust energy.SATIATION_YEAR
     energy.SATIATION_YEAR <- min(max(MODEL_BASE_YEARS), energy.SATIATION_YEAR)
 
-    # TODO: use this GDP or baseGDP?
     X245.SatiationAdder_bld_Bangkok_Thailand <- X201.GDP_Bangkok_Thailand %>%
       # filter for target region(s)
       filter( year == energy.SATIATION_YEAR ) %>%
@@ -594,8 +592,8 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
              subsector.name = subsector) %>%
       select(LEVEL2_DATA_NAMES[["GlobalTechEff"]])
 
-    # X245.StubTechMarket_bld: Specify market names for fuel inputs to all technologies in each state
-    X245.StubTechMarket_bld <- X245.end_use_eff %>%
+    # X245.StubTechMarket_bld: Specify market names for fuel inputs to all technologies in each region
+    X245.StubTechMarket_bld_Bangkok_Thailand <- X245.end_use_eff %>%
       mutate(market.name = NA) %>%
       rename(stub.technology = technology) %>%
       write_to_all_states(LEVEL2_DATA_NAMES[["StubTechMarket"]], region_list = c( "Bangkok", "Rest of Thailand" )) %>%
@@ -895,6 +893,106 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
              internal.gains.scalar = if_else(variable == "HDD" & degree.days < threshold_HDD, 0, internal.gains.scalar)) %>%
       select(LEVEL2_DATA_NAMES[["Intgains_scalar"]])
 
+    # Check subregional shares
+    # If the subregional share for any region is 0, it must be removed from all data tables
+    # First, figure out if this case exists, and for what regions / years
+    zero_subregional_shares <- X245.SubregionalShares_bld_Bangkok_Thailand %>%
+      filter( subregional.population.share == 0 ) %>%
+      distinct( region, gcam.consumer, inc.year.fillout )
+
+    # If this case exists, we need to remove those entries from all data tables using an anti-join
+    # and reassign each dataframe to the same name
+    if( length( zero_subregional_shares != 0 ) ) {
+
+      X245.SubregionalShares_bld_Bangkok_Thailand <- X245.SubregionalShares_bld_Bangkok_Thailand %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "inc.year.fillout" ) )
+
+      X245.PriceExp_IntGains_bld_Bangkok_Thailand <- X245.PriceExp_IntGains_bld_Bangkok_Thailand %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "price.exp.year.fillout" = "inc.year.fillout" ) )
+
+      X245.Floorspace_bld_Bangkok_Thailand <- X245.Floorspace_bld_Bangkok_Thailand %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "year" = "inc.year.fillout" ) )
+
+      X245.DemandFunction_serv_bld_Bangkok_Thailand <- X245.DemandFunction_serv_bld_Bangkok_Thailand %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) )
+
+      X245.DemandFunction_flsp_bld_Bangkok_Thailand <- X245.DemandFunction_flsp_bld_Bangkok_Thailand %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) )
+
+      X245.Satiation_flsp_bld_Bangkok_Thailand <- X245.Satiation_flsp_bld_Bangkok_Thailand %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) )
+
+      X245.SatiationAdder_bld_Bangkok_Thailand <- X245.SatiationAdder_bld_Bangkok_Thailand %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) )
+
+      X245.ThermalBaseService_bld_Bangkok_Thailand <- X245.ThermalBaseService_bld_Bangkok_Thailand %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "year" = "inc.year.fillout" ) )
+
+      X245.GenericBaseService_bld_Bangkok_Thailand <- X245.GenericBaseService_bld_Bangkok_Thailand %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "year" = "inc.year.fillout" ) )
+
+      X245.ThermalServiceSatiation_bld_Bangkok_Thailand <- X245.ThermalServiceSatiation_bld_Bangkok_Thailand %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) )
+
+      X245.GenericServiceSatiation_bld_Bangkok_Thailand <- X245.GenericServiceSatiation_bld_Bangkok_Thailand %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) )
+
+      X245.Intgains_scalar_bld_Bangkok_Thailand <- X245.Intgains_scalar_bld_Bangkok_Thailand %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) )
+
+      X245.ShellConductance_bld_Bangkok_Thailand <- X245.ShellConductance_bld_Bangkok_Thailand %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "year" = "inc.year.fillout" ) )
+
+      X245.Supplysector_bld_Bangkok_Thailand <- X245.Supplysector_bld_Bangkok_Thailand %>%
+        separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
+        unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "logit.year.fillout" = "inc.year.fillout" ) ) %>%
+        select( -gcam.consumer )
+
+      X245.FinalEnergyKeyword_bld_Bangkok_Thailand <- X245.FinalEnergyKeyword_bld_Bangkok_Thailand %>%
+        separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
+        unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) ) %>%
+        select( -gcam.consumer )
+
+      X245.SubsectorShrwtFllt_bld_Bangkok_Thailand <- X245.SubsectorShrwtFllt_bld_Bangkok_Thailand %>%
+        separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
+        unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) ) %>%
+        select( -gcam.consumer )
+
+      X245.SubsectorInterp_bld_Bangkok_Thailand <- X245.SubsectorInterp_bld_Bangkok_Thailand %>%
+        separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
+        unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) ) %>%
+        select( -gcam.consumer )
+
+      X245.SubsectorLogit_bld_Bangkok_Thailand <- X245.SubsectorLogit_bld_Bangkok_Thailand %>%
+        separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
+        unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) ) %>%
+        select( -gcam.consumer )
+
+      X245.StubTech_bld_Bangkok_Thailand <- X245.StubTech_bld_Bangkok_Thailand %>%
+        separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
+        unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) ) %>%
+        select( -gcam.consumer )
+
+      X245.StubTechCalInput_bld_Bangkok_Thailand <- X245.StubTechCalInput_bld_Bangkok_Thailand %>%
+        separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
+        unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "year" = "inc.year.fillout" ) ) %>%
+        select( -gcam.consumer )
+
+      X245.StubTechMarket_bld_Bangkok_Thailand <- X245.StubTechMarket_bld_Bangkok_Thailand %>%
+        separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
+        unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
+        anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "year" = "inc.year.fillout" ) ) %>%
+        select( -gcam.consumer )
+
+      }
+
 
     # ===================================================
     # Produce outputs
@@ -1132,7 +1230,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
                      "gcam-seasia/IND_A44_tech_eff_avg", "gcam-seasia/IND_A44_globaltech_shares", "gcam-seasia/IESS_bld_serv_fuel") ->
       X245.StubTechCalInput_bld_Bangkok_Thailand
 
-    X245.StubTechMarket_bld %>%
+    X245.StubTechMarket_bld_Bangkok_Thailand %>%
       add_title("market names for fuel inputs to all technologies in each state") %>%
       add_units("NA") %>%
       add_comments("Categories from IND_A44_tech_eff written to all states") %>%
