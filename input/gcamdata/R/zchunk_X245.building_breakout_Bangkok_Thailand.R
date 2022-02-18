@@ -601,9 +601,21 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       mutate(market.name = region)
 
     # X245.StubTechCalInput_bld: Calibrated energy consumption by buildings technologies
+    # This needs to be done separately for the city and Rest of Region (RoR)
+    # Since we are assuming there is no rural energy consumption in the cities.
     # The input that has energy consumption is at an aggregated level and needs to be broken out
     # the IESS file has fuel shares for "buildings" as a whole
-    bld_agg_energy_consumption <- X244.StubTechCalInput_bld_Bangkok_Thailand %>%
+    bld_agg_energy_consumption_city <- X244.StubTechCalInput_bld_Bangkok_Thailand %>%
+      filter( region == "Bangkok" ) %>%
+      # aggregate energy consumption by fuel and year for building sector by comm and resid
+      separate( supplysector, c( "resid/comm", "specific" ) ) %>%
+      group_by( `resid/comm`, subsector, year, region ) %>%
+      mutate( value = sum( calibrated.value ) ) %>%
+      rename( fuel = subsector ) %>%
+      distinct( `resid/comm`, fuel, year, region, value )
+
+    bld_agg_energy_consumption_RoR <- X244.StubTechCalInput_bld_Bangkok_Thailand %>%
+      filter( region == "Rest of Thailand" ) %>%
       # aggregate energy consumption by fuel and year for building sector by comm and resid
       separate( supplysector, c( "resid/comm", "specific" ) ) %>%
       group_by( `resid/comm`, subsector, year, region ) %>%
@@ -615,7 +627,19 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
     # TODO: get regional fuel consumption by service by year- using India for now
     # For the IESS, instead of having shares by fuel for buildings as a whole,
     # we want it by resid/comm and fuel
-    IESS_bld_serv_fuel_resid_comm <- IESS_bld_serv_fuel %>%
+    # For the cities, we are assuming there is no residential rural area,
+    # Since the "Rest of Region" has rural, we need to make two tables with different shares.
+    IESS_bld_serv_fuel_resid_comm_city <- IESS_bld_serv_fuel %>%
+      filter( sector != "residential rural" ) %>%
+      separate( sector, c( "resid/comm", "drop" ), remove = F ) %>%
+      select( -c( share, drop ) ) %>%
+      group_by( `resid/comm`, fuel ) %>%
+      mutate( "total_energy" = sum( energy ),
+              "share" = energy / total_energy ) %>%
+      ungroup() %>%
+      select( -c( `resid/comm`, total_energy ) )
+
+    IESS_bld_serv_fuel_resid_comm_RoR <- IESS_bld_serv_fuel %>%
       separate( sector, c( "resid/comm", "drop" ), remove = F ) %>%
       select( -c( share, drop ) ) %>%
       group_by( `resid/comm`, fuel ) %>%
@@ -625,7 +649,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       select( -c( `resid/comm`, total_energy ) )
 
 
-    bld_service_fuel_energy_consumption <- IESS_bld_serv_fuel_resid_comm %>%
+    bld_service_fuel_energy_consumption_city <- IESS_bld_serv_fuel_resid_comm_city %>%
       repeat_add_columns( tibble( year = MODEL_BASE_YEARS ) ) %>%
       mutate( "resid/comm" = sector ) %>%
       separate( `resid/comm`, c( "resid/comm", "drop" ) ) %>%
@@ -634,12 +658,32 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       select( -drop ) %>%
       # join with the table that has energy consumption by resid/comm, fuel and year
       # TODO: fuel "solar" is not in bld_agg_energy_consumption, which is why solar water heaters are not included
-      left_join( bld_agg_energy_consumption, by = c( "year", "fuel", "resid/comm" ) ) %>%
+      left_join( bld_agg_energy_consumption_city, by = c( "year", "fuel", "resid/comm" ) ) %>%
       # omit NAs (solar water heater)
       na.omit() %>%
       # multiply the energy consumption value by share to get energy consumption for detailed services
       mutate( value = share * value,
       # change sector names to match format
+              sector = gsub( "commercial", "comm", sector ),
+              sector = gsub( "residential urban", "resid urban", sector ) ) %>%
+      # combine sector and service columns to get supplysector
+      unite( supplysector, sector, service, sep = " " )
+
+    bld_service_fuel_energy_consumption_RoR <- IESS_bld_serv_fuel_resid_comm_RoR %>%
+      repeat_add_columns( tibble( year = MODEL_BASE_YEARS ) ) %>%
+      mutate( "resid/comm" = sector ) %>%
+      separate( `resid/comm`, c( "resid/comm", "drop" ) ) %>%
+      mutate( `resid/comm` = gsub( "residential", "resid", `resid/comm` ),
+              `resid/comm` = gsub( "commercial", "comm", `resid/comm` ) ) %>%
+      select( -drop ) %>%
+      # join with the table that has energy consumption by resid/comm, fuel and year
+      # TODO: fuel "solar" is not in bld_agg_energy_consumption, which is why solar water heaters are not included
+      left_join( bld_agg_energy_consumption_RoR, by = c( "year", "fuel", "resid/comm" ) ) %>%
+      # omit NAs (solar water heater)
+      na.omit() %>%
+      # multiply the energy consumption value by share to get energy consumption for detailed services
+      mutate( value = share * value,
+              # change sector names to match format
               sector = gsub( "commercial", "comm", sector ),
               sector = gsub( "residential rural", "resid rural", sector ),
               sector = gsub( "residential urban", "resid urban", sector ) ) %>%
@@ -647,7 +691,8 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       unite( supplysector, sector, service, sep = " " )
 
 
-    X245.in_EJ_R_bld_serv_F_Yh <- bld_service_fuel_energy_consumption %>%
+    X245.in_EJ_R_bld_serv_F_Yh <- bld_service_fuel_energy_consumption_city %>%
+      bind_rows( bld_service_fuel_energy_consumption_RoR ) %>%
       mutate(calibrated.value = round(value, energy.DIGITS_CALOUTPUT)) %>%
       # Add subsector and energy.input
       # IND_bld_techs has hi and lo efficiency, so left_join_error_no_match does not work
@@ -722,8 +767,8 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
     # assign them 0 inputs in the base years
     # First, reformat IESS data for joining purposes
     IESS_reformat <- IESS_bld_serv_fuel %>%
-      mutate( sector = gsub( "residential rural", "resid rural", sector ),
-              sector = gsub( "residential urban", "resid urban", sector ),
+      mutate( sector = gsub( "residential urban", "resid urban", sector ),
+              sector = gsub( "residential rural", "resid rural", sector ),
               sector = gsub( "commercial", "comm", sector )) %>%
       unite( supplysector, c( sector, service ), sep = " " )
     # Then, anti-join the two dataframes of interest to see what is missing
