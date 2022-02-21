@@ -1,6 +1,6 @@
 # Copyright 2019 Battelle Memorial Institute; see the LICENSE file.
 
-#' module_gcamseasia_X245.building_breakout_Bangkok_Thailand
+#' module_gcamseasia_X245.building_breakout_Subregions_Thailand
 #'
 #' Creates GCAM-SEAsia building output files for writing to xml.
 #'
@@ -8,16 +8,16 @@
 #' @param ... other optional parameters, depending on command
 #' @return Depends on \code{command}: either a vector of required inputs,
 #' a vector of output names, or (if \code{command} is "MAKE") all
-#' the generated outputs: \code{X245.DeleteConsumer_bld_Bangkok_Thailand}, \code{X245.DeleteSupplysector_bld_Bangkok_Thailand}, \code{X245.SubregionalShares_bld_Bangkok_Thailand},
-#' \code{X245.PriceExp_IntGains_bld_Bangkok_Thailand}, \code{X245.Floorspace_bld_Bangkok_Thailand}, \code{X245.DemandFunction_serv_bld_Bangkok_Thailand}, \code{X245.DemandFunction_flsp_bld_Bangkok_Thailand},
-#' \code{X245.Satiation_flsp_bld_Bangkok_Thailand}, \code{X245.SatiationAdder_bld_Bangkok_Thailand}, \code{X245.ThermalBaseService_bld_Bangkok_Thailand}, \code{X245.GenericBaseService_bld_Bangkok_Thailand},
-#' \code{X245.ThermalServiceSatiation_bld_Bangkok_Thailand}, \code{X245.GenericServiceSatiation_bld_Bangkok_Thailand}, \code{X245.Intgains_scalar_bld_Bangkok_Thailand},
-#' \code{X245.ShellConductance_bld_Bangkok_Thailand}, \code{X245.Supplysector_bld_Bangkok_Thailand}, \code{X245.FinalEnergyKeyword_bld_Bangkok_Thailand}, \code{X245.SubsectorShrwt_bld_Bangkok_Thailand},
-#' \code{X245.SubsectorShrwtFllt_bld_Bangkok_Thailand}, \code{X245.SubsectorInterp_bld_Bangkok_Thailand}, \code{X245.SubsectorInterpTo_bld_Bangkok_Thailand},
-#' \code{X245.SubsectorLogit_bld_Bangkok_Thailand}, \code{X245.StubTech_bld_Bangkok_Thailand}, \code{X245.StubTechCalInput_bld_Bangkok_Thailand}, \code{X245.StubTechMarket_bld_Bangkok_Thailand},
-#' \code{X245.GlobalTechIntGainOutputRatio_bld_Bangkok_Thailand}, \code{X245.GlobalTechInterpTo_bld_Bangkok_Thailand}, \code{X245.GlobalTechEff_bld_Bangkok_Thailand},
-#' \code{X245.GlobalTechShrwt_bld_Bangkok_Thailand}, \code{X245.GlobalTechCost_bld_Bangkok_Thailand}, \code{X245.GlobalTechSCurve_bld_Bangkok_Thailand}, \code{X245.HDDCDD_A2_GFDL_bld_Bangkok_Thailand},
-#' \code{X245.HDDCDD_AEO_2015_bld_Bangkok_Thailand}, \code{X245.HDDCDD_constdds_bld_Bangkok_Thailand}.
+#' the generated outputs: \code{X245.DeleteConsumer_bld_Subregions_Thailand}, \code{X245.DeleteSupplysector_bld_Subregions_Thailand}, \code{X245.SubregionalShares_bld_Subregions_Thailand},
+#' \code{X245.PriceExp_IntGains_bld_Subregions_Thailand}, \code{X245.Floorspace_bld_Subregions_Thailand}, \code{X245.DemandFunction_serv_bld_Subregions_Thailand}, \code{X245.DemandFunction_flsp_bld_Subregions_Thailand},
+#' \code{X245.Satiation_flsp_bld_Subregions_Thailand}, \code{X245.SatiationAdder_bld_Subregions_Thailand}, \code{X245.ThermalBaseService_bld_Subregions_Thailand}, \code{X245.GenericBaseService_bld_Subregions_Thailand},
+#' \code{X245.ThermalServiceSatiation_bld_Subregions_Thailand}, \code{X245.GenericServiceSatiation_bld_Subregions_Thailand}, \code{X245.Intgains_scalar_bld_Subregions_Thailand},
+#' \code{X245.ShellConductance_bld_Subregions_Thailand}, \code{X245.Supplysector_bld_Subregions_Thailand}, \code{X245.FinalEnergyKeyword_bld_Subregions_Thailand}, \code{X245.SubsectorShrwt_bld_Subregions_Thailand},
+#' \code{X245.SubsectorShrwtFllt_bld_Subregions_Thailand}, \code{X245.SubsectorInterp_bld_Subregions_Thailand}, \code{X245.SubsectorInterpTo_bld_Subregions_Thailand},
+#' \code{X245.SubsectorLogit_bld_Subregions_Thailand}, \code{X245.StubTech_bld_Subregions_Thailand}, \code{X245.StubTechCalInput_bld_Subregions_Thailand}, \code{X245.StubTechMarket_bld_Subregions_Thailand},
+#' \code{X245.GlobalTechIntGainOutputRatio_bld_Subregions_Thailand}, \code{X245.GlobalTechInterpTo_bld_Subregions_Thailand}, \code{X245.GlobalTechEff_bld_Subregions_Thailand},
+#' \code{X245.GlobalTechShrwt_bld_Subregions_Thailand}, \code{X245.GlobalTechCost_bld_Subregions_Thailand}, \code{X245.GlobalTechSCurve_bld_Subregions_Thailand}, \code{X245.HDDCDD_A2_GFDL_bld_Subregions_Thailand},
+#' \code{X245.HDDCDD_AEO_2015_bld_Subregions_Thailand}, \code{X245.HDDCDD_constdds_bld_Subregions_Thailand}.
 #' The corresponding file in the original data system was \code{X245.building_USA.R} (gcam-usa level2).
 #' @details Creates GCAM-SEAsia building output files for writing to xml.
 #' @importFrom assertthat assert_that
@@ -25,7 +25,7 @@
 #' @importFrom tidyr complete gather nesting replace_na crossing
 #' @author RLH November 2017, MAW April 2021
 
-module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, ...) {
+module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command, ...) {
   if(command == driver.DECLARE_INPUTS) {
     return(c(FILE = "common/GCAM_region_names",
              FILE = "common/iso_GCAM_regID",
@@ -53,46 +53,46 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
              FILE = "gcam-seasia/IND_A44_subregional_shares",
              FILE = "gcam-seasia/Various_flsp_Mm2",
              FILE = "gcam-seasia/IESS_bld_serv_fuel",
-             "X244.Floorspace_Bangkok_Thailand",
-             "X244.Satiation_flsp_Bangkok_Thailand",
-             "X244.StubTechCalInput_bld_Bangkok_Thailand",
+             "X244.Floorspace_Subregions_Thailand",
+             "X244.Satiation_flsp_Subregions_Thailand",
+             "X244.StubTechCalInput_bld_Subregions_Thailand",
              "L143.HDDCDD_scen_R_Y",
-             "X201.Pop_Bangkok_Thailand",
-             "X201.GDP_Bangkok_Thailand"))
+             "X201.Pop_Subregions_Thailand",
+             "X201.GDP_Subregions_Thailand"))
   } else if(command == driver.DECLARE_OUTPUTS) {
-    return(c("X245.DeleteConsumer_bld_Bangkok_Thailand",
-             "X245.DeleteSupplysector_bld_Bangkok_Thailand",
-             "X245.SubregionalShares_bld_Bangkok_Thailand",
-             "X245.PriceExp_IntGains_bld_Bangkok_Thailand",
-             "X245.Floorspace_bld_Bangkok_Thailand",
-             "X245.DemandFunction_serv_bld_Bangkok_Thailand",
-             "X245.DemandFunction_flsp_bld_Bangkok_Thailand",
-             "X245.Satiation_flsp_bld_Bangkok_Thailand",
-             "X245.SatiationAdder_bld_Bangkok_Thailand",
-             "X245.ThermalBaseService_bld_Bangkok_Thailand",
-             "X245.GenericBaseService_bld_Bangkok_Thailand",
-             "X245.ThermalServiceSatiation_bld_Bangkok_Thailand",
-             "X245.GenericServiceSatiation_bld_Bangkok_Thailand",
-             "X245.Intgains_scalar_bld_Bangkok_Thailand",
-             "X245.ShellConductance_bld_Bangkok_Thailand",
-             "X245.Supplysector_bld_Bangkok_Thailand",
-             "X245.FinalEnergyKeyword_bld_Bangkok_Thailand",
-             "X245.SubsectorShrwt_bld_Bangkok_Thailand",
-             "X245.SubsectorShrwtFllt_bld_Bangkok_Thailand",
-             "X245.SubsectorInterp_bld_Bangkok_Thailand",
-             "X245.SubsectorInterpTo_bld_Bangkok_Thailand",
-             "X245.SubsectorLogit_bld_Bangkok_Thailand",
-             "X245.StubTech_bld_Bangkok_Thailand",
-             "X245.StubTechCalInput_bld_Bangkok_Thailand",
-             "X245.StubTechMarket_bld_Bangkok_Thailand",
-             "X245.GlobalTechIntGainOutputRatio_bld_Bangkok_Thailand",
-             "X245.GlobalTechInterpTo_bld_Bangkok_Thailand",
-             "X245.GlobalTechEff_bld_Bangkok_Thailand",
-             "X245.GlobalTechShrwt_bld_Bangkok_Thailand",
-             "X245.GlobalTechCost_bld_Bangkok_Thailand",
-             "X245.GlobalTechSCurve_bld_Bangkok_Thailand",
-             "X245.HDDCDD_A2_GFDL_bld_Bangkok_Thailand",
-             "X245.HDDCDD_constdds_bld_Bangkok_Thailand"
+    return(c("X245.DeleteConsumer_bld_Subregions_Thailand",
+             "X245.DeleteSupplysector_bld_Subregions_Thailand",
+             "X245.SubregionalShares_bld_Subregions_Thailand",
+             "X245.PriceExp_IntGains_bld_Subregions_Thailand",
+             "X245.Floorspace_bld_Subregions_Thailand",
+             "X245.DemandFunction_serv_bld_Subregions_Thailand",
+             "X245.DemandFunction_flsp_bld_Subregions_Thailand",
+             "X245.Satiation_flsp_bld_Subregions_Thailand",
+             "X245.SatiationAdder_bld_Subregions_Thailand",
+             "X245.ThermalBaseService_bld_Subregions_Thailand",
+             "X245.GenericBaseService_bld_Subregions_Thailand",
+             "X245.ThermalServiceSatiation_bld_Subregions_Thailand",
+             "X245.GenericServiceSatiation_bld_Subregions_Thailand",
+             "X245.Intgains_scalar_bld_Subregions_Thailand",
+             "X245.ShellConductance_bld_Subregions_Thailand",
+             "X245.Supplysector_bld_Subregions_Thailand",
+             "X245.FinalEnergyKeyword_bld_Subregions_Thailand",
+             "X245.SubsectorShrwt_bld_Subregions_Thailand",
+             "X245.SubsectorShrwtFllt_bld_Subregions_Thailand",
+             "X245.SubsectorInterp_bld_Subregions_Thailand",
+             "X245.SubsectorInterpTo_bld_Subregions_Thailand",
+             "X245.SubsectorLogit_bld_Subregions_Thailand",
+             "X245.StubTech_bld_Subregions_Thailand",
+             "X245.StubTechCalInput_bld_Subregions_Thailand",
+             "X245.StubTechMarket_bld_Subregions_Thailand",
+             "X245.GlobalTechIntGainOutputRatio_bld_Subregions_Thailand",
+             "X245.GlobalTechInterpTo_bld_Subregions_Thailand",
+             "X245.GlobalTechEff_bld_Subregions_Thailand",
+             "X245.GlobalTechShrwt_bld_Subregions_Thailand",
+             "X245.GlobalTechCost_bld_Subregions_Thailand",
+             "X245.GlobalTechSCurve_bld_Subregions_Thailand",
+             "X245.HDDCDD_A2_GFDL_bld_Subregions_Thailand",
+             "X245.HDDCDD_constdds_bld_Subregions_Thailand"
              ))
   } else if(command == driver.MAKE) {
 
@@ -140,12 +140,12 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
     IND_A44_subregional_shares <- get_data(all_data, "gcam-seasia/IND_A44_subregional_shares", strip_attributes = TRUE)
     Various_flsp_Mm2 <- get_data(all_data, "gcam-seasia/Various_flsp_Mm2", strip_attributes = TRUE)
     IESS_bld_serv_fuel <- get_data(all_data, "gcam-seasia/IESS_bld_serv_fuel", strip_attributes = TRUE)
-    X244.Floorspace_Bangkok_Thailand <- get_data(all_data, "X244.Floorspace_Bangkok_Thailand", strip_attributes = TRUE)
-    X244.Satiation_flsp_Bangkok_Thailand <- get_data(all_data, "X244.Satiation_flsp_Bangkok_Thailand", strip_attributes = TRUE)
-    X244.StubTechCalInput_bld_Bangkok_Thailand <- get_data(all_data, "X244.StubTechCalInput_bld_Bangkok_Thailand", strip_attributes = TRUE)
+    X244.Floorspace_Subregions_Thailand <- get_data(all_data, "X244.Floorspace_Subregions_Thailand", strip_attributes = TRUE)
+    X244.Satiation_flsp_Subregions_Thailand <- get_data(all_data, "X244.Satiation_flsp_Subregions_Thailand", strip_attributes = TRUE)
+    X244.StubTechCalInput_bld_Subregions_Thailand <- get_data(all_data, "X244.StubTechCalInput_bld_Subregions_Thailand", strip_attributes = TRUE)
     L143.HDDCDD_scen_R_Y <- get_data(all_data, "L143.HDDCDD_scen_R_Y", strip_attributes = TRUE)
-    X201.Pop_Bangkok_Thailand <- get_data(all_data, "X201.Pop_Bangkok_Thailand", strip_attributes = TRUE)
-    X201.GDP_Bangkok_Thailand <- get_data(all_data, "X201.GDP_Bangkok_Thailand", strip_attributes = TRUE)
+    X201.Pop_Subregions_Thailand <- get_data(all_data, "X201.Pop_Subregions_Thailand", strip_attributes = TRUE)
+    X201.GDP_Subregions_Thailand <- get_data(all_data, "X201.GDP_Subregions_Thailand", strip_attributes = TRUE)
 
     # ===================================================
     # Data Processing
@@ -164,8 +164,8 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
     # 0. Pre-Processing
     # ===================================================
     # Need to delete the buildings sector in the SEAsia regions (gcam.consumers and supplysectors)
-    X245.DeleteConsumer_bld_Bangkok_Thailand <- tibble(region = "Thailand", gcam.consumer = A44.gcam_consumer_en$gcam.consumer)
-    X245.DeleteSupplysector_bld_Bangkok_Thailand <- tibble(region = "Thailand", supplysector = A44.sector_en$supplysector)
+    X245.DeleteConsumer_bld_Subregions_Thailand <- tibble(region = "Thailand", gcam.consumer = A44.gcam_consumer_en$gcam.consumer)
+    X245.DeleteSupplysector_bld_Subregions_Thailand <- tibble(region = "Thailand", supplysector = A44.sector_en$supplysector)
 
     # Assign subregional shares
     # Manipulate subregional shares input to contain relevant info
@@ -226,7 +226,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
               subregional.income.share = approx_fun( pop.year.fillout, subregional.income.share, rule = 2 ),
               inc.year.fillout = pop.year.fillout )
 
-    X245.SubregionalShares_bld_Bangkok_Thailand <- write_to_all_states(A44.gcam_consumer, c("region", "gcam.consumer"),
+    X245.SubregionalShares_bld_Subregions_Thailand <- write_to_all_states(A44.gcam_consumer, c("region", "gcam.consumer"),
                                                                        region_list = c( "Bangkok", "Rest of Thailand" ) ) %>%
       filter( gcam.consumer == "comm" ) %>%
       repeat_add_columns( tibble::tibble( year = MODEL_YEARS ) ) %>%
@@ -242,24 +242,24 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
     # ===================================================
     # Bind historical and future population data and filter for the target region(s)
     # Select SSP scenario, default is gSSP2 (business as usual)
-    X245.Pop_thous <- X201.Pop_Bangkok_Thailand %>%
+    X245.Pop_thous <- X201.Pop_Subregions_Thailand %>%
       # rename columns
       rename( value = totalPop )
 
-    # X245.PriceExp_IntGains_bld_Bangkok_Thailand: price exponent on floorspace and naming of internal gains trial markets
-    X245.PriceExp_IntGains_bld_Bangkok_Thailand <- write_to_all_states(A44.gcam_consumer, LEVEL2_DATA_NAMES[["PriceExp_IntGains"]],
+    # X245.PriceExp_IntGains_bld_Subregions_Thailand: price exponent on floorspace and naming of internal gains trial markets
+    X245.PriceExp_IntGains_bld_Subregions_Thailand <- write_to_all_states(A44.gcam_consumer, LEVEL2_DATA_NAMES[["PriceExp_IntGains"]],
                                                           region_list = c( "Bangkok", "Rest of Thailand" ) )
 
     # ===================================================
     # 1. Floorspace
     # ===================================================
-    # X245.Floorspace_bld_Bangkok_Thailand: base year floorspace
+    # X245.Floorspace_bld_Subregions_Thailand: base year floorspace
     # Keep all historical years for now - these are needed in calculating satiation adders later on
 
     # ===================================================
     # 1.1. Residential Floorspace
     # ===================================================
-    X245.Floorspace_resid <- X244.Floorspace_Bangkok_Thailand %>%
+    X245.Floorspace_resid <- X244.Floorspace_Subregions_Thailand %>%
       # filter for target region(s)
       filter( gcam.consumer == "resid" ) %>%
       # add column that contains gcam.consumer
@@ -345,35 +345,35 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
     # ===================================================
     # 1.2. Commercial Floorspace
     # ===================================================
-    X245.Floorspace_comm <- X244.Floorspace_Bangkok_Thailand %>%
+    X245.Floorspace_comm <- X244.Floorspace_Subregions_Thailand %>%
       # filter for target region(s)
       filter( gcam.consumer == "comm" ) %>%
       mutate( base.building.size = round(base.building.size, energy.DIGITS_FLOORSPACE))
 
-    X245.Floorspace_bld_Bangkok_Thailand <- bind_rows(X245.Floorspace_resid_Yh, X245.Floorspace_comm)
+    X245.Floorspace_bld_Subregions_Thailand <- bind_rows(X245.Floorspace_resid_Yh, X245.Floorspace_comm)
 
-    # X245.DemandFunction_serv_bld_Bangkok_Thailand and X245.DemandFunction_flsp_bld_Bangkok_Thailand: demand function types
-    X245.DemandFunction_serv_bld_Bangkok_Thailand <- write_to_all_states(IND_A44_demandFn_serv, LEVEL2_DATA_NAMES[["DemandFunction_serv"]],
+    # X245.DemandFunction_serv_bld_Subregions_Thailand and X245.DemandFunction_flsp_bld_Subregions_Thailand: demand function types
+    X245.DemandFunction_serv_bld_Subregions_Thailand <- write_to_all_states(IND_A44_demandFn_serv, LEVEL2_DATA_NAMES[["DemandFunction_serv"]],
                                                             region_list = c( "Bangkok", "Rest of Thailand" ) )
-    X245.DemandFunction_flsp_bld_Bangkok_Thailand <- write_to_all_states(IND_A44_demandFn_flsp, LEVEL2_DATA_NAMES[["DemandFunction_flsp"]],
+    X245.DemandFunction_flsp_bld_Subregions_Thailand <- write_to_all_states(IND_A44_demandFn_flsp, LEVEL2_DATA_NAMES[["DemandFunction_flsp"]],
                                                             region_list = c( "Bangkok", "Rest of Thailand" ) )
 
     # ===================================================
     # 1.3. Floorspace Satiation Levels
     # ===================================================
-    # X245.Satiation_flsp_bld_Bangkok_Thailand: Satiation levels assumed for floorspace
+    # X245.Satiation_flsp_bld_Subregions_Thailand: Satiation levels assumed for floorspace
     # TODO: check on this. Units of original input VS units in data system
-    satiation_flsp <- X244.Satiation_flsp_Bangkok_Thailand %>%
+    satiation_flsp <- X244.Satiation_flsp_Subregions_Thailand %>%
       mutate( satiation.level = satiation.level * 1000000 ) %>%
       select( -c( nodeInput, building.node.input ) ) %>%
       spread( gcam.consumer, satiation.level ) %>%
       mutate( "resid urban" = resid ) %>%
       rename( "resid rural" = resid )
 
-    X245.Satiation_flsp_bld_Bangkok_Thailand <- satiation_flsp %>%
+    X245.Satiation_flsp_bld_Subregions_Thailand <- satiation_flsp %>%
       tidyr::gather( gcam.consumer, value, `resid rural`, `resid urban`, comm ) %>%
       # Need to make sure that the satiation level is greater than the floorspace in the final base year
-      left_join_error_no_match(X245.Floorspace_bld_Bangkok_Thailand %>%
+      left_join_error_no_match(X245.Floorspace_bld_Subregions_Thailand %>%
                                  filter(year == max(MODEL_BASE_YEARS)), by = c("region", "gcam.consumer")) %>%
       left_join_error_no_match(X245.Pop_thous %>% rename(pop = value), by = c("region", "year")) %>%
       mutate(year = as.integer(year),
@@ -385,7 +385,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       left_join_error_no_match(A44.gcam_consumer, by = c("gcam.consumer", "nodeInput", "building.node.input")) %>%
       select(LEVEL2_DATA_NAMES[["BldNodes"]], "satiation.level")
 
-    # X245.SatiationAdder_bld_Bangkok_Thailand: Satiation adders in floorspace demand function
+    # X245.SatiationAdder_bld_Subregions_Thailand: Satiation adders in floorspace demand function
     # Required for shaping the future floorspace growth trajectories in each region
     # Match in the per-capita GDP, total floorspace, and population (for calculating per-capita floorspace)
 
@@ -393,14 +393,14 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
     # under timeshift conditions. So we adjust energy.SATIATION_YEAR
     energy.SATIATION_YEAR <- min(max(MODEL_BASE_YEARS), energy.SATIATION_YEAR)
 
-    X245.SatiationAdder_bld_Bangkok_Thailand <- X201.GDP_Bangkok_Thailand %>%
+    X245.SatiationAdder_bld_Subregions_Thailand <- X201.GDP_Subregions_Thailand %>%
       # filter for target region(s)
       filter( year == energy.SATIATION_YEAR ) %>%
       # convert from million to thousand
       mutate( GDP = GDP * CONV_MIL_THOUS ) %>%
-      left_join( X245.Satiation_flsp_bld_Bangkok_Thailand, by = c( "region") ) %>%
+      left_join( X245.Satiation_flsp_bld_Subregions_Thailand, by = c( "region") ) %>%
       # Add floorspace
-      left_join_error_no_match(X245.Floorspace_bld_Bangkok_Thailand, by = c("region", "gcam.consumer", "year", "nodeInput", "building.node.input")) %>%
+      left_join_error_no_match(X245.Floorspace_bld_Subregions_Thailand, by = c("region", "gcam.consumer", "year", "nodeInput", "building.node.input")) %>%
       # Add population
       left_join_error_no_match(X245.Pop_thous, by = c("region", "year")) %>%
       rename( pop = value ) %>%
@@ -509,7 +509,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
     # ===================================================
     # X245.ShellConductance_bld_gcamusa: Shell conductance (inverse of shell efficiency)
     # TODO: Shell conductance from Zarrar's script?
-    X245.ShellConductance_bld_Bangkok_Thailand <- IND_A44_shell %>%
+    X245.ShellConductance_bld_Subregions_Thailand <- IND_A44_shell %>%
       # Convert to long form
       gather_years() %>%
       # Interpolate to model years
@@ -534,43 +534,43 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
     # The remainder of the building-level parameters require information about the output of each service, which we do not have yet
 
     # X245.Supplysector_bld: Supplysector info for buildings
-    X245.Supplysector_bld_Bangkok_Thailand <- write_to_all_states(IND_A44_sector, c(LEVEL2_DATA_NAMES[["Supplysector"]], LOGIT_TYPE_COLNAME),
+    X245.Supplysector_bld_Subregions_Thailand <- write_to_all_states(IND_A44_sector, c(LEVEL2_DATA_NAMES[["Supplysector"]], LOGIT_TYPE_COLNAME),
                                                          region_list = c( "Bangkok", "Rest of Thailand" ))
 
     # X245.FinalEnergyKeyword_bld: Supply sector keywords for detailed building sector
-    X245.FinalEnergyKeyword_bld_Bangkok_Thailand <- write_to_all_states(IND_A44_sector, LEVEL2_DATA_NAMES[["FinalEnergyKeyword"]],
+    X245.FinalEnergyKeyword_bld_Subregions_Thailand <- write_to_all_states(IND_A44_sector, LEVEL2_DATA_NAMES[["FinalEnergyKeyword"]],
                                                                region_list = c( "Bangkok", "Rest of Thailand" ))
 
     # X245.SubsectorLogit_bld: Subsector logit exponents of building sector
-    X245.SubsectorLogit_bld_Bangkok_Thailand <- write_to_all_states(IND_A44_subsector_logit, c(LEVEL2_DATA_NAMES[["SubsectorLogit"]], LOGIT_TYPE_COLNAME),
+    X245.SubsectorLogit_bld_Subregions_Thailand <- write_to_all_states(IND_A44_subsector_logit, c(LEVEL2_DATA_NAMES[["SubsectorLogit"]], LOGIT_TYPE_COLNAME),
                                                            region_list = c( "Bangkok", "Rest of Thailand" ))
 
     # X245.SubsectorShrwt_bld and X245.SubsectorShrwtFllt_bld: Subsector shareweights of building sector
     if(any(!is.na(IND_A44_subsector_shrwt$year))) {
-      X245.SubsectorShrwt_bld_Bangkok_Thailand <- write_to_all_states(IND_A44_subsector_shrwt %>%
+      X245.SubsectorShrwt_bld_Subregions_Thailand <- write_to_all_states(IND_A44_subsector_shrwt %>%
                                                                filter(!is.na(year)), LEVEL2_DATA_NAMES[["SubsectorShrwt"]],
                                                              region_list = c( "Bangkok", "Rest of Thailand" ))
     }
     if(any(!is.na(IND_A44_subsector_shrwt$year.fillout))) {
-      X245.SubsectorShrwtFllt_bld_Bangkok_Thailand <- write_to_all_states(IND_A44_subsector_shrwt %>%
+      X245.SubsectorShrwtFllt_bld_Subregions_Thailand <- write_to_all_states(IND_A44_subsector_shrwt %>%
                                                                    filter(!is.na(year.fillout)), LEVEL2_DATA_NAMES[["SubsectorShrwtFllt"]],
                                                                  region_list = c( "Bangkok", "Rest of Thailand" ))
     }
 
     # X245.SubsectorInterp_bld and X245.SubsectorInterpTo_bld: Subsector shareweight interpolation of building sector
     if(any(is.na(IND_A44_subsector_interp$to.value))) {
-      X245.SubsectorInterp_bld_Bangkok_Thailand <- write_to_all_states(IND_A44_subsector_interp %>%
+      X245.SubsectorInterp_bld_Subregions_Thailand <- write_to_all_states(IND_A44_subsector_interp %>%
                                                                 filter(is.na(to.value)), LEVEL2_DATA_NAMES[["SubsectorInterp"]],
                                                               region_list = c( "Bangkok", "Rest of Thailand" ))
     }
     if(any(!is.na(IND_A44_subsector_interp$to.value))) {
-      X245.SubsectorInterpTo_bld_Bangkok_Thailand <- write_to_all_states(IND_A44_subsector_interp %>%
+      X245.SubsectorInterpTo_bld_Subregions_Thailand <- write_to_all_states(IND_A44_subsector_interp %>%
                                                                   filter(!is.na(to.value)), LEVEL2_DATA_NAMES[["SubsectorInterpTo"]],
                                                                 region_list = c( "Bangkok", "Rest of Thailand" ))
     }
 
-    # X245.StubTech_bld_Bangkok_Thailand: Identification of stub technologies for buildings
-    X245.StubTech_bld_Bangkok_Thailand <- IND_A44_tech_eff %>%
+    # X245.StubTech_bld_Subregions_Thailand: Identification of stub technologies for buildings
+    X245.StubTech_bld_Subregions_Thailand <- IND_A44_tech_eff %>%
       select(supplysector, subsector, technology) %>%
       distinct() %>%
       write_to_all_states(LEVEL2_DATA_NAMES[["Tech"]], region_list = c( "Bangkok", "Rest of Thailand" )) %>%
@@ -593,7 +593,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       select(LEVEL2_DATA_NAMES[["GlobalTechEff"]])
 
     # X245.StubTechMarket_bld: Specify market names for fuel inputs to all technologies in each region
-    X245.StubTechMarket_bld_Bangkok_Thailand <- X245.end_use_eff %>%
+    X245.StubTechMarket_bld_Subregions_Thailand <- X245.end_use_eff %>%
       mutate(market.name = NA) %>%
       rename(stub.technology = technology) %>%
       write_to_all_states(LEVEL2_DATA_NAMES[["StubTechMarket"]], region_list = c( "Bangkok", "Rest of Thailand" )) %>%
@@ -605,7 +605,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
     # Since we are assuming there is no rural energy consumption in the cities.
     # The input that has energy consumption is at an aggregated level and needs to be broken out
     # the IESS file has fuel shares for "buildings" as a whole
-    bld_agg_energy_consumption_city <- X244.StubTechCalInput_bld_Bangkok_Thailand %>%
+    bld_agg_energy_consumption_city <- X244.StubTechCalInput_bld_Subregions_Thailand %>%
       filter( region == "Bangkok" ) %>%
       # aggregate energy consumption by fuel and year for building sector by comm and resid
       separate( supplysector, c( "resid/comm", "specific" ) ) %>%
@@ -614,7 +614,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       rename( fuel = subsector ) %>%
       distinct( `resid/comm`, fuel, year, region, value )
 
-    bld_agg_energy_consumption_RoR <- X244.StubTechCalInput_bld_Bangkok_Thailand %>%
+    bld_agg_energy_consumption_RoR <- X244.StubTechCalInput_bld_Subregions_Thailand %>%
       filter( region == "Rest of Thailand" ) %>%
       # aggregate energy consumption by fuel and year for building sector by comm and resid
       separate( supplysector, c( "resid/comm", "specific" ) ) %>%
@@ -736,7 +736,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       na.omit()
 
     # For calibration table, start with global tech efficiency table, and match in tech shares.
-    X245.StubTechCalInput_bld_Bangkok_Thailand <- X245.GlobalTechEff_bld %>%
+    X245.StubTechCalInput_bld_Subregions_Thailand <- X245.GlobalTechEff_bld %>%
       filter(year %in% MODEL_BASE_YEARS) %>%
       write_to_all_states(c(LEVEL2_DATA_NAMES[["GlobalTechEff"]], "region"),
                           region_list = c( "Bangkok", "Rest of Thailand" )) %>%
@@ -763,7 +763,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       select(LEVEL2_DATA_NAMES[["StubTechCalInput"]])
 
     # Some technologies may be missing from the calibrated inputs table due to being in IESS
-    # but not in X244.StubTechCalInput_bld_Bangkok_Thailand. We want to know what these technologies are, and
+    # but not in X244.StubTechCalInput_bld_Subregions_Thailand. We want to know what these technologies are, and
     # assign them 0 inputs in the base years
     # First, reformat IESS data for joining purposes
     IESS_reformat <- IESS_bld_serv_fuel %>%
@@ -772,12 +772,12 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
               sector = gsub( "commercial", "comm", sector )) %>%
       unite( supplysector, c( sector, service ), sep = " " )
     # Then, anti-join the two dataframes of interest to see what is missing
-    missing_entries <- anti_join( IESS_reformat, X245.StubTechCalInput_bld_Bangkok_Thailand,
+    missing_entries <- anti_join( IESS_reformat, X245.StubTechCalInput_bld_Subregions_Thailand,
                by = c( "supplysector", "fuel" = "subsector" ) )
 
     # If there are missing entries, we need to add them to the calibrated input dataframe
     if ( dim(missing_entries)[1] != 0 ) {
-      X245.StubTechCalInput_bld_Bangkok_Thailand <- missing_entries %>%
+      X245.StubTechCalInput_bld_Subregions_Thailand <- missing_entries %>%
         select( -c( energy, share ) ) %>%
         rename( subsector = fuel,
                 stub.technology = technology ) %>%
@@ -796,12 +796,12 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
         set_subsector_shrwt() %>%
         mutate( tech.share.weight =  if_else( calibrated.value > 0, 1, 0 ) ) %>%
         select( LEVEL2_DATA_NAMES[["StubTechCalInput"]] ) %>%
-        bind_rows( X245.StubTechCalInput_bld_Bangkok_Thailand )
+        bind_rows( X245.StubTechCalInput_bld_Subregions_Thailand )
     }
     else{ print("No missing technologies") }
 
-    # X245.GlobalTechShrwt_bld_Bangkok_Thailand: Default shareweights for global building technologies
-    X245.GlobalTechShrwt_bld_Bangkok_Thailand <- IND_A44_tech_shrwt %>%
+    # X245.GlobalTechShrwt_bld_Subregions_Thailand: Default shareweights for global building technologies
+    X245.GlobalTechShrwt_bld_Subregions_Thailand <- IND_A44_tech_shrwt %>%
       gather_years(value_col = "share.weight") %>%
       complete(nesting(supplysector, subsector, technology), year = c(year, MODEL_YEARS)) %>%
       group_by(supplysector, subsector, technology) %>%
@@ -820,7 +820,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       select(LEVEL2_DATA_NAMES[["GlobalTechInterpTo"]])
 
     # X245.GlobalTechCost_bld: Non-fuel costs of global building technologies
-    X245.GlobalTechCost_bld_Bangkok_Thailand <- IND_A44_tech_cost %>%
+    X245.GlobalTechCost_bld_Subregions_Thailand <- IND_A44_tech_cost %>%
       gather_years(value_col = "input.cost") %>%
       complete(nesting(supplysector, subsector, technology), year = c(year, MODEL_YEARS)) %>%
       group_by(supplysector, subsector, technology) %>%
@@ -832,7 +832,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       select(LEVEL2_DATA_NAMES[["GlobalTechCost"]])
 
     # X245.GlobalTechSCurve_bld: Retirement rates for building technologies
-    X245.GlobalTechSCurve_bld <- X245.GlobalTechCost_bld_Bangkok_Thailand %>%
+    X245.GlobalTechSCurve_bld <- X245.GlobalTechCost_bld_Subregions_Thailand %>%
       filter(year %in% c(max(MODEL_BASE_YEARS), MODEL_FUTURE_YEARS),
              sector.name %in% IND_A44_tech_retirement$supplysector) %>%
       # Add lifetimes and steepness
@@ -863,7 +863,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
 
     # X245.GenericBaseService and X245.ThermalBaseService: Base year output of buildings services (per unit floorspace)
     # Base-service: Multiply energy consumption by efficiency for each technology, and aggregate by service
-    X245.base_service <- X245.StubTechCalInput_bld_Bangkok_Thailand %>%
+    X245.base_service <- X245.StubTechCalInput_bld_Subregions_Thailand %>%
       # Add in efficiency by technology
       left_join_error_no_match(X245.GlobalTechEff_bld,
                                by = c("supplysector" = "sector.name", "subsector" = "subsector.name",
@@ -880,22 +880,22 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       left_join_error_no_match(A44.gcam_consumer, by = "gcam.consumer")
 
     # Separate thermal and generic services into separate tables with different ID strings
-    X245.GenericBaseService_bld_Bangkok_Thailand <- X245.base_service %>%
+    X245.GenericBaseService_bld_Subregions_Thailand <- X245.base_service %>%
       filter(supplysector %in% generic_services) %>%
       rename(building.service.input = supplysector) %>%
       select(LEVEL2_DATA_NAMES[["GenericBaseService"]])
 
-    X245.ThermalBaseService_bld_Bangkok_Thailand <- X245.base_service %>%
+    X245.ThermalBaseService_bld_Subregions_Thailand <- X245.base_service %>%
       filter(supplysector %in% thermal_services) %>%
       rename(thermal.building.service.input = supplysector) %>%
       select(LEVEL2_DATA_NAMES[["ThermalBaseService"]])
 
-    # X245.GenericServiceSatiation_bld_Bangkok_Thailand: Satiation levels assumed for non-thermal building services
+    # X245.GenericServiceSatiation_bld_Subregions_Thailand: Satiation levels assumed for non-thermal building services
     # Just multiply the base-service by an exogenous multiplier
-    X245.GenericServiceSatiation_bld_Bangkok_Thailand <- X245.GenericBaseService_bld_Bangkok_Thailand %>%
+    X245.GenericServiceSatiation_bld_Subregions_Thailand <- X245.GenericBaseService_bld_Subregions_Thailand %>%
       filter(year == max(MODEL_BASE_YEARS)) %>%
       # Add floorspace
-      left_join_error_no_match(X245.Floorspace_bld_Bangkok_Thailand, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year")) %>%
+      left_join_error_no_match(X245.Floorspace_bld_Subregions_Thailand, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year")) %>%
       # Add multiplier
       # TODO: Need multiplier for SEA, currently just changed to SEAsia sectors, but the values are not correct
       # TODO: ask Sha or Page about demand satiation multiplier
@@ -905,10 +905,10 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       select(LEVEL2_DATA_NAMES[["GenericServiceSatiation"]])
 
     # X245.ThermalServiceSatiation: Satiation levels assumed for thermal building services
-    X245.ThermalServiceSatiation_bld_Bangkok_Thailand <- X245.ThermalBaseService_bld_Bangkok_Thailand %>%
+    X245.ThermalServiceSatiation_bld_Subregions_Thailand <- X245.ThermalBaseService_bld_Subregions_Thailand %>%
       filter(year == max(MODEL_BASE_YEARS)) %>%
       # Add floorspace
-      left_join_error_no_match(X245.Floorspace_bld_Bangkok_Thailand, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year")) %>%
+      left_join_error_no_match(X245.Floorspace_bld_Subregions_Thailand, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year")) %>%
       # Add multiplier
       left_join_error_no_match(IND_A44_demand_satiation_mult, by = c("thermal.building.service.input" = "supplysector")) %>%
       # Satiation level = service per floorspace * multiplier
@@ -922,7 +922,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
     SEA.base.scalar <- tibble(variable, scalar, DDnorm)
     threshold_HDD <- 500
 
-    X245.Intgains_scalar_bld_Bangkok_Thailand <- X245.ThermalServiceSatiation_bld_Bangkok_Thailand %>%
+    X245.Intgains_scalar_bld_Subregions_Thailand <- X245.ThermalServiceSatiation_bld_Subregions_Thailand %>%
       # Assign HDD or CDD
       mutate(variable = if_else(thermal.building.service.input %in% heating_services, "HDD", "CDD")) %>%
       # Add scalar
@@ -941,7 +941,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
     # Check subregional shares
     # If the subregional share for any region is 0, it must be removed from all data tables
     # First, figure out if this case exists, and for what regions / years
-    zero_subregional_shares <- X245.SubregionalShares_bld_Bangkok_Thailand %>%
+    zero_subregional_shares <- X245.SubregionalShares_bld_Subregions_Thailand %>%
       filter( subregional.population.share == 0 ) %>%
       distinct( region, gcam.consumer, inc.year.fillout )
 
@@ -949,88 +949,88 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
     # and reassign each dataframe to the same name
     if( length( zero_subregional_shares != 0 ) ) {
 
-      X245.SubregionalShares_bld_Bangkok_Thailand <- X245.SubregionalShares_bld_Bangkok_Thailand %>%
+      X245.SubregionalShares_bld_Subregions_Thailand <- X245.SubregionalShares_bld_Subregions_Thailand %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "inc.year.fillout" ) )
 
-      X245.PriceExp_IntGains_bld_Bangkok_Thailand <- X245.PriceExp_IntGains_bld_Bangkok_Thailand %>%
+      X245.PriceExp_IntGains_bld_Subregions_Thailand <- X245.PriceExp_IntGains_bld_Subregions_Thailand %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "price.exp.year.fillout" = "inc.year.fillout" ) )
 
-      X245.Floorspace_bld_Bangkok_Thailand <- X245.Floorspace_bld_Bangkok_Thailand %>%
+      X245.Floorspace_bld_Subregions_Thailand <- X245.Floorspace_bld_Subregions_Thailand %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "year" = "inc.year.fillout" ) )
 
-      X245.DemandFunction_serv_bld_Bangkok_Thailand <- X245.DemandFunction_serv_bld_Bangkok_Thailand %>%
+      X245.DemandFunction_serv_bld_Subregions_Thailand <- X245.DemandFunction_serv_bld_Subregions_Thailand %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) )
 
-      X245.DemandFunction_flsp_bld_Bangkok_Thailand <- X245.DemandFunction_flsp_bld_Bangkok_Thailand %>%
+      X245.DemandFunction_flsp_bld_Subregions_Thailand <- X245.DemandFunction_flsp_bld_Subregions_Thailand %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) )
 
-      X245.Satiation_flsp_bld_Bangkok_Thailand <- X245.Satiation_flsp_bld_Bangkok_Thailand %>%
+      X245.Satiation_flsp_bld_Subregions_Thailand <- X245.Satiation_flsp_bld_Subregions_Thailand %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) )
 
-      X245.SatiationAdder_bld_Bangkok_Thailand <- X245.SatiationAdder_bld_Bangkok_Thailand %>%
+      X245.SatiationAdder_bld_Subregions_Thailand <- X245.SatiationAdder_bld_Subregions_Thailand %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) )
 
-      X245.ThermalBaseService_bld_Bangkok_Thailand <- X245.ThermalBaseService_bld_Bangkok_Thailand %>%
+      X245.ThermalBaseService_bld_Subregions_Thailand <- X245.ThermalBaseService_bld_Subregions_Thailand %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "year" = "inc.year.fillout" ) )
 
-      X245.GenericBaseService_bld_Bangkok_Thailand <- X245.GenericBaseService_bld_Bangkok_Thailand %>%
+      X245.GenericBaseService_bld_Subregions_Thailand <- X245.GenericBaseService_bld_Subregions_Thailand %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "year" = "inc.year.fillout" ) )
 
-      X245.ThermalServiceSatiation_bld_Bangkok_Thailand <- X245.ThermalServiceSatiation_bld_Bangkok_Thailand %>%
+      X245.ThermalServiceSatiation_bld_Subregions_Thailand <- X245.ThermalServiceSatiation_bld_Subregions_Thailand %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) )
 
-      X245.GenericServiceSatiation_bld_Bangkok_Thailand <- X245.GenericServiceSatiation_bld_Bangkok_Thailand %>%
+      X245.GenericServiceSatiation_bld_Subregions_Thailand <- X245.GenericServiceSatiation_bld_Subregions_Thailand %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) )
 
-      X245.Intgains_scalar_bld_Bangkok_Thailand <- X245.Intgains_scalar_bld_Bangkok_Thailand %>%
+      X245.Intgains_scalar_bld_Subregions_Thailand <- X245.Intgains_scalar_bld_Subregions_Thailand %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) )
 
-      X245.ShellConductance_bld_Bangkok_Thailand <- X245.ShellConductance_bld_Bangkok_Thailand %>%
+      X245.ShellConductance_bld_Subregions_Thailand <- X245.ShellConductance_bld_Subregions_Thailand %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "year" = "inc.year.fillout" ) )
 
-      X245.Supplysector_bld_Bangkok_Thailand <- X245.Supplysector_bld_Bangkok_Thailand %>%
+      X245.Supplysector_bld_Subregions_Thailand <- X245.Supplysector_bld_Subregions_Thailand %>%
         separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
         unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "logit.year.fillout" = "inc.year.fillout" ) ) %>%
         select( -gcam.consumer )
 
-      X245.FinalEnergyKeyword_bld_Bangkok_Thailand <- X245.FinalEnergyKeyword_bld_Bangkok_Thailand %>%
+      X245.FinalEnergyKeyword_bld_Subregions_Thailand <- X245.FinalEnergyKeyword_bld_Subregions_Thailand %>%
         separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
         unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) ) %>%
         select( -gcam.consumer )
 
-      X245.SubsectorShrwtFllt_bld_Bangkok_Thailand <- X245.SubsectorShrwtFllt_bld_Bangkok_Thailand %>%
+      X245.SubsectorShrwtFllt_bld_Subregions_Thailand <- X245.SubsectorShrwtFllt_bld_Subregions_Thailand %>%
         separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
         unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) ) %>%
         select( -gcam.consumer )
 
-      X245.SubsectorInterp_bld_Bangkok_Thailand <- X245.SubsectorInterp_bld_Bangkok_Thailand %>%
+      X245.SubsectorInterp_bld_Subregions_Thailand <- X245.SubsectorInterp_bld_Subregions_Thailand %>%
         separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
         unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) ) %>%
         select( -gcam.consumer )
 
-      X245.SubsectorLogit_bld_Bangkok_Thailand <- X245.SubsectorLogit_bld_Bangkok_Thailand %>%
+      X245.SubsectorLogit_bld_Subregions_Thailand <- X245.SubsectorLogit_bld_Subregions_Thailand %>%
         separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
         unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) ) %>%
         select( -gcam.consumer )
 
-      X245.StubTech_bld_Bangkok_Thailand <- X245.StubTech_bld_Bangkok_Thailand %>%
+      X245.StubTech_bld_Subregions_Thailand <- X245.StubTech_bld_Subregions_Thailand %>%
         separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
         unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer" ) ) %>%
         select( -gcam.consumer )
 
-      X245.StubTechCalInput_bld_Bangkok_Thailand <- X245.StubTechCalInput_bld_Bangkok_Thailand %>%
+      X245.StubTechCalInput_bld_Subregions_Thailand <- X245.StubTechCalInput_bld_Subregions_Thailand %>%
         separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
         unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "year" = "inc.year.fillout" ) ) %>%
         select( -gcam.consumer )
 
-      X245.StubTechMarket_bld_Bangkok_Thailand <- X245.StubTechMarket_bld_Bangkok_Thailand %>%
+      X245.StubTechMarket_bld_Subregions_Thailand <- X245.StubTechMarket_bld_Subregions_Thailand %>%
         separate( supplysector, c( "resid/comm", "specific" ), remove = F ) %>%
         unite( "gcam.consumer", c( "resid/comm", "specific" ), sep = " " ) %>%
         anti_join( zero_subregional_shares, by = c( "region", "gcam.consumer", "year" = "inc.year.fillout" ) ) %>%
@@ -1041,248 +1041,248 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
 
     # ===================================================
     # Produce outputs
-    X245.DeleteConsumer_bld_Bangkok_Thailand %>%
+    X245.DeleteConsumer_bld_Subregions_Thailand %>%
       add_title("Deletes building sector in SEA region to rewrite with gcam-seasia data") %>%
       add_units("NA") %>%
       add_comments("gcam.consumer column from A44.gcam_consumer") %>%
       add_legacy_name("X245.DeleteConsumer_SEAbld") %>%
       add_precursors("energy/A44.gcam_consumer") ->
-      X245.DeleteConsumer_bld_Bangkok_Thailand
+      X245.DeleteConsumer_bld_Subregions_Thailand
 
-    X245.DeleteSupplysector_bld_Bangkok_Thailand %>%
+    X245.DeleteSupplysector_bld_Subregions_Thailand %>%
       add_title("Deletes building sector in SEA region to rewrite with gcam-seasia data") %>%
       add_units("NA") %>%
       add_comments("supplysector column from A44.sector") %>%
       add_legacy_name("X245.DeleteSupplysector_SEAbld") %>%
       add_precursors("energy/A44.sector") ->
-      X245.DeleteSupplysector_bld_Bangkok_Thailand
+      X245.DeleteSupplysector_bld_Subregions_Thailand
 
-    X245.SubregionalShares_bld_Bangkok_Thailand %>%
+    X245.SubregionalShares_bld_Subregions_Thailand %>%
       add_title("Shares out population and GDP to residential rural and urban") %>%
       add_units("NA") %>%
       add_precursors("gcam-seasia/IND_A44_subregional_shares", "gcam-seasia/A44.gcam_consumer") ->
-      X245.SubregionalShares_bld_Bangkok_Thailand
+      X245.SubregionalShares_bld_Subregions_Thailand
 
-    X245.PriceExp_IntGains_bld_Bangkok_Thailand %>%
+    X245.PriceExp_IntGains_bld_Subregions_Thailand %>%
       add_title("Price exponent on floorspace and naming of internal gains trial markets") %>%
       add_units("Unitless") %>%
       add_comments("A44.gcam_consumer written to all states") %>%
       add_legacy_name("X245.PriceExp_IntGains") %>%
       add_precursors("gcam-seasia/A44.gcam_consumer") ->
-      X245.PriceExp_IntGains_bld_Bangkok_Thailand
+      X245.PriceExp_IntGains_bld_Subregions_Thailand
 
-    X245.Floorspace_bld_Bangkok_Thailand %>%
+    X245.Floorspace_bld_Subregions_Thailand %>%
       add_title("base year floorspace") %>%
       add_units("billion m2") %>%
       add_comments("Data from L144.flsp_bm2_R_res_Yh and L144.flsp_bm2_R_comm_Yh") %>%
       add_legacy_name("X245.Floorspace") %>%
-      add_precursors("X244.Floorspace_Bangkok_Thailand", "gcam-seasia/A44.gcam_consumer",
+      add_precursors("X244.Floorspace_Subregions_Thailand", "gcam-seasia/A44.gcam_consumer",
                      "gcam-seasia/Various_flsp_Mm2") ->
-      X245.Floorspace_bld_Bangkok_Thailand
+      X245.Floorspace_bld_Subregions_Thailand
 
-    X245.DemandFunction_serv_bld_Bangkok_Thailand %>%
+    X245.DemandFunction_serv_bld_Subregions_Thailand %>%
       add_title("Service demand function types") %>%
       add_units("NA") %>%
       add_comments("IND_A44_demandFn_serv written to all states") %>%
       add_legacy_name("X245.DemandFunction_serv") %>%
       add_precursors("gcam-seasia/IND_A44_demandFn_serv") ->
-      X245.DemandFunction_serv_bld_Bangkok_Thailand
+      X245.DemandFunction_serv_bld_Subregions_Thailand
 
-    X245.DemandFunction_flsp_bld_Bangkok_Thailand %>%
+    X245.DemandFunction_flsp_bld_Subregions_Thailand %>%
       add_title("Floorspace demand function types") %>%
       add_units("NA") %>%
       add_comments("IND_A44_demandFn_flsp written to all states") %>%
       add_legacy_name("X245.DemandFunction_flsp") %>%
       add_precursors("gcam-seasia/IND_A44_demandFn_flsp") ->
-      X245.DemandFunction_flsp_bld_Bangkok_Thailand
+      X245.DemandFunction_flsp_bld_Subregions_Thailand
 
-    X245.Satiation_flsp_bld_Bangkok_Thailand %>%
+    X245.Satiation_flsp_bld_Subregions_Thailand %>%
       add_title("Satiation levels assumed for floorspace") %>%
       add_units("million m2 / person") %>%
-      add_comments("Values from X244.Satiation_flsp_Bangkok_Thailand or X245.Floorspace_bld_Bangkok_Thailand/X245.Pop_thous") %>%
+      add_comments("Values from X244.Satiation_flsp_Subregions_Thailand or X245.Floorspace_bld_Subregions_Thailand/X245.Pop_thous") %>%
       add_comments("Whichever is larger") %>%
       add_legacy_name("X245.Satiation_flsp") %>%
-      add_precursors("X244.Satiation_flsp_Bangkok_Thailand", "gcam-seasia/A44.gcam_consumer", "X201.Pop_Bangkok_Thailand",
-                     "X244.Floorspace_Bangkok_Thailand", "gcam-seasia/Various_flsp_Mm2") ->
-      X245.Satiation_flsp_bld_Bangkok_Thailand
+      add_precursors("X244.Satiation_flsp_Subregions_Thailand", "gcam-seasia/A44.gcam_consumer", "X201.Pop_Subregions_Thailand",
+                     "X244.Floorspace_Subregions_Thailand", "gcam-seasia/Various_flsp_Mm2") ->
+      X245.Satiation_flsp_bld_Subregions_Thailand
 
-    X245.SatiationAdder_bld_Bangkok_Thailand %>%
+    X245.SatiationAdder_bld_Subregions_Thailand %>%
       add_title("Satiation adders in floorspace demand function") %>%
       add_units("million m2 / person") %>%
       add_comments("Calculated with function dependent on satiation level; per capita floorspace; and per capita GDP") %>%
       add_legacy_name("X245.SatiationAdder") %>%
-      add_precursors("gcam-seasia/X244.Satiation_flsp_Bangkok_Thailand", "gcam-seasia/A44.gcam_consumer", "X201.Pop_Bangkok_Thailand",
-                     "X244.Floorspace_Bangkok_Thailand", "X201.GDP_Bangkok_Thailand") ->
-      X245.SatiationAdder_bld_Bangkok_Thailand
+      add_precursors("gcam-seasia/X244.Satiation_flsp_Subregions_Thailand", "gcam-seasia/A44.gcam_consumer", "X201.Pop_Subregions_Thailand",
+                     "X244.Floorspace_Subregions_Thailand", "X201.GDP_Subregions_Thailand") ->
+      X245.SatiationAdder_bld_Subregions_Thailand
 
-    X245.ThermalBaseService_bld_Bangkok_Thailand %>%
+    X245.ThermalBaseService_bld_Subregions_Thailand %>%
       add_title("Base year output of thermal buildings services") %>%
       add_units("EJ per unit floorspace") %>%
       add_comments("Multiplied energy consumption by efficiency for each technology, then aggregated by service") %>%
       add_legacy_name("X245.ThermalBaseService") %>%
-      add_precursors("X244.StubTechCalInput_bld_Bangkok_Thailand", "gcam-seasia/IND_bld_techs",
+      add_precursors("X244.StubTechCalInput_bld_Subregions_Thailand", "gcam-seasia/IND_bld_techs",
                      "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-seasia/IND_A44_globaltech_shares",
                      "gcam-seasia/A44.gcam_consumer", "gcam-seasia/IESS_bld_serv_fuel") ->
-      X245.ThermalBaseService_bld_Bangkok_Thailand
+      X245.ThermalBaseService_bld_Subregions_Thailand
 
-    X245.GenericBaseService_bld_Bangkok_Thailand %>%
+    X245.GenericBaseService_bld_Subregions_Thailand %>%
       add_title("Base year output of generic buildings services") %>%
       add_units("EJ per unit floorspace") %>%
       add_comments("Multiplied energy consumption by efficiency for each technology, then aggregated by service") %>%
       add_legacy_name("X245.GenericBaseService") %>%
-      add_precursors("X244.StubTechCalInput_bld_Bangkok_Thailand", "gcam-seasia/IND_bld_techs",
+      add_precursors("X244.StubTechCalInput_bld_Subregions_Thailand", "gcam-seasia/IND_bld_techs",
                      "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-seasia/IND_A44_globaltech_shares",
                      "gcam-seasia/A44.gcam_consumer", "gcam-seasia/IESS_bld_serv_fuel") ->
-      X245.GenericBaseService_bld_Bangkok_Thailand
+      X245.GenericBaseService_bld_Subregions_Thailand
 
-    X245.GenericServiceSatiation_bld_Bangkok_Thailand %>%
+    X245.GenericServiceSatiation_bld_Subregions_Thailand %>%
       add_title("Satiation levels assumed for non-thermal building services") %>%
       add_units("EJ/billion m2 floorspace") %>%
       add_comments("Satiation level = base service / floorspace * exogenous multiplier") %>%
       add_legacy_name("X245.GenericServiceSatiation") %>%
-      add_precursors("X244.StubTechCalInput_bld_Bangkok_Thailand", "gcam-seasia/IND_bld_techs",
+      add_precursors("X244.StubTechCalInput_bld_Subregions_Thailand", "gcam-seasia/IND_bld_techs",
                      "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-seasia/IND_A44_globaltech_shares",
-                     "gcam-seasia/A44.gcam_consumer", "X244.Floorspace_Bangkok_Thailand",
+                     "gcam-seasia/A44.gcam_consumer", "X244.Floorspace_Subregions_Thailand",
                      "gcam-seasia/IND_A44_demand_satiation_mult", "gcam-seasia/IESS_bld_serv_fuel") ->
-      X245.GenericServiceSatiation_bld_Bangkok_Thailand
+      X245.GenericServiceSatiation_bld_Subregions_Thailand
 
-    X245.ThermalServiceSatiation_bld_Bangkok_Thailand %>%
+    X245.ThermalServiceSatiation_bld_Subregions_Thailand %>%
       add_title("Satiation levels assumed for thermal building services") %>%
       add_units("EJ/billion m2 floorspace") %>%
       add_comments("Satiation level = base service / floorspace * exogenous multiplier") %>%
       add_legacy_name("X245.ThermalServiceSatiation") %>%
-      add_precursors("X244.StubTechCalInput_bld_Bangkok_Thailand", "gcam-seasia/IND_bld_techs",
+      add_precursors("X244.StubTechCalInput_bld_Subregions_Thailand", "gcam-seasia/IND_bld_techs",
                      "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-seasia/IND_A44_globaltech_shares",
-                     "gcam-seasia/A44.gcam_consumer", "X244.Floorspace_Bangkok_Thailand",
+                     "gcam-seasia/A44.gcam_consumer", "X244.Floorspace_Subregions_Thailand",
                      "gcam-seasia/IND_A44_demand_satiation_mult", "gcam-seasia/IESS_bld_serv_fuel") ->
-      X245.ThermalServiceSatiation_bld_Bangkok_Thailand
+      X245.ThermalServiceSatiation_bld_Subregions_Thailand
 
-    X245.Intgains_scalar_bld_Bangkok_Thailand %>%
+    X245.Intgains_scalar_bld_Subregions_Thailand %>%
       add_title("Scalers relating internal gain energy to increased/reduced cooling/heating demands") %>%
       add_units("Unitless") %>%
       add_comments("internal.gains.scalar = exogenous scalar * degree.days / exogenous degree day norm") %>%
       add_legacy_name("X245.Intgains_scalar") %>%
-      add_precursors("X244.StubTechCalInput_bld_Bangkok_Thailand", "gcam-seasia/IND_bld_techs",
+      add_precursors("X244.StubTechCalInput_bld_Subregions_Thailand", "gcam-seasia/IND_bld_techs",
                      "gcam-seasia/IND_A44_tech_eff", "gcam-seasia/IND_A44_tech_eff_avg", "gcam-seasia/IND_A44_globaltech_shares",
-                     "gcam-seasia/A44.gcam_consumer", "X244.Floorspace_Bangkok_Thailand",
+                     "gcam-seasia/A44.gcam_consumer", "X244.Floorspace_Subregions_Thailand",
                      "gcam-seasia/IND_A44_demand_satiation_mult", "L143.HDDCDD_scen_R_Y") ->
-      X245.Intgains_scalar_bld_Bangkok_Thailand
+      X245.Intgains_scalar_bld_Subregions_Thailand
 
-    X245.ShellConductance_bld_Bangkok_Thailand %>%
+    X245.ShellConductance_bld_Subregions_Thailand %>%
       add_title("Shell conductance (inverse of shell efficiency) by state") %>%
       add_units("Unitless") %>%
       add_comments("values from IND_A44_shell") %>%
       add_legacy_name("X245.ShellConductance_bld") %>%
       add_precursors("gcam-seasia/IND_A44_shell", "gcam-seasia/A44.gcam_consumer") ->
-      X245.ShellConductance_bld_Bangkok_Thailand
+      X245.ShellConductance_bld_Subregions_Thailand
 
-    X245.Supplysector_bld_Bangkok_Thailand %>%
+    X245.Supplysector_bld_Subregions_Thailand %>%
       add_title("Supplysector info for buildings") %>%
       add_units("Unitless") %>%
       add_comments("IND_A44_sector written to all states") %>%
       add_legacy_name("X245.Supplysector_bld") %>%
       add_precursors("gcam-seasia/IND_A44_sector") ->
-      X245.Supplysector_bld_Bangkok_Thailand
+      X245.Supplysector_bld_Subregions_Thailand
 
-    X245.FinalEnergyKeyword_bld_Bangkok_Thailand %>%
+    X245.FinalEnergyKeyword_bld_Subregions_Thailand %>%
       add_title("Supply sector keywords for detailed building sector") %>%
       add_units("NA") %>%
       add_comments("IND_A44_sector written to all states") %>%
       add_legacy_name("X245.FinalEnergyKeyword_bld") %>%
       add_precursors("gcam-seasia/IND_A44_sector") ->
-      X245.FinalEnergyKeyword_bld_Bangkok_Thailand
+      X245.FinalEnergyKeyword_bld_Subregions_Thailand
 
     if(exists("X245.SubsectorShrwt_bld")) {
-      X245.SubsectorShrwt_bld_Bangkok_Thailand %>%
+      X245.SubsectorShrwt_bld_Subregions_Thailand %>%
         add_title("Subsector shareweights of building sector") %>%
         add_units("Unitless") %>%
         add_comments("IND_A44_subsector_shrwt written to all regions") %>%
         add_legacy_name("X245.SubsectorShrwt_bld") %>%
         add_precursors("gcam-seasia/IND_A44_subsector_shrwt") ->
-        X245.SubsectorShrwt_bld_Bangkok_Thailand
+        X245.SubsectorShrwt_bld_Subregions_Thailand
     } else {
       missing_data() %>%
         add_legacy_name("X245.SubsectorShrwt_bld") ->
-        X245.SubsectorShrwt_bld_Bangkok_Thailand
+        X245.SubsectorShrwt_bld_Subregions_Thailand
     }
 
-    if(exists("X245.SubsectorShrwtFllt_bld_Bangkok_Thailand")) {
-      X245.SubsectorShrwtFllt_bld_Bangkok_Thailand %>%
+    if(exists("X245.SubsectorShrwtFllt_bld_Subregions_Thailand")) {
+      X245.SubsectorShrwtFllt_bld_Subregions_Thailand %>%
         add_title("Subsector shareweights of building sector") %>%
         add_units("Unitless") %>%
         add_comments("IND_A44_subsector_shrwt written to all regions") %>%
         add_legacy_name("X245.SubsectorShrwtFllt_bld") %>%
         add_precursors("gcam-seasia/IND_A44_subsector_shrwt") ->
-        X245.SubsectorShrwtFllt_bld_Bangkok_Thailand
+        X245.SubsectorShrwtFllt_bld_Subregions_Thailand
     } else {
       missing_data() %>%
         add_legacy_name("X245.SubsectorShrwtFllt_bld") ->
-        X245.SubsectorShrwtFllt_bld_Bangkok_Thailand
+        X245.SubsectorShrwtFllt_bld_Subregions_Thailand
     }
 
 
-    if(exists("X245.SubsectorInterp_bld_Bangkok_Thailand")) {
-      X245.SubsectorInterp_bld_Bangkok_Thailand %>%
+    if(exists("X245.SubsectorInterp_bld_Subregions_Thailand")) {
+      X245.SubsectorInterp_bld_Subregions_Thailand %>%
         add_title("Subsector shareweight interpolation of building sector") %>%
         add_units("NA") %>%
         add_comments("IND_A44_subsector_interp written to all regions") %>%
         add_legacy_name("X245.SubsectorInterp_bld") %>%
         add_precursors("gcam-seasia/IND_A44_subsector_interp") ->
-        X245.SubsectorInterp_bld_Bangkok_Thailand
+        X245.SubsectorInterp_bld_Subregions_Thailand
     } else {
       missing_data() %>%
         add_legacy_name("X245.SubsectorInterp_bld") ->
-        X245.SubsectorInterp_bld_Bangkok_Thailand
+        X245.SubsectorInterp_bld_Subregions_Thailand
     }
 
-    if(exists("X245.SubsectorInterpTo_bld_Bangkok_Thailand")) {
-      X245.SubsectorInterpTo_bld_Bangkok_Thailand %>%
+    if(exists("X245.SubsectorInterpTo_bld_Subregions_Thailand")) {
+      X245.SubsectorInterpTo_bld_Subregions_Thailand %>%
         add_title("Subsector shareweight interpolation of building sector") %>%
         add_units("NA") %>%
         add_comments("IND_A44_subsector_interp written to all regions") %>%
         add_legacy_name("X245.SubsectorInterpTo_bld") %>%
         add_precursors("gcam-seasia/IND_A44_subsector_interp") ->
-        X245.SubsectorInterpTo_bld_Bangkok_Thailand
+        X245.SubsectorInterpTo_bld_Subregions_Thailand
     } else {
       missing_data() %>%
         add_legacy_name("X245.SubsectorInterpTo_bld") ->
-        X245.SubsectorInterpTo_bld_Bangkok_Thailand
+        X245.SubsectorInterpTo_bld_Subregions_Thailand
     }
 
-    X245.SubsectorLogit_bld_Bangkok_Thailand %>%
+    X245.SubsectorLogit_bld_Subregions_Thailand %>%
       add_title("Subsector logit exponents of building sector") %>%
       add_units("Unitless") %>%
       add_comments("IND_A44_subsector_logit written to all states") %>%
       add_legacy_name("X245.SubsectorLogit_bld") %>%
       add_precursors("gcam-seasia/IND_A44_subsector_logit") ->
-      X245.SubsectorLogit_bld_Bangkok_Thailand
+      X245.SubsectorLogit_bld_Subregions_Thailand
 
-    X245.StubTech_bld_Bangkok_Thailand %>%
+    X245.StubTech_bld_Subregions_Thailand %>%
       add_title("Identification of stub technologies for buildings") %>%
       add_units("NA") %>%
       add_comments("IND_A44_tech_eff written to all states") %>%
       add_legacy_name("X245.StubTech_bld") %>%
       add_precursors("gcam-seasia/IND_A44_tech_eff") ->
-      X245.StubTech_bld_Bangkok_Thailand
+      X245.StubTech_bld_Subregions_Thailand
 
-    X245.StubTechCalInput_bld_Bangkok_Thailand %>%
+    X245.StubTechCalInput_bld_Subregions_Thailand %>%
       add_title("Calibrated energy consumption and share weights by buildings technologies") %>%
       add_units("calibrated.value: EJ/yr; shareweights: Unitless") %>%
       add_comments("Energy consumption multiplied by shares to get calibrated energy") %>%
       add_comments("Shares calculated using efficiency averages") %>%
       add_legacy_name("X245.StubTechCalInput_bld") %>%
-      add_precursors("X244.StubTechCalInput_bld_Bangkok_Thailand", "gcam-seasia/IND_bld_techs", "gcam-seasia/IND_A44_tech_eff",
+      add_precursors("X244.StubTechCalInput_bld_Subregions_Thailand", "gcam-seasia/IND_bld_techs", "gcam-seasia/IND_A44_tech_eff",
                      "gcam-seasia/IND_A44_tech_eff_avg", "gcam-seasia/IND_A44_globaltech_shares", "gcam-seasia/IESS_bld_serv_fuel") ->
-      X245.StubTechCalInput_bld_Bangkok_Thailand
+      X245.StubTechCalInput_bld_Subregions_Thailand
 
-    X245.StubTechMarket_bld_Bangkok_Thailand %>%
+    X245.StubTechMarket_bld_Subregions_Thailand %>%
       add_title("market names for fuel inputs to all technologies in each state") %>%
       add_units("NA") %>%
       add_comments("Categories from IND_A44_tech_eff written to all states") %>%
       add_comments("Market set to states for electricity") %>%
       add_legacy_name("X245.StubTechMarket_bld") %>%
       add_precursors("gcam-seasia/IND_A44_tech_eff") ->
-      X245.StubTechMarket_bld_Bangkok_Thailand
+      X245.StubTechMarket_bld_Subregions_Thailand
 
     X245.GlobalTechIntGainOutputRatio %>%
       add_title("Output ratios of internal gain energy from non-thermal building services") %>%
@@ -1291,7 +1291,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       add_legacy_name("X245.GlobalTechIntGainOutputRatio") %>%
       add_precursors("gcam-seasia/IND_A44_tech_intgains", "gcam-seasia/IND_bld_techs",
                      "gcam-seasia/A44.gcam_consumer", "gcam-seasia/IND_A44_tech_eff") ->
-      X245.GlobalTechIntGainOutputRatio_bld_Bangkok_Thailand
+      X245.GlobalTechIntGainOutputRatio_bld_Subregions_Thailand
 
     X245.GlobalTechInterpTo_bld %>%
       add_title("Technology shareweight interpolation") %>%
@@ -1299,7 +1299,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       add_comments("Directly from IND_A44_tech_interp") %>%
       add_legacy_name("X245.GlobalTechInterpTo_bld") %>%
       add_precursors("gcam-seasia/IND_A44_tech_interp") ->
-      X245.GlobalTechInterpTo_bld_Bangkok_Thailand
+      X245.GlobalTechInterpTo_bld_Subregions_Thailand
 
     X245.GlobalTechEff_bld %>%
       add_title("Assumed efficiencies (all years) of buildings technologies") %>%
@@ -1307,23 +1307,23 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       add_comments("Values from IND_A44_tech_eff") %>%
       add_legacy_name("X245.GlobalTechEff_bld") %>%
       add_precursors("gcam-seasia/IND_A44_tech_eff") ->
-      X245.GlobalTechEff_bld_Bangkok_Thailand
+      X245.GlobalTechEff_bld_Subregions_Thailand
 
-    X245.GlobalTechShrwt_bld_Bangkok_Thailand %>%
+    X245.GlobalTechShrwt_bld_Subregions_Thailand %>%
       add_title("Default shareweights for global building technologies") %>%
       add_units("Unitless") %>%
       add_comments("Values interpolated to model years from IND_A44_tech_shrwt") %>%
       add_legacy_name("X245.GlobalTechShrwt_bld") %>%
       add_precursors("gcam-seasia/IND_A44_tech_shrwt") ->
-      X245.GlobalTechShrwt_bld_Bangkok_Thailand
+      X245.GlobalTechShrwt_bld_Subregions_Thailand
 
-    X245.GlobalTechCost_bld_Bangkok_Thailand %>%
+    X245.GlobalTechCost_bld_Subregions_Thailand %>%
       add_title("Non-fuel costs of global building technologies") %>%
       add_units("1975$/GJ") %>%
       add_comments("Values from IND_A44_tech_cost") %>%
       add_legacy_name("X245.GlobalTechCost_bld") %>%
       add_precursors("gcam-seasia/IND_A44_tech_cost") ->
-      X245.GlobalTechCost_bld_Bangkok_Thailand
+      X245.GlobalTechCost_bld_Subregions_Thailand
 
     X245.GlobalTechSCurve_bld %>%
       add_title("Retirement rates for building technologies") %>%
@@ -1331,7 +1331,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       add_comments("Lifetime, steepness, and half.life from IND_A44_tech_retirement") %>%
       add_legacy_name("X245.GlobalTechSCurve_bld") %>%
       add_precursors("gcam-seasia/IND_A44_tech_cost", "gcam-seasia/IND_A44_tech_retirement") ->
-      X245.GlobalTechSCurve_bld_Bangkok_Thailand
+      X245.GlobalTechSCurve_bld_Subregions_Thailand
 
     # X245.HDDCDD_AEO_2015_SEA %>%
     #   add_title("Heating and Cooling Degree Days by State consistent with AEO 2015") %>%
@@ -1339,7 +1339,7 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
     #   add_comments("L143.HDDCDD_scen_R_Y assigned to GCAM residential / commercial building consumers") %>%
     #   add_legacy_name("X245.HDDCDD_QER_QER") %>%
     #   same_precursors_as("X245.HDDCDD_A2_GFDL_SEA") ->
-    #   X245.HDDCDD_AEO_2015_bld_Bangkok_Thailand
+    #   X245.HDDCDD_AEO_2015_bld_Subregions_Thailand
 
     X245.HDDCDD_A2_GFDL_SEA %>%
       add_title("Heating and Cooling Degree Days by State for GFDL A2") %>%
@@ -1348,48 +1348,48 @@ module_gcamseasia_X245.building_breakout_Bangkok_Thailand <- function(command, .
       add_legacy_name("X245.HDDCDD_A2_GFDL") %>%
       add_precursors("L143.HDDCDD_scen_R_Y", "gcam-seasia/IND_A44_sector",
                      "gcam-seasia/IND_bld_techs", "gcam-seasia/A44.gcam_consumer") ->
-      X245.HDDCDD_A2_GFDL_bld_Bangkok_Thailand
+      X245.HDDCDD_A2_GFDL_bld_Subregions_Thailand
 
     X245.HDDCDD_constdds_SEA %>%
       add_title("Heating and Cooling Degree Days by State - constant at historical levels") %>%
       add_units("Fahrenheit Degree Days") %>%
       add_comments("L143.HDDCDD_scen_R_Y assigned to GCAM subsectors") %>%
       same_precursors_as("X245.HDDCDD_A2_GFDL_SEA") ->
-      X245.HDDCDD_constdds_bld_Bangkok_Thailand
+      X245.HDDCDD_constdds_bld_Subregions_Thailand
 
-    return_data(X245.DeleteConsumer_bld_Bangkok_Thailand,
-                X245.DeleteSupplysector_bld_Bangkok_Thailand,
-                X245.SubregionalShares_bld_Bangkok_Thailand,
-                X245.PriceExp_IntGains_bld_Bangkok_Thailand,
-                X245.Floorspace_bld_Bangkok_Thailand,
-                X245.DemandFunction_serv_bld_Bangkok_Thailand,
-                X245.DemandFunction_flsp_bld_Bangkok_Thailand,
-                X245.Satiation_flsp_bld_Bangkok_Thailand,
-                X245.SatiationAdder_bld_Bangkok_Thailand,
-                X245.ThermalBaseService_bld_Bangkok_Thailand,
-                X245.GenericBaseService_bld_Bangkok_Thailand,
-                X245.ThermalServiceSatiation_bld_Bangkok_Thailand,
-                X245.GenericServiceSatiation_bld_Bangkok_Thailand,
-                X245.Intgains_scalar_bld_Bangkok_Thailand,
-                X245.ShellConductance_bld_Bangkok_Thailand,
-                X245.Supplysector_bld_Bangkok_Thailand,
-                X245.FinalEnergyKeyword_bld_Bangkok_Thailand,
-                X245.SubsectorShrwt_bld_Bangkok_Thailand,
-                X245.SubsectorShrwtFllt_bld_Bangkok_Thailand,
-                X245.SubsectorInterp_bld_Bangkok_Thailand,
-                X245.SubsectorInterpTo_bld_Bangkok_Thailand,
-                X245.SubsectorLogit_bld_Bangkok_Thailand,
-                X245.StubTech_bld_Bangkok_Thailand,
-                X245.StubTechCalInput_bld_Bangkok_Thailand,
-                X245.StubTechMarket_bld_Bangkok_Thailand,
-                X245.GlobalTechIntGainOutputRatio_bld_Bangkok_Thailand,
-                X245.GlobalTechInterpTo_bld_Bangkok_Thailand,
-                X245.GlobalTechEff_bld_Bangkok_Thailand,
-                X245.GlobalTechShrwt_bld_Bangkok_Thailand,
-                X245.GlobalTechCost_bld_Bangkok_Thailand,
-                X245.GlobalTechSCurve_bld_Bangkok_Thailand,
-                X245.HDDCDD_A2_GFDL_bld_Bangkok_Thailand,
-                X245.HDDCDD_constdds_bld_Bangkok_Thailand)
+    return_data(X245.DeleteConsumer_bld_Subregions_Thailand,
+                X245.DeleteSupplysector_bld_Subregions_Thailand,
+                X245.SubregionalShares_bld_Subregions_Thailand,
+                X245.PriceExp_IntGains_bld_Subregions_Thailand,
+                X245.Floorspace_bld_Subregions_Thailand,
+                X245.DemandFunction_serv_bld_Subregions_Thailand,
+                X245.DemandFunction_flsp_bld_Subregions_Thailand,
+                X245.Satiation_flsp_bld_Subregions_Thailand,
+                X245.SatiationAdder_bld_Subregions_Thailand,
+                X245.ThermalBaseService_bld_Subregions_Thailand,
+                X245.GenericBaseService_bld_Subregions_Thailand,
+                X245.ThermalServiceSatiation_bld_Subregions_Thailand,
+                X245.GenericServiceSatiation_bld_Subregions_Thailand,
+                X245.Intgains_scalar_bld_Subregions_Thailand,
+                X245.ShellConductance_bld_Subregions_Thailand,
+                X245.Supplysector_bld_Subregions_Thailand,
+                X245.FinalEnergyKeyword_bld_Subregions_Thailand,
+                X245.SubsectorShrwt_bld_Subregions_Thailand,
+                X245.SubsectorShrwtFllt_bld_Subregions_Thailand,
+                X245.SubsectorInterp_bld_Subregions_Thailand,
+                X245.SubsectorInterpTo_bld_Subregions_Thailand,
+                X245.SubsectorLogit_bld_Subregions_Thailand,
+                X245.StubTech_bld_Subregions_Thailand,
+                X245.StubTechCalInput_bld_Subregions_Thailand,
+                X245.StubTechMarket_bld_Subregions_Thailand,
+                X245.GlobalTechIntGainOutputRatio_bld_Subregions_Thailand,
+                X245.GlobalTechInterpTo_bld_Subregions_Thailand,
+                X245.GlobalTechEff_bld_Subregions_Thailand,
+                X245.GlobalTechShrwt_bld_Subregions_Thailand,
+                X245.GlobalTechCost_bld_Subregions_Thailand,
+                X245.GlobalTechSCurve_bld_Subregions_Thailand,
+                X245.HDDCDD_A2_GFDL_bld_Subregions_Thailand,
+                X245.HDDCDD_constdds_bld_Subregions_Thailand)
   } else {
     stop("Unknown command")
   }
