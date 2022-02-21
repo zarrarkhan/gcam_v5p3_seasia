@@ -1,0 +1,61 @@
+# File: Subregions_Malaysia_pcgdp.csv
+# Title: Subregions and rest-of-Malaysia pcgdp
+# Units: thousand 2005 USD per capita
+# Description: Computed off-line
+# Column types: cin
+# ----------
+"region","year","pcgdp"
+"KualaLumpur",1971,1.094
+"KualaLumpur",1975,1.74
+"KualaLumpur",1980,3.755
+"KualaLumpur",1985,4.932
+"KualaLumpur",1990,6.853
+"KualaLumpur",1995,11.573
+"KualaLumpur",2000,16.758
+"KualaLumpur",2005,23.002
+"KualaLumpur",2010,31.599
+"KualaLumpur",2015,35.429
+"KualaLumpur",2020,38.855
+"KualaLumpur",2025,44.626
+"KualaLumpur",2030,51.964
+"KualaLumpur",2035,60.811
+"KualaLumpur",2040,70.764
+"KualaLumpur",2045,81.275
+"KualaLumpur",2050,91.937
+"KualaLumpur",2055,102.484
+"KualaLumpur",2060,112.886
+"KualaLumpur",2065,123.428
+"KualaLumpur",2070,134.205
+"KualaLumpur",2075,145.562
+"KualaLumpur",2080,158.092
+"KualaLumpur",2085,172.298
+"KualaLumpur",2090,188.293
+"KualaLumpur",2095,206.03
+"KualaLumpur",2100,225.534
+"Rest of Malaysia",1971,0.403
+"Rest of Malaysia",1975,0.632
+"Rest of Malaysia",1980,1.327
+"Rest of Malaysia",1985,1.703
+"Rest of Malaysia",1990,2.259
+"Rest of Malaysia",1995,3.708
+"Rest of Malaysia",2000,5.239
+"Rest of Malaysia",2005,7.216
+"Rest of Malaysia",2010,9.932
+"Rest of Malaysia",2015,11.099
+"Rest of Malaysia",2020,12.048
+"Rest of Malaysia",2025,13.11
+"Rest of Malaysia",2030,14.521
+"Rest of Malaysia",2035,16.215
+"Rest of Malaysia",2040,18.031
+"Rest of Malaysia",2045,19.797
+"Rest of Malaysia",2050,21.387
+"Rest of Malaysia",2055,22.791
+"Rest of Malaysia",2060,24.042
+"Rest of Malaysia",2065,25.235
+"Rest of Malaysia",2070,26.403
+"Rest of Malaysia",2075,27.628
+"Rest of Malaysia",2080,28.979
+"Rest of Malaysia",2085,30.517
+"Rest of Malaysia",2090,32.187
+"Rest of Malaysia",2095,33.983
+"Rest of Malaysia",2100,35.869
