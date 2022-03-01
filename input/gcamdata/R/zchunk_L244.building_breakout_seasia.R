@@ -168,14 +168,15 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
     # ===================================================
     # 0. Pre-Processing
     # ===================================================
+
     # Need to delete the buildings sector in the SEAsia regions (gcam.consumers and supplysectors)
-    L244.DeleteConsumer_bld_gcamSEA <- tibble(region = gcam.SEA_REGION  , gcam.consumer = A44.gcam_consumer_en$gcam.consumer)
-    L244.DeleteSupplysector_bld_gcamSEA <- tibble(region = gcam.SEA_REGION  , supplysector = A44.sector_en$supplysector)
+    L244.DeleteConsumer_bld_gcamSEA <- write_to_all_states(A44.gcam_consumer_en, names = c("gcam.consumer", "region"), gcam.SEA_REGION )
+    L244.DeleteSupplysector_bld_gcamSEA <- write_to_all_states(A44.sector_en, names = c("supplysector", "region"), gcam.SEA_REGION )
 
     # Assign subregional shares
     # Manipulate subregional shares input to contain relevant info
     subregional_shares_manipulate <- IND_A44_subregional_shares %>%
-      filter( region == gcam.SEA_REGION,
+      filter( region %in% gcam.SEA_REGION,
               grepl( "share", item ) ) %>%
       gather_years() %>%
       mutate( value = value / 100,
@@ -231,7 +232,7 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
               subregional.income.share = approx_fun( pop.year.fillout, subregional.income.share, rule = 2 ),
               inc.year.fillout = pop.year.fillout )
 
-    L244.SubregionalShares_bld_gcamSEA <- tibble(region = gcam.SEA_REGION, gcam.consumer = A44.gcam_consumer$gcam.consumer) %>%
+    L244.SubregionalShares_bld_gcamSEA <- write_to_all_states(A44.gcam_consumer, names = c("gcam.consumer", "region"), gcam.SEA_REGION ) %>%
       filter( gcam.consumer == "comm" ) %>%
       repeat_add_columns( tibble::tibble( year = MODEL_YEARS ) ) %>%
       mutate( pop.year.fillout = year,
@@ -246,14 +247,13 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
     # 0.5. Population
     # ===================================================
     # Bind historical and future population data and filter for the target region(s) (SEAsia)
-    # TODO: to change the region the XML is produced for, change "gcam.SEA_REGION" in constants.R
     # Select SSP scenario, default is gSSP2 (business as usual)
     L244.Pop_thous <- L101.Pop_thous_Scen_R_Yfut %>%
       filter( scenario == "gSSP2" ) %>%
       bind_rows( L101.Pop_thous_R_Yh ) %>%
       left_join_error_no_match( GCAM_region_names, by = c( "GCAM_region_ID" ) ) %>%
       # filter for target region(s)
-      filter( region == gcam.SEA_REGION ) %>%
+      filter( region %in% gcam.SEA_REGION ) %>%
       # select relevant columns
       select( -c( scenario, GCAM_region_ID ) )
 
@@ -273,7 +273,7 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
     L244.Floorspace_resid <- L144.flsp_bm2_R_res_Yh %>%
       left_join_error_no_match( GCAM_region_names, by = c( "GCAM_region_ID" ) ) %>%
       # filter for target region(s)
-      filter( region == gcam.SEA_REGION ) %>%
+      filter( region %in% gcam.SEA_REGION ) %>%
       # select relevant columns
       select( -c( GCAM_region_ID ) ) %>%
       rename( base.building.size = value ) %>%
@@ -337,6 +337,7 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
     # Multiply the residential floorspace total by the rural and urban shares
     L244.Floorspace_resid_rural_Yh <- L244.Floorspace_resid %>%
     # can't use a left_join_error_no_match due to differing years
+    # since floorspace assumptions are currently the same for all of SEAsia, we don't join by region here
       left_join( res_shares_all, by = c( "year" ) ) %>%
       mutate(  base.building.size = base.building.size * rural_share,
                gcam.consumer = "resid rural",
@@ -365,7 +366,7 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
     L244.Floorspace_comm <- L144.flsp_bm2_R_comm_Yh %>%
       left_join_error_no_match( GCAM_region_names, by = c( "GCAM_region_ID" ) ) %>%
       # filter for target region(s)
-      filter( region == gcam.SEA_REGION ) %>%
+      filter( region %in% gcam.SEA_REGION ) %>%
       # select relevant columns
       select( -c( GCAM_region_ID ) ) %>%
       rename(base.building.size = value) %>%
@@ -391,7 +392,7 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
     # TODO: check on this. Units of original input VS units in data system
     satiation_flsp <- L244.Satiation_flsp %>%
       # filter for the target region(s)
-      filter( region == gcam.SEA_REGION ) %>%
+      filter( region %in% gcam.SEA_REGION ) %>%
       mutate( satiation.level = satiation.level * 1000000 ) %>%
       select( -c( nodeInput, building.node.input ) ) %>%
       spread( gcam.consumer, satiation.level ) %>%
@@ -400,7 +401,7 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
 
     L244.Satiation_flsp_bld_gcamSEA <- satiation_flsp %>%
       # select the target region
-      filter( region == gcam.SEA_REGION ) %>%
+      filter( region %in% gcam.SEA_REGION ) %>%
       tidyr::gather( gcam.consumer, value, `resid rural`, `resid urban`, comm ) %>%
       # Need to make sure that the satiation level is greater than the floorspace in the final base year
       left_join_error_no_match(L244.Floorspace_bld_gcamSEA %>%
@@ -430,7 +431,7 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
       rename( GDP = value ) %>%
       # filter for target region(s)
       left_join_error_no_match( iso_GCAM_regID, by = c( "iso" ) ) %>%
-      filter( country_name == gcam.SEA_REGION,
+      filter( country_name %in% gcam.SEA_REGION,
               year == energy.SATIATION_YEAR ) %>%
       rename( region = country_name ) %>%
       select( -c( iso, region_GCAM3, GCAM_region_ID ) ) %>%
@@ -464,7 +465,7 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
     L244.HDDCDD_scen <- L143.HDDCDD_scen_R_Y %>%
       left_join_error_no_match( GCAM_region_names, by = c( "GCAM_region_ID" ) ) %>%
       # filter for target region(s)
-      filter( region == gcam.SEA_REGION ) %>%
+      filter( region %in% gcam.SEA_REGION ) %>%
       # select relevant columns
       select( -c( GCAM_region_ID ) ) %>%
       rename(degree.days = value)
@@ -549,15 +550,14 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
       mutate(value = round(approx_fun(year, value), energy.DIGITS_EFFICIENCY)) %>%
       ungroup() %>%
       filter(year %in% MODEL_YEARS) %>%
-      # Add region
-      mutate( region = gcam.SEA_REGION ) %>%
       # Add nodeInput and building.node.input
       left_join_error_no_match(A44.gcam_consumer, by = "gcam.consumer") %>%
       mutate(floor.to.surface.ratio = energy.FLOOR_TO_SURFACE_RATIO,
              shell.year = year) %>%
       # Rename columns
       rename(shell.conductance = value) %>%
-      select(LEVEL2_DATA_NAMES[["ShellConductance"]])
+      write_to_all_states(LEVEL2_DATA_NAMES[["ShellConductance"]],
+                        region_list = gcam.SEA_REGION )
 
     # ===================================================
     # 4. Buildings Sectors, Subsectors, etc.
@@ -626,10 +626,9 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
 
     # L244.StubTechMarket_bld: Specify market names for fuel inputs to all technologies in each state
     L244.StubTechMarket_bld <- L244.end_use_eff %>%
-      mutate(market.name = gcam.SEA_REGION) %>%
       rename(stub.technology = technology) %>%
-      write_to_all_states(LEVEL2_DATA_NAMES[["StubTechMarket"]], region_list = gcam.SEA_REGION) %>%
-      select(LEVEL2_DATA_NAMES[["StubTechMarket"]])
+      write_to_all_states(c(LEVEL2_DATA_NAMES[["StubTechYr"]], "minicam.energy.input"), region_list = gcam.SEA_REGION) %>%
+      mutate(market.name = region )
 
     # L244.StubTechCalInput_bld: Calibrated energy consumption by buildings technologies
     # The input that has energy consumption is at an aggregated level and needs to be broken out
@@ -637,7 +636,7 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
     bld_agg_energy_consumption <- L144.in_EJ_R_bld_serv_F_Yh %>%
       left_join_error_no_match( GCAM_region_names, by = c( "GCAM_region_ID" ) ) %>%
       # filter for target region(s)
-      filter( region == gcam.SEA_REGION ) %>%
+      filter( region %in% gcam.SEA_REGION ) %>%
       # select relevant columns
       select( -c( GCAM_region_ID ) ) %>%
       filter(year %in% MODEL_YEARS) %>%
@@ -729,8 +728,7 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
     # For calibration table, start with global tech efficiency table, and match in tech shares.
     L244.StubTechCalInput_bld_gcamSEA <- L244.GlobalTechEff_bld %>%
       filter(year %in% MODEL_BASE_YEARS) %>%
-      # add region column
-      mutate( region = gcam.SEA_REGION ) %>%
+      write_to_all_states(c(LEVEL2_DATA_NAMES[["GlobalTechEff"]],"region"), region_list = gcam.SEA_REGION) %>%
       rename(supplysector = sector.name, subsector = subsector.name, stub.technology = technology) %>%
       # Using left_join because we don't have shares for all technologies, NAs will be set to 1
       left_join(L244.globaltech_shares, by = c("supplysector", "subsector", "stub.technology" = "technology")) %>%
@@ -774,8 +772,8 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
                 stub.technology = technology ) %>%
         mutate( year = 0 ) %>%
         complete( nesting( supplysector, subsector, stub.technology ), year = MODEL_BASE_YEARS ) %>%
-        mutate( region = gcam.SEA_REGION,
-                calibrated.value = 0,
+        write_to_all_states( c("supplysector", "subsector", "stub.technology", "year", "region"), region_list = gcam.SEA_REGION) %>%
+        mutate( calibrated.value = 0,
                 share.weight.year = year,
                 calOutputValue = calibrated.value ) %>%
         # join back with technology table to get a column that has general technology names
@@ -885,7 +883,7 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
     L244.GenericServiceSatiation_bld_gcamSEA <- L244.GenericBaseService_bld_gcamSEA %>%
       filter(year == max(MODEL_BASE_YEARS)) %>%
       # Add floorspace
-      left_join_error_no_match(L244.Floorspace_bld_gcamSEA, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year")) %>%
+      left_join_error_no_match(L244.Floorspace_bld_gcamSEA, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year", "region")) %>%
       # Add multiplier
       # TODO: Need multiplier for SEA, currently just changed to SEAsia sectors, but the values are not correct
       # TODO: ask Sha or Page about demand satiation multiplier
@@ -898,7 +896,7 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
     L244.ThermalServiceSatiation_bld_gcamSEA <- L244.ThermalBaseService_bld_gcamSEA %>%
       filter(year == max(MODEL_BASE_YEARS)) %>%
       # Add floorspace
-      left_join_error_no_match(L244.Floorspace_bld_gcamSEA, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year")) %>%
+      left_join_error_no_match(L244.Floorspace_bld_gcamSEA, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year", "region")) %>%
       # Add multiplier
       left_join_error_no_match(IND_A44_demand_satiation_mult, by = c("thermal.building.service.input" = "supplysector")) %>%
       # Satiation level = service per floorspace * multiplier

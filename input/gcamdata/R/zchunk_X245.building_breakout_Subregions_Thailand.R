@@ -163,14 +163,14 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
     # ===================================================
     # 0. Pre-Processing
     # ===================================================
-    # Need to delete the buildings sector in the SEAsia regions (gcam.consumers and supplysectors)
+    # Need to delete the buildings sector at the national level (gcam.consumers and supplysectors)
     X245.DeleteConsumer_bld_Subregions_Thailand <- tibble(region = "Thailand", gcam.consumer = A44.gcam_consumer_en$gcam.consumer)
     X245.DeleteSupplysector_bld_Subregions_Thailand <- tibble(region = "Thailand", supplysector = A44.sector_en$supplysector)
 
     # Assign subregional shares
     # Manipulate subregional shares input to contain relevant info
     subregional_shares_manipulate <- IND_A44_subregional_shares %>%
-      filter( region == "Bangkok" | region == "Rest of Thailand",
+      filter( region %in% gcam.Thailand.subregions,
               grepl( "share", item ) ) %>%
       gather_years() %>%
       mutate( value = value / 100,
@@ -227,7 +227,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
               inc.year.fillout = pop.year.fillout )
 
     X245.SubregionalShares_bld_Subregions_Thailand <- write_to_all_states(A44.gcam_consumer, c("region", "gcam.consumer"),
-                                                                       region_list = c( "Bangkok", "Rest of Thailand" ) ) %>%
+                                                                       region_list = gcam.Thailand.subregions ) %>%
       filter( gcam.consumer == "comm" ) %>%
       repeat_add_columns( tibble::tibble( year = MODEL_YEARS ) ) %>%
       mutate( pop.year.fillout = year,
@@ -243,12 +243,13 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
     # Bind historical and future population data and filter for the target region(s)
     # Select SSP scenario, default is gSSP2 (business as usual)
     X245.Pop_thous <- X201.Pop_Subregions_Thailand %>%
+      filter( region %in% gcam.Thailand.subregions ) %>%
       # rename columns
       rename( value = totalPop )
 
     # X245.PriceExp_IntGains_bld_Subregions_Thailand: price exponent on floorspace and naming of internal gains trial markets
     X245.PriceExp_IntGains_bld_Subregions_Thailand <- write_to_all_states(A44.gcam_consumer, LEVEL2_DATA_NAMES[["PriceExp_IntGains"]],
-                                                          region_list = c( "Bangkok", "Rest of Thailand" ) )
+                                                          region_list = gcam.Thailand.subregions )
 
     # ===================================================
     # 1. Floorspace
@@ -261,7 +262,8 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
     # ===================================================
     X245.Floorspace_resid <- X244.Floorspace_Subregions_Thailand %>%
       # filter for target region(s)
-      filter( gcam.consumer == "resid" ) %>%
+      filter( region %in% gcam.Thailand.subregions,
+             gcam.consumer == "resid" ) %>%
       # add column that contains gcam.consumer
       mutate( base.building.size = round( base.building.size, energy.DIGITS_FLOORSPACE ) )
 
@@ -347,16 +349,17 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
     # ===================================================
     X245.Floorspace_comm <- X244.Floorspace_Subregions_Thailand %>%
       # filter for target region(s)
-      filter( gcam.consumer == "comm" ) %>%
+      filter( region %in% gcam.Thailand.subregions,
+              gcam.consumer == "comm" ) %>%
       mutate( base.building.size = round(base.building.size, energy.DIGITS_FLOORSPACE))
 
     X245.Floorspace_bld_Subregions_Thailand <- bind_rows(X245.Floorspace_resid_Yh, X245.Floorspace_comm)
 
     # X245.DemandFunction_serv_bld_Subregions_Thailand and X245.DemandFunction_flsp_bld_Subregions_Thailand: demand function types
     X245.DemandFunction_serv_bld_Subregions_Thailand <- write_to_all_states(IND_A44_demandFn_serv, LEVEL2_DATA_NAMES[["DemandFunction_serv"]],
-                                                            region_list = c( "Bangkok", "Rest of Thailand" ) )
+                                                            region_list = gcam.Thailand.subregions )
     X245.DemandFunction_flsp_bld_Subregions_Thailand <- write_to_all_states(IND_A44_demandFn_flsp, LEVEL2_DATA_NAMES[["DemandFunction_flsp"]],
-                                                            region_list = c( "Bangkok", "Rest of Thailand" ) )
+                                                            region_list = gcam.Thailand.subregions )
 
     # ===================================================
     # 1.3. Floorspace Satiation Levels
@@ -364,6 +367,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
     # X245.Satiation_flsp_bld_Subregions_Thailand: Satiation levels assumed for floorspace
     # TODO: check on this. Units of original input VS units in data system
     satiation_flsp <- X244.Satiation_flsp_Subregions_Thailand %>%
+      filter( region %in% gcam.Thailand.subregions ) %>%
       mutate( satiation.level = satiation.level * 1000000 ) %>%
       select( -c( nodeInput, building.node.input ) ) %>%
       spread( gcam.consumer, satiation.level ) %>%
@@ -395,7 +399,8 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
 
     X245.SatiationAdder_bld_Subregions_Thailand <- X201.GDP_Subregions_Thailand %>%
       # filter for target region(s)
-      filter( year == energy.SATIATION_YEAR ) %>%
+      filter( region %in% gcam.Thailand.subregions,
+              year == energy.SATIATION_YEAR ) %>%
       # convert from million to thousand
       mutate( GDP = GDP * CONV_MIL_THOUS ) %>%
       left_join( X245.Satiation_flsp_bld_Subregions_Thailand, by = c( "region") ) %>%
@@ -448,7 +453,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
       ungroup() %>%
       # rename to target region(s)
       write_to_all_states(c( "region", "variable", "degree.days" ),
-                        region_list = c( "Bangkok", "Rest of Thailand" ) )
+                        region_list = gcam.Thailand.subregions )
 
     # X245.HDDCDD: Heating and cooling degree days for USA, used to calculate internal gains
     X245.HDDCDD_normal_USA <- L143.HDDCDD_scen_R_Y %>%
@@ -525,7 +530,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
       # Rename columns
       rename(shell.conductance = value) %>%
       write_to_all_states(LEVEL2_DATA_NAMES[["ShellConductance"]],
-                          region_list = c( "Bangkok", "Rest of Thailand" ) )
+                          region_list = gcam.Thailand.subregions )
 
     # ===================================================
     # 4. Buildings Sectors, Subsectors, etc.
@@ -535,45 +540,45 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
 
     # X245.Supplysector_bld: Supplysector info for buildings
     X245.Supplysector_bld_Subregions_Thailand <- write_to_all_states(IND_A44_sector, c(LEVEL2_DATA_NAMES[["Supplysector"]], LOGIT_TYPE_COLNAME),
-                                                         region_list = c( "Bangkok", "Rest of Thailand" ))
+                                                         region_list = gcam.Thailand.subregions)
 
     # X245.FinalEnergyKeyword_bld: Supply sector keywords for detailed building sector
     X245.FinalEnergyKeyword_bld_Subregions_Thailand <- write_to_all_states(IND_A44_sector, LEVEL2_DATA_NAMES[["FinalEnergyKeyword"]],
-                                                               region_list = c( "Bangkok", "Rest of Thailand" ))
+                                                               region_list = gcam.Thailand.subregions)
 
     # X245.SubsectorLogit_bld: Subsector logit exponents of building sector
     X245.SubsectorLogit_bld_Subregions_Thailand <- write_to_all_states(IND_A44_subsector_logit, c(LEVEL2_DATA_NAMES[["SubsectorLogit"]], LOGIT_TYPE_COLNAME),
-                                                           region_list = c( "Bangkok", "Rest of Thailand" ))
+                                                           region_list = gcam.Thailand.subregions)
 
     # X245.SubsectorShrwt_bld and X245.SubsectorShrwtFllt_bld: Subsector shareweights of building sector
     if(any(!is.na(IND_A44_subsector_shrwt$year))) {
       X245.SubsectorShrwt_bld_Subregions_Thailand <- write_to_all_states(IND_A44_subsector_shrwt %>%
                                                                filter(!is.na(year)), LEVEL2_DATA_NAMES[["SubsectorShrwt"]],
-                                                             region_list = c( "Bangkok", "Rest of Thailand" ))
+                                                             region_list = gcam.Thailand.subregions)
     }
     if(any(!is.na(IND_A44_subsector_shrwt$year.fillout))) {
       X245.SubsectorShrwtFllt_bld_Subregions_Thailand <- write_to_all_states(IND_A44_subsector_shrwt %>%
                                                                    filter(!is.na(year.fillout)), LEVEL2_DATA_NAMES[["SubsectorShrwtFllt"]],
-                                                                 region_list = c( "Bangkok", "Rest of Thailand" ))
+                                                                 region_list = gcam.Thailand.subregions)
     }
 
     # X245.SubsectorInterp_bld and X245.SubsectorInterpTo_bld: Subsector shareweight interpolation of building sector
     if(any(is.na(IND_A44_subsector_interp$to.value))) {
       X245.SubsectorInterp_bld_Subregions_Thailand <- write_to_all_states(IND_A44_subsector_interp %>%
                                                                 filter(is.na(to.value)), LEVEL2_DATA_NAMES[["SubsectorInterp"]],
-                                                              region_list = c( "Bangkok", "Rest of Thailand" ))
+                                                              region_list = gcam.Thailand.subregions)
     }
     if(any(!is.na(IND_A44_subsector_interp$to.value))) {
       X245.SubsectorInterpTo_bld_Subregions_Thailand <- write_to_all_states(IND_A44_subsector_interp %>%
                                                                   filter(!is.na(to.value)), LEVEL2_DATA_NAMES[["SubsectorInterpTo"]],
-                                                                region_list = c( "Bangkok", "Rest of Thailand" ))
+                                                                region_list = gcam.Thailand.subregions)
     }
 
     # X245.StubTech_bld_Subregions_Thailand: Identification of stub technologies for buildings
     X245.StubTech_bld_Subregions_Thailand <- IND_A44_tech_eff %>%
       select(supplysector, subsector, technology) %>%
       distinct() %>%
-      write_to_all_states(LEVEL2_DATA_NAMES[["Tech"]], region_list = c( "Bangkok", "Rest of Thailand" )) %>%
+      write_to_all_states(LEVEL2_DATA_NAMES[["Tech"]], region_list = gcam.Thailand.subregions) %>%
       rename(stub.technology = technology)
 
     # X245.GlobalTechEff_bld: Assumed efficiencies (all years) of buildings technologies
@@ -594,10 +599,8 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
 
     # X245.StubTechMarket_bld: Specify market names for fuel inputs to all technologies in each region
     X245.StubTechMarket_bld_Subregions_Thailand <- X245.end_use_eff %>%
-      mutate(market.name = NA) %>%
       rename(stub.technology = technology) %>%
-      write_to_all_states(LEVEL2_DATA_NAMES[["StubTechMarket"]], region_list = c( "Bangkok", "Rest of Thailand" )) %>%
-      select(LEVEL2_DATA_NAMES[["StubTechMarket"]]) %>%
+      write_to_all_states(c(LEVEL2_DATA_NAMES[["StubTechYr"]], "minicam.energy.input"), region_list = gcam.Thailand.subregions) %>%
       mutate(market.name = region)
 
     # X245.StubTechCalInput_bld: Calibrated energy consumption by buildings technologies
@@ -606,7 +609,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
     # The input that has energy consumption is at an aggregated level and needs to be broken out
     # the IESS file has fuel shares for "buildings" as a whole
     bld_agg_energy_consumption_city <- X244.StubTechCalInput_bld_Subregions_Thailand %>%
-      filter( region == "Bangkok" ) %>%
+      filter( !grepl("Rest of", region ) ) %>%
       # aggregate energy consumption by fuel and year for building sector by comm and resid
       separate( supplysector, c( "resid/comm", "specific" ) ) %>%
       group_by( `resid/comm`, subsector, year, region ) %>%
@@ -615,7 +618,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
       distinct( `resid/comm`, fuel, year, region, value )
 
     bld_agg_energy_consumption_RoR <- X244.StubTechCalInput_bld_Subregions_Thailand %>%
-      filter( region == "Rest of Thailand" ) %>%
+      filter( grepl("Rest of", region ) ) %>%
       # aggregate energy consumption by fuel and year for building sector by comm and resid
       separate( supplysector, c( "resid/comm", "specific" ) ) %>%
       group_by( `resid/comm`, subsector, year, region ) %>%
@@ -739,7 +742,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
     X245.StubTechCalInput_bld_Subregions_Thailand <- X245.GlobalTechEff_bld %>%
       filter(year %in% MODEL_BASE_YEARS) %>%
       write_to_all_states(c(LEVEL2_DATA_NAMES[["GlobalTechEff"]], "region"),
-                          region_list = c( "Bangkok", "Rest of Thailand" )) %>%
+                          region_list = gcam.Thailand.subregions) %>%
       rename(supplysector = sector.name, subsector = subsector.name, stub.technology = technology) %>%
       # Using left_join because we don't have shares for all technologies, NAs will be set to 1
       left_join(X245.globaltech_shares, by = c("supplysector", "subsector", "stub.technology" = "technology")) %>%
@@ -784,7 +787,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
         mutate( year = 0 ) %>%
         complete( nesting( supplysector, subsector, stub.technology ), year = MODEL_BASE_YEARS ) %>%
         write_to_all_states(c("supplysector", "subsector", "stub.technology", "year", "region"),
-                            region_list = c( "Bangkok", "Rest of Thailand" )) %>%
+                            region_list = gcam.Thailand.subregions) %>%
         mutate( calibrated.value = 0,
                 share.weight.year = year,
                 calOutputValue = calibrated.value ) %>%
@@ -895,7 +898,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
     X245.GenericServiceSatiation_bld_Subregions_Thailand <- X245.GenericBaseService_bld_Subregions_Thailand %>%
       filter(year == max(MODEL_BASE_YEARS)) %>%
       # Add floorspace
-      left_join_error_no_match(X245.Floorspace_bld_Subregions_Thailand, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year")) %>%
+      left_join_error_no_match(X245.Floorspace_bld_Subregions_Thailand, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year", "region")) %>%
       # Add multiplier
       # TODO: Need multiplier for SEA, currently just changed to SEAsia sectors, but the values are not correct
       # TODO: ask Sha or Page about demand satiation multiplier
@@ -908,7 +911,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
     X245.ThermalServiceSatiation_bld_Subregions_Thailand <- X245.ThermalBaseService_bld_Subregions_Thailand %>%
       filter(year == max(MODEL_BASE_YEARS)) %>%
       # Add floorspace
-      left_join_error_no_match(X245.Floorspace_bld_Subregions_Thailand, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year")) %>%
+      left_join_error_no_match(X245.Floorspace_bld_Subregions_Thailand, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year", "region")) %>%
       # Add multiplier
       left_join_error_no_match(IND_A44_demand_satiation_mult, by = c("thermal.building.service.input" = "supplysector")) %>%
       # Satiation level = service per floorspace * multiplier

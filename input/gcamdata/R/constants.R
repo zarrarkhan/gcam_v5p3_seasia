@@ -801,8 +801,8 @@ names(water.MAPPED_WATER_TYPES_SHORT)     <- water.MAPPED_WATER_TYPES
 
 # SEAsia constants ======================================================================
 
-gcam.SEA_REGION <- c( "Thailand" )
-gcam.SEA_CITY <- c( "Bangkok" )
+gcam.SEA_REGION <- c( "Thailand", "Malaysia" )
+gcam.Thailand.subregions <- c( "Bangkok", "Nonthaburi", "SamutPrakan", "Rest of Thailand" )
 
 # Degree day norms
 gcamSEA.BASE_HDD_SEA <- 11 # calculated in L244.building_seasia.R
