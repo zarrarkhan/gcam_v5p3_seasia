@@ -772,6 +772,7 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
                 stub.technology = technology ) %>%
         mutate( year = 0 ) %>%
         complete( nesting( supplysector, subsector, stub.technology ), year = MODEL_BASE_YEARS ) %>%
+        filter(year %in% MODEL_BASE_YEARS) %>%
         write_to_all_states( c("supplysector", "subsector", "stub.technology", "year", "region"), region_list = gcam.SEA_REGION) %>%
         mutate( calibrated.value = 0,
                 share.weight.year = year,
