@@ -1114,7 +1114,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
       add_units("million m2 / person") %>%
       add_comments("Calculated with function dependent on satiation level; per capita floorspace; and per capita GDP") %>%
       add_legacy_name("X245.SatiationAdder") %>%
-      add_precursors("gcam-seasia/X244.Satiation_flsp_Subregions_Thailand", "gcam-seasia/A44.gcam_consumer", "X201.Pop_Subregions_Thailand",
+      add_precursors("X244.Satiation_flsp_Subregions_Thailand", "gcam-seasia/A44.gcam_consumer", "X201.Pop_Subregions_Thailand",
                      "X244.Floorspace_Subregions_Thailand", "X201.GDP_Subregions_Thailand") ->
       X245.SatiationAdder_bld_Subregions_Thailand
 
