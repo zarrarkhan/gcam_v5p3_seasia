@@ -164,8 +164,8 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
     # 0. Pre-Processing
     # ===================================================
     # Need to delete the buildings sector at the national level (gcam.consumers and supplysectors)
-    X245.DeleteConsumer_bld_Subregions_Thailand <- tibble(region = "Thailand", gcam.consumer = A44.gcam_consumer_en$gcam.consumer)
-    X245.DeleteSupplysector_bld_Subregions_Thailand <- tibble(region = "Thailand", supplysector = A44.sector_en$supplysector)
+    X245.DeleteConsumer_bld_Subregions_Thailand <- tibble(region = gcam.Thailand.parentregion, gcam.consumer = A44.gcam_consumer_en$gcam.consumer)
+    X245.DeleteSupplysector_bld_Subregions_Thailand <- tibble(region = gcam.Thailand.parentregion, supplysector = A44.sector_en$supplysector)
 
     # Assign subregional shares
     # Manipulate subregional shares input to contain relevant info
@@ -434,7 +434,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
       left_join_error_no_match( GCAM_region_names, by = c( "GCAM_region_ID" ) ) %>%
       # filter for target region(s)
       # TODO: Use Thailand for Bangkok?
-      filter( region == "Thailand" ) %>%
+      filter( region == gcam.Thailand.parentregion ) %>%
       # select relevant columns
       select( -c( GCAM_region_ID ) ) %>%
       rename(degree.days = value)
@@ -479,7 +479,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
     heating_services <- thermal_services[grepl("heating", thermal_services)]
     cooling_services <- thermal_services[grepl("cooling", thermal_services)]
 
-    X245.HDDCDD_temp <- tidyr::crossing(region = "Thailand", thermal.building.service.input = thermal_services) %>%
+    X245.HDDCDD_temp <- tidyr::crossing(region = gcam.Thailand.parentregion, thermal.building.service.input = thermal_services) %>%
       # Add in gcam.consumer
       left_join_error_no_match(IND_bld_techs %>%
                                  select(service, gcam.consumer = sector) %>%
@@ -601,7 +601,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
     X245.StubTechMarket_bld_Subregions_Thailand <- X245.end_use_eff %>%
       rename(stub.technology = technology) %>%
       write_to_all_states(c(LEVEL2_DATA_NAMES[["StubTechYr"]], "minicam.energy.input"), region_list = gcam.Thailand.subregions) %>%
-      mutate(market.name = region)
+      mutate(market.name = gcam.Thailand.parentregion)
 
     # X245.StubTechCalInput_bld: Calibrated energy consumption by buildings technologies
     # This needs to be done separately for the city and Rest of Region (RoR)
