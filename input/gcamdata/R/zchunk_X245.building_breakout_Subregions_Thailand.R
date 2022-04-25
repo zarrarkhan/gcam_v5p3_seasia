@@ -604,12 +604,25 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
       mutate(market.name = gcam.Thailand.parentregion)
 
     # X245.StubTechCalInput_bld: Calibrated energy consumption by buildings technologies
-    # This needs to be done separately for the city and Rest of Region (RoR)
-    # Since we are assuming there is no rural energy consumption in the cities.
+    # This needs to be done separately for the Bangkok and the other subregions
+    # Since we are assuming there is no rural energy consumption in Bangkok.
+    # For robustness, we will list the subregions with no rural shares, and those with rural shares
+    # Take the subregional shares table
+    IND_A44_subregional_shares %>%
+      # filter for the subregions
+      filter( region %in% gcam.Thailand.subregions,
+              # filter for a value of 100 in a single year, indicating it is 100% urban
+              `2010` == 100 ) -> subregional_100
+    # assign the subregions with 100% residential urban shares to a variable
+    unique( subregional_100$region ) -> res_urban_subregions
+
+    # Now list those that do not have 100% residential urban
+    setdiff( gcam.Thailand.subregions, res_urban_subregions ) -> res_rural_subregions
+
     # The input that has energy consumption is at an aggregated level and needs to be broken out
     # the IESS file has fuel shares for "buildings" as a whole
-    bld_agg_energy_consumption_city <- X244.StubTechCalInput_bld_Subregions_Thailand %>%
-      filter( !grepl("Rest of", region ) ) %>%
+    bld_agg_energy_consumption_urban_only <- X244.StubTechCalInput_bld_Subregions_Thailand %>%
+      filter( region %in% res_urban_subregions ) %>%
       # aggregate energy consumption by fuel and year for building sector by comm and resid
       separate( supplysector, c( "resid/comm", "specific" ) ) %>%
       group_by( `resid/comm`, subsector, year, region ) %>%
@@ -617,8 +630,8 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
       rename( fuel = subsector ) %>%
       distinct( `resid/comm`, fuel, year, region, value )
 
-    bld_agg_energy_consumption_RoR <- X244.StubTechCalInput_bld_Subregions_Thailand %>%
-      filter( grepl("Rest of", region ) ) %>%
+    bld_agg_energy_consumption_has_rural <- X244.StubTechCalInput_bld_Subregions_Thailand %>%
+      filter( region %in% res_rural_subregions ) %>%
       # aggregate energy consumption by fuel and year for building sector by comm and resid
       separate( supplysector, c( "resid/comm", "specific" ) ) %>%
       group_by( `resid/comm`, subsector, year, region ) %>%
@@ -630,9 +643,9 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
     # TODO: get regional fuel consumption by service by year- using India for now
     # For the IESS, instead of having shares by fuel for buildings as a whole,
     # we want it by resid/comm and fuel
-    # For the cities, we are assuming there is no residential rural area,
-    # Since the "Rest of Region" has rural, we need to make two tables with different shares.
-    IESS_bld_serv_fuel_resid_comm_city <- IESS_bld_serv_fuel %>%
+    # For the subregions with 100% urban, we are assuming there is no residential rural area,
+    # Since the other subregions have rural, we need to make two tables with different shares.
+    IESS_bld_serv_fuel_resid_comm_urban_only <- IESS_bld_serv_fuel %>%
       filter( sector != "residential rural" ) %>%
       separate( sector, c( "resid/comm", "drop" ), remove = F ) %>%
       select( -c( share, drop ) ) %>%
@@ -642,7 +655,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
       ungroup() %>%
       select( -c( `resid/comm`, total_energy ) )
 
-    IESS_bld_serv_fuel_resid_comm_RoR <- IESS_bld_serv_fuel %>%
+    IESS_bld_serv_fuel_resid_comm_has_rural <- IESS_bld_serv_fuel %>%
       separate( sector, c( "resid/comm", "drop" ), remove = F ) %>%
       select( -c( share, drop ) ) %>%
       group_by( `resid/comm`, fuel ) %>%
@@ -652,7 +665,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
       select( -c( `resid/comm`, total_energy ) )
 
 
-    bld_service_fuel_energy_consumption_city <- IESS_bld_serv_fuel_resid_comm_city %>%
+    bld_service_fuel_energy_consumption_urban_only <- IESS_bld_serv_fuel_resid_comm_urban_only %>%
       repeat_add_columns( tibble( year = MODEL_BASE_YEARS ) ) %>%
       mutate( "resid/comm" = sector ) %>%
       separate( `resid/comm`, c( "resid/comm", "drop" ) ) %>%
@@ -661,7 +674,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
       select( -drop ) %>%
       # join with the table that has energy consumption by resid/comm, fuel and year
       # TODO: fuel "solar" is not in bld_agg_energy_consumption, which is why solar water heaters are not included
-      left_join( bld_agg_energy_consumption_city, by = c( "year", "fuel", "resid/comm" ) ) %>%
+      left_join( bld_agg_energy_consumption_urban_only, by = c( "year", "fuel", "resid/comm" ) ) %>%
       # omit NAs (solar water heater)
       na.omit() %>%
       # multiply the energy consumption value by share to get energy consumption for detailed services
@@ -672,7 +685,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
       # combine sector and service columns to get supplysector
       unite( supplysector, sector, service, sep = " " )
 
-    bld_service_fuel_energy_consumption_RoR <- IESS_bld_serv_fuel_resid_comm_RoR %>%
+    bld_service_fuel_energy_consumption_has_rural <- IESS_bld_serv_fuel_resid_comm_has_rural %>%
       repeat_add_columns( tibble( year = MODEL_BASE_YEARS ) ) %>%
       mutate( "resid/comm" = sector ) %>%
       separate( `resid/comm`, c( "resid/comm", "drop" ) ) %>%
@@ -681,7 +694,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
       select( -drop ) %>%
       # join with the table that has energy consumption by resid/comm, fuel and year
       # TODO: fuel "solar" is not in bld_agg_energy_consumption, which is why solar water heaters are not included
-      left_join( bld_agg_energy_consumption_RoR, by = c( "year", "fuel", "resid/comm" ) ) %>%
+      left_join( bld_agg_energy_consumption_has_rural, by = c( "year", "fuel", "resid/comm" ) ) %>%
       # omit NAs (solar water heater)
       na.omit() %>%
       # multiply the energy consumption value by share to get energy consumption for detailed services
@@ -694,8 +707,8 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
       unite( supplysector, sector, service, sep = " " )
 
 
-    X245.in_EJ_R_bld_serv_F_Yh <- bld_service_fuel_energy_consumption_city %>%
-      bind_rows( bld_service_fuel_energy_consumption_RoR ) %>%
+    X245.in_EJ_R_bld_serv_F_Yh <- bld_service_fuel_energy_consumption_urban_only %>%
+      bind_rows( bld_service_fuel_energy_consumption_has_rural ) %>%
       mutate(calibrated.value = round(value, energy.DIGITS_CALOUTPUT)) %>%
       # Add subsector and energy.input
       # IND_bld_techs has hi and lo efficiency, so left_join_error_no_match does not work
