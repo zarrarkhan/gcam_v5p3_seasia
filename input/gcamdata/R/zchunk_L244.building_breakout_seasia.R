@@ -884,7 +884,7 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
     L244.GenericServiceSatiation_bld_gcamSEA <- L244.GenericBaseService_bld_gcamSEA %>%
       filter(year == max(MODEL_BASE_YEARS)) %>%
       # Add floorspace
-      left_join_error_no_match(L244.Floorspace_bld_gcamSEA, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year", "region")) %>%
+      left_join_error_no_match(L244.Floorspace_bld_gcamSEA, by = unique(c(LEVEL2_DATA_NAMES[["BldNodes"]], "year", "region"))) %>%
       # Add multiplier
       # TODO: Need multiplier for SEA, currently just changed to SEAsia sectors, but the values are not correct
       # TODO: ask Sha or Page about demand satiation multiplier
@@ -897,7 +897,7 @@ module_gcamseasia_L244.building_breakout_seasia <- function(command, ...) {
     L244.ThermalServiceSatiation_bld_gcamSEA <- L244.ThermalBaseService_bld_gcamSEA %>%
       filter(year == max(MODEL_BASE_YEARS)) %>%
       # Add floorspace
-      left_join_error_no_match(L244.Floorspace_bld_gcamSEA, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year", "region")) %>%
+      left_join_error_no_match(L244.Floorspace_bld_gcamSEA, by = unique(c(LEVEL2_DATA_NAMES[["BldNodes"]], "year", "region"))) %>%
       # Add multiplier
       left_join_error_no_match(IND_A44_demand_satiation_mult, by = c("thermal.building.service.input" = "supplysector")) %>%
       # Satiation level = service per floorspace * multiplier

@@ -1,0 +1,158 @@
+<scenario>
+<world>
+<region name="Viet Nam">
+<supplysector name="refining">
+            <subsector name="biomass liquids">
+               <stub-technology name="cellulosic ethanol">
+                  <period year="2020">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                  <period year="2025">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                   <period year="2030">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                 <period year="2035">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                 <period year="2040">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                  <period year="2045">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                   <period year="2050">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+   </stub-technology>
+  <stub-technology name="FT biofuels">
+                       <period year="2020">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                  <period year="2025">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                   <period year="2030">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                 <period year="2035">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                 <period year="2040">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                  <period year="2045">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                   <period year="2050">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+</stub-technology>
+  <stub-technology name="sugar cane ethanol">
+                                   <period year="2020">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                  <period year="2025">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                   <period year="2030">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                 <period year="2035">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                 <period year="2040">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                  <period year="2045">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                   <period year="2050">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+</stub-technology>
+  <stub-technology name="biodiesel">
+                       <period year="2020">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                  <period year="2025">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                   <period year="2030">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                 <period year="2035">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                 <period year="2040">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                  <period year="2045">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+                   <period year="2050">
+                     <res-secondary-output name="BioFuelsCredits">
+                        <output-ratio>1</output-ratio>
+                     </res-secondary-output>
+                  </period>
+</stub-technology>
+</subsector>
+</supplysector>
+</region>
+</world>
+</scenario>

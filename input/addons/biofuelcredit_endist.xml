@@ -1,0 +1,76 @@
+<scenario>
+<world>
+
+<region name="Viet Nam">
+<supplysector name="refined liquids enduse">
+            <subsector name="refined liquids enduse">
+                  <stub-technology name="refined liquids enduse">
+                  <period year="2020">
+                     <minicam-energy-input name="BioFuelsCredits">
+                        <coefficient>0.05</coefficient>
+                     </minicam-energy-input>
+                     <share-weight>1</share-weight>
+                     <minicam-energy-input name="refining">
+                        <coefficient>1</coefficient>
+                     </minicam-energy-input>
+                  </period>
+                  <period year="2025">
+                     <minicam-energy-input name="BioFuelsCredits">
+                        <coefficient>0.09</coefficient>
+                     </minicam-energy-input>
+                     <share-weight>1</share-weight>
+                     <minicam-energy-input name="refining">
+                        <coefficient>1</coefficient>
+                     </minicam-energy-input>
+                  </period>
+                  <period year="2030">
+                     <minicam-energy-input name="BioFuelsCredits">
+                        <coefficient>0.12</coefficient>
+                     </minicam-energy-input>
+                     <share-weight>1</share-weight>
+                     <minicam-energy-input name="refining">
+                        <coefficient>1</coefficient>
+                     </minicam-energy-input>
+                  </period>
+                   <period year="2035">
+                     <minicam-energy-input name="BioFuelsCredits">
+                        <coefficient>0.15</coefficient>
+                     </minicam-energy-input>
+                     <share-weight>1</share-weight>
+                     <minicam-energy-input name="refining">
+                        <coefficient>1</coefficient>
+                     </minicam-energy-input>
+                  </period>
+                  <period year="2040">
+                     <minicam-energy-input name="BioFuelsCredits">
+                        <coefficient>0.19</coefficient>
+                     </minicam-energy-input>
+                     <share-weight>1</share-weight>
+                     <minicam-energy-input name="refining">
+                        <coefficient>1</coefficient>
+                     </minicam-energy-input>
+                  </period>
+                   <period year="2045">
+                     <minicam-energy-input name="BioFuelsCredits">
+                        <coefficient>0.22</coefficient>
+                     </minicam-energy-input>
+                     <share-weight>1</share-weight>
+                     <minicam-energy-input name="refining">
+                        <coefficient>1</coefficient>
+                     </minicam-energy-input>
+                  </period>
+                  <period year="2050">
+                     <minicam-energy-input name="BioFuelsCredits">
+                        <coefficient>0.25</coefficient>
+                     </minicam-energy-input>
+                     <share-weight>1</share-weight>
+                     <minicam-energy-input name="refining">
+                        <coefficient>1</coefficient>
+                     </minicam-energy-input>
+                  </period>
+</stub-technology>
+</subsector>
+</supplysector>
+</region>
+</world>
+</scenario>

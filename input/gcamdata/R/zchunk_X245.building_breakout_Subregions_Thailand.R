@@ -912,7 +912,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
     X245.GenericServiceSatiation_bld_Subregions_Thailand <- X245.GenericBaseService_bld_Subregions_Thailand %>%
       filter(year == max(MODEL_BASE_YEARS)) %>%
       # Add floorspace
-      left_join_error_no_match(X245.Floorspace_bld_Subregions_Thailand, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year", "region")) %>%
+      left_join_error_no_match(X245.Floorspace_bld_Subregions_Thailand, by = unique(c(LEVEL2_DATA_NAMES[["BldNodes"]], "year", "region"))) %>%
       # Add multiplier
       # TODO: Need multiplier for SEA, currently just changed to SEAsia sectors, but the values are not correct
       # TODO: ask Sha or Page about demand satiation multiplier
@@ -925,7 +925,7 @@ module_gcamseasia_X245.building_breakout_Subregions_Thailand <- function(command
     X245.ThermalServiceSatiation_bld_Subregions_Thailand <- X245.ThermalBaseService_bld_Subregions_Thailand %>%
       filter(year == max(MODEL_BASE_YEARS)) %>%
       # Add floorspace
-      left_join_error_no_match(X245.Floorspace_bld_Subregions_Thailand, by = c(LEVEL2_DATA_NAMES[["BldNodes"]], "year", "region")) %>%
+      left_join_error_no_match(X245.Floorspace_bld_Subregions_Thailand, by = unique(c(LEVEL2_DATA_NAMES[["BldNodes"]], "year", "region"))) %>%
       # Add multiplier
       left_join_error_no_match(IND_A44_demand_satiation_mult, by = c("thermal.building.service.input" = "supplysector")) %>%
       # Satiation level = service per floorspace * multiplier

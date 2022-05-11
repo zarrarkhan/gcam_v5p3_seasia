@@ -1,0 +1,24 @@
+Transportation Policies
+
+1) Change UCD_region
+- Change UCD_region of iso region vnm to Southeast Asia
+\input\gcamdata\inst\extdata\energy\mappings\UCD_ctry.csv
+
+
+2) Fuel Economy Standards
+- Change intensity variable (MJ/vkm) of Liquids and Hybrid Liquids in UCD_region Southeast Asia 
+\input\gcamdata\inst\extdata\energy\UCD_trn_data_CORE.csv
+
+3) Emission Standards
+- Generate the all_energy_emissions.xml
+- Access \input\gcamdata\outputs\L201.en_pol_emissions.xlsx
+- Enter the calculated emission standards in the ^ files format and convert it to xml
+
+4) EV subsidies
+- Generate UCD_trn_data_CORE.xml
+- Access \input\gcamdata\outptus\L254.StubTranTechCost.csv
+- Enter the calculated emission standards in the ^ files format and convert it to xml
+
+5) Biofuels
+
+6) Modal Shift

@@ -29,7 +29,7 @@
         <Value name = "climate">../input/gcamdata/xml/hector.xml</Value>
 		<Value name = "socioeconomics">../input/gcamdata/xml/socioeconomics_gSSP2.xml</Value>
 		<!-- INSERT CORE SOCIO-ECONOMIC ASSUMPTIONS FOR VIETNAM (ie. GDP=PDP8-med and POP=GSO-med -->
-		<Value name = "socioeconomics">../input/gcamdata/new_xml/socioeconomics_vnmAddOn_PDP8-GSO_CorePopGDP.xml</Value>
+		<Value name = "socioeconomics">../input/addons/socioeconomics_vnmAddOn_PDP8-GSO_CorePopGDP.xml</Value>
 
 		<Value name = "resources">../input/gcamdata/xml/resources.xml</Value>
 		<Value name = "energy_supply">../input/gcamdata/xml/en_supply.xml</Value>
@@ -37,7 +37,7 @@
 		<!--Value name = "electricity">../input/gcamdata/xml/electricity.xml</Value-->
 		<Value name = "elec_water_base">../input/gcamdata/xml/electricity_water.xml</Value>
 		<!-- INSERT "CORE" ASSUMPTIONS ON HYDRO AND NUCLEAR FOR VIETNAM HERE -->
-		<Value name = "elec_water_base">../input/gcamdata/new_xml/electricity_water_vnmAddOn_hydro_nuclear_Core.xml</Value>
+		<Value name = "elec_water_base">../input/addons/electricity_water_vnmAddOn_hydro_nuclear_Core.xml</Value>
 
 		<Value name = "heat">../input/gcamdata/xml/heat.xml</Value>
 		<Value name = "hydrogen">../input/gcamdata/xml/hydrogen.xml</Value>

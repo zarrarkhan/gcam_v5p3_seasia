@@ -1,0 +1,10 @@
+<scenario>
+<world>
+<region name="Viet Nam">
+<policy-portfolio-standard name="BioFuelsCredits">
+            <market>Viet Nam</market>
+            <policyType>RES</policyType>
+</policy-portfolio-standard>
+</region>
+</world>
+</scenario>

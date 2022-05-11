@@ -14,7 +14,7 @@
 		<Value name="BatchFileName">batch_ag.xml</Value>
 		<Value name="policy-target-file">../input/policy/forcing_target_4p5.xml</Value>
 		<Value name="GHGInputFileName">../input/magicc/inputs/input_gases.emk</Value>
-		<Value write-output="1" append-scenario-name="0" name="xmldb-location">../output/database_basexdb_breakout_seasia_cities</Value>
+		<Value write-output="1" append-scenario-name="0" name="xmldb-location">../output/database_seasia_cities_breakout</Value>
 		<Value write-output="1" append-scenario-name="0" name="restart">./restart/restart</Value>
 		<Value write-output="1" append-scenario-name="1" name="xmlDebugFileName">debug.xml</Value>
 		<Value write-output="1" append-scenario-name="0" name="climatFileName">gas.emk</Value>
@@ -29,7 +29,7 @@
         <Value name = "climate">../input/gcamdata/xml/hector.xml</Value>
 		<Value name = "socioeconomics">../input/gcamdata/xml/socioeconomics_gSSP2.xml</Value>
 		<!-- INSERT CORE SOCIO-ECONOMIC ASSUMPTIONS FOR VIETNAM (ie. GDP=PDP8-med and POP=GSO-med -->
-		<Value name = "socioeconomics">../input/gcamdata/new_xml/socioeconomics_vnmAddOn_PDP8-GSO_CorePopGDP.xml</Value>
+		<Value name = "socioeconomics">../input/addons/socioeconomics_vnmAddOn_PDP8-GSO_CorePopGDP.xml</Value>
 
 		<Value name = "resources">../input/gcamdata/xml/resources.xml</Value>
 		<Value name = "energy_supply">../input/gcamdata/xml/en_supply.xml</Value>
@@ -37,7 +37,7 @@
 		<!--Value name = "electricity">../input/gcamdata/xml/electricity.xml</Value-->
 		<Value name = "elec_water_base">../input/gcamdata/xml/electricity_water.xml</Value>
 		<!-- INSERT "CORE" ASSUMPTIONS ON HYDRO AND NUCLEAR FOR VIETNAM HERE -->
-		<Value name = "elec_water_base">../input/gcamdata/new_xml/electricity_water_vnmAddOn_hydro_nuclear_Core.xml</Value>
+		<Value name = "elec_water_base">../input/addons/electricity_water_vnmAddOn_hydro_nuclear_Core.xml</Value>
 
 		<Value name = "heat">../input/gcamdata/xml/heat.xml</Value>
 		<Value name = "hydrogen">../input/gcamdata/xml/hydrogen.xml</Value>
@@ -93,8 +93,10 @@
 		<Value name = "bio_neg_emiss_budget">../input/gcamdata/xml/negative_emissions_budget_gSSP2.xml</Value>
         <Value name = "wind_update">../input/gcamdata/xml/onshore_wind.xml</Value>
 
+		<!-- CITY ADD-ONS -->
 		<Value name = "cities">../input/gcamdata/xml/socioeconomics_Subregions_Malaysia.xml</Value>
-		<Value name = "cities">../input/gcamdata/xml/building_Subregions_Malaysia.xml</Value>
+		<!--Value name = "cities">../input/gcamdata/xml/building_Subregions_Malaysia.xml</Value-->
+		<Value name = "cities">../input/gcamdata/xml/building_breakout_Subregions_Malaysia.xml</Value>
 		<Value name = "cities">../input/gcamdata/xml/industry_Subregions_Malaysia.xml</Value>
 		<Value name = "cities">../input/gcamdata/xml/transportation_Subregions_Malaysia.xml</Value>
 		<Value name = "cities">../input/gcamdata/xml/liquids_limits_Subregions_Malaysia.xml</Value>
@@ -110,7 +112,7 @@
 
 	</ScenarioComponents>
 	<Strings>
-		<Value name="scenarioName">Ref_breakout_cities</Value>
+		<Value name="scenarioName">Ref_cities_breakout</Value>
 		<Value name="debug-region">KualaLumpur</Value>
 		<Value name="MAGICC-input-dir">../input/magicc/inputs</Value>
 		<Value name="MAGICC-output-dir">../output</Value>

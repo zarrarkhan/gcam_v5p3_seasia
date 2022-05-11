@@ -1,0 +1,2766 @@
+<?xml version="1.0" encoding="UTF-8"?><scenario>
+    <world>
+        <region name="Viet Nam">
+            <supplysector name="trn_pass_road_LDV_4W" nocreate="1">
+                <subsector name="Mini Car" nocreate="1">
+                    <stub-technology name="Liquids" nocreate="1">
+                        <period year="2020">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0428926683113827</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.714877805189712</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2025">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0519181218924684</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.86530203154114</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2030">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0640282187214452</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.06713697869075</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2035">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0746414602346806</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.24402433724468</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2040">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0746414602346806</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.24402433724468</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2045">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0755777084884881</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.25962847480813</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2050">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0757552675026832</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.26258779171139</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2055">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0760036554587612</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.26672759097935</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2060">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0758118310474968</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.26353051745828</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2065">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0758132462479969</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.26355410413328</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2070">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0758146615013339</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.2635776916889</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2075">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0758147322484626</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.26357887080771</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2080">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0758148029957234</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.26358004992872</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2085">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0758148065500151</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.26358010916692</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2090">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0758148101043071</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.26358016840512</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2095">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0758148102735591</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.26358017122599</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2100">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0758148104428111</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.26358017404685</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                    </stub-technology>
+                </subsector>
+                <subsector name="Large Car and Truck" nocreate="1">
+                    <stub-technology name="Liquids" nocreate="1">
+                        <period year="2020">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0165964297461594</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.276607162435991</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2025">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0299581371009942</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.499302285016571</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2030">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0352307692307692</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.587179487179487</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2035">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0436024371667936</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.726707286113227</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2040">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0435581306306564</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.725968843844274</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2045">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0434093803248558</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.72348967208093</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2050">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0435521807814601</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.725869679691002</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2055">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0435307607718685</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.725512679531141</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2060">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0435518833253713</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.725864722089522</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2065">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0435518758953178</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.725864598255297</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2070">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0435518684472764</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.725864474121273</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2075">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0435518680874677</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.725864468124462</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2080">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0435518677096686</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.72586446182781</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2085">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0435518676916781</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.725864461527969</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2090">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0435518676736877</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.725864461228128</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2095">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0435518676736877</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.725864461228128</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2100">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0435518676736877</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.725864461228128</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                    </stub-technology>
+                </subsector>
+                <subsector name="Car" nocreate="1">
+                    <stub-technology name="Liquids" nocreate="1">
+                        <period year="2020">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0344746315827009</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.574577193045014</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2025">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0463562753036437</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.772604588394062</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2030">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0543684710351377</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.906141183918962</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2035">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0746414602346806</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.24402433724468</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2040">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0760428409556438</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.26738068259406</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2045">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0769966670717579</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.2832777845293</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2050">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0771775597198474</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.28629266199746</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2055">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0774306111751692</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.29051018625282</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2060">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0772351852900434</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.28725308816739</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2065">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0772366270546924</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.28727711757821</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2070">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.07723806886891</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.28730114781517</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2075">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0772381409593301</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.28730234932217</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2080">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0772382130541444</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.28730355090241</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2085">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0772382166435388</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.28730361072565</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2090">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0772382202371934</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.28730367061989</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2095">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0772382203800421</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.2873036730007</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2100">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0772382205879255</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.28730367646542</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                    </stub-technology>
+                </subsector>
+            </supplysector>
+            <supplysector name="trn_freight_road" nocreate="1">
+                <subsector name="Medium truck" nocreate="1">
+                    <stub-technology name="Liquids" nocreate="1">
+                        <period year="2020">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0135359269862255</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.144777666873188</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000181123019441019</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000422620378695711</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2025">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0146991240166663</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.157218998180043</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000196687654103474</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000458937859574772</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2030">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0160810322509338</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.171999622380639</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000215178843678864</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000502083968584017</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2035">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0172561407181289</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.184568356119862</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.00023090286420333</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00053877334980777</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2040">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0186165285319392</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.199118802049911</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000249106090971532</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000581247545600241</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2045">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0189465821603987</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.202648992063497</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000253522508836735</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000591552520619048</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2050">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0192885500990671</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.206306615243367</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000258098351013386</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000602229485697902</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2055">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0193059728307936</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.206492965424813</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000258331483016864</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000602773460372683</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2060">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0193234270657712</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.206679652558962</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000258565036562504</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000603318418645844</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2065">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0193243006026819</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.206688995741442</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000258576725281203</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000603345692322807</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2070">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0193251742219061</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.206698339804331</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000258588415101331</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000603372968569772</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2075">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0193252179081058</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.206698807063504</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000258588999662432</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000603374332545676</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2080">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0193252615911714</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.206699274289157</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000258589584181598</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000603375696423728</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2085">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0193252637733309</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.206699297629115</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000258589613380878</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000603375764555382</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2090">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0193252659588225</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.206699321004712</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000258589642624744</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000603375832791069</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2095">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0193252660687634</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.206699322180618</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000258589644095853</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000603375836223657</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2100">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0193252661753728</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.206699323320892</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000258589645522383</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000603375839552228</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                    </stub-technology>
+                </subsector>
+                <subsector name="Light truck" nocreate="1">
+                    <stub-technology name="Liquids" nocreate="1">
+                        <period year="2020">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0221758334836011</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.235031262269936</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000307591569668663</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000717713662560214</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2025">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0260892158630601</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.276507367376396</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.00036187243490431</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000844369014776722</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2030">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0316797621194301</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.335758946099909</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.00043941652809809</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00102530523222888</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2035">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0342864184136029</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.363372462695366</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000475638853654713</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.001109823991861</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2040">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0373609153581494</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.395939346340263</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.00051837585227735</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00120954365531382</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2045">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0379378225165393</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.40205715813041</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000526360553763237</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00122817462544755</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2050">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0385328510499629</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.408367256723114</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000534595467264848</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00124738942361798</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2055">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0385630935041569</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.408687972065282</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000535013992353267</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00124836598215762</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2060">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.038593383544642</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.409009192361804</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000535433174422517</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00124934407365254</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2065">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0385948992983436</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.409025266658695</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000535454150806307</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00124939301854805</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2070">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0385964151712793</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.409041342220822</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000535475128836239</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00124944196728456</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2075">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0385964909683179</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.409042146035005</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000535476177784135</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00124944441482965</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2080">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0385965667656546</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.409042949852351</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000535477226736146</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00124944686238434</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2085">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0385965705512198</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.409042989997334</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000535477279125557</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.0012494469846263</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2090">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0385965743448403</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.409043030228475</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000535477331622755</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00124944710711976</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2095">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.038596574529327</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.409043032184097</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000535477334180011</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00124944711308669</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2100">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0385965747218683</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.409043034225869</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000535477336845042</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.0012494471193051</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                    </stub-technology>
+                </subsector>
+                <subsector name="Heavy Truck" nocreate="1">
+                    <stub-technology name="Liquids" nocreate="1">
+                        <period year="2020">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0105717113902383</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.113072988018695</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000141459117621386</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000330071274449901</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2025">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0114721352057412</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.122703747651059</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000153507607570133</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000358184417663643</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2030">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0125402229524963</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.134127808385755</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000167799593476758</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000391532384779101</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2035">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0133643241638738</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.142942236150622</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000178826817536224</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00041726257425119</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2040">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0143043584154843</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.152996661375251</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000191405331161698</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000446612439377296</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2045">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0145322195460007</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.155433820121809</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000194454320419278</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000453726747644982</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2050">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0147674576103877</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.157949881131622</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000197602019764332</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000461071379450107</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2055">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0147794195878733</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.158077824137914</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000197762081907315</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000461444857783734</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2060">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0147914009619699</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.158205974606619</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000197922403594602</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000461818941720738</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2065">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0147920005406309</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.158212387584446</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000197930426502643</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000461837661839501</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2070">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0147926001679023</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.158218801082203</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000197938450061138</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000461856383475988</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2075">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0147926301509325</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.158219121774915</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000197938851261362</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000461857319609845</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2080">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0147926601321321</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.15821944244805</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000197939252437093</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00046185825568655</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2085">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0147926616312929</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.158219458482784</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000197939272497228</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000461858302493532</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2090">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0147926631304539</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.158219474517522</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000197939292557368</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000461858349300524</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2095">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0147926632065832</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.158219475331787</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000197939293576047</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000461858351677442</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2100">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0147926632807605</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.158219476125172</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000197939294568606</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000461858353993413</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                    </stub-technology>
+                </subsector>
+            </supplysector>
+            <supplysector name="trn_pass_road" nocreate="1">
+                <subsector name="All" nocreate="1">
+                    <stub-technology name="Liquids" nocreate="1">
+                        <period year="2020">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0112263020646113</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.120074363741917</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000150218136457778</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000350508985068149</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2025">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0119910365365289</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.128253816300608</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000160450979525365</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000374385618892518</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2030">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0130922541781675</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.14003222800734</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000175186273570484</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000408767971664462</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2035">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0141017036828514</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.150829105403557</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000188693626443149</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000440285128367348</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2040">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0146829018817845</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.157045489351112</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000196470587178205</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000458431370082479</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2045">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0149276169137342</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.159662914179904</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000199745096972358</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000466071892935501</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2050">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0150499744288784</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.160971626585417</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.00020138235185832</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00046989215433608</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2055">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0150593865464316</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.161072296781191</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000201508294555284</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000470186020628997</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2060">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0150688104418321</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.16117309295055</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000201634394850563</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000470480254651315</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2065">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0150692819459165</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.161178136067385</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000201640704004235</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000470494976009882</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2070">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0150697534815345</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.161183179521497</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000201647013579855</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000470509698352994</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2075">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0150697770583809</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.161183431694904</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000201647329059513</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000470510434472197</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2080">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0150698006353012</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.1611836838691</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000201647644540159</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000470511170593704</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2085">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0150698018143517</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.161183696479998</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000201647660316928</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000470511207406165</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2090">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0150698029934025</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.161183709090897</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000201647676093699</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000470511244218631</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2095">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0150698030521524</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.161183709719275</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000201647676879827</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.00047051124605293</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2100">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0150698031109024</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>0.161183710347653</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="OC">
+                                <input-emissions>0.000201647677665955</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="BC">
+                                <input-emissions>0.000470511247887228</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                    </stub-technology>
+                </subsector>
+            </supplysector>
+            <supplysector name="trn_pass_road_LDV" nocreate="1">
+                <subsector name="2W and 3W" nocreate="1">
+                    <stub-technology name="Liquids" nocreate="1">
+                        <period year="2020">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0853364081595689</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.42227346932615</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2025">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0882808075863303</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.47134679310551</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2030">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0914356519061984</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.52392753176997</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2035">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0948243389840463</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.58040564973411</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2040">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.0977864095454297</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.62977349242383</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2045">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.100939502325431</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.68232503875719</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2050">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.104302711202031</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.73837852003385</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2055">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.104929605059449</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.74882675099081</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2060">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.105564080141088</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.75940133568479</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2065">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.106206275069648</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.77010458449413</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2070">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.106828386128817</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.78047310214695</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2075">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.107457828412857</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.79096380688095</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2080">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.108094732001226</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.80157886668711</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2085">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.108721830293695</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.81203050489492</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2090">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.109356247040774</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.82260411734623</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2095">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.109998111304086</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.8333018550681</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                        <period year="2100">
+                            <Non-CO2 name="NOx">
+                                <input-emissions>0.109998111304086</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                            <Non-CO2 name="CO">
+                                <input-emissions>1.8333018550681</input-emissions>
+                                <input-driver>
+                                    <input-name>refined liquids enduse</input-name>
+                                </input-driver>
+                            </Non-CO2>
+                        </period>
+                    </stub-technology>
+                </subsector>
+            </supplysector>
+        </region>
+    </world>
+</scenario>
